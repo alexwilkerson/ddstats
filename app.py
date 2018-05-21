@@ -11,8 +11,6 @@ def backend_score_submission():
     if request.headers['Content-Type'] == 'application/json':
         parsed_json = request.json
 
-        print(parsed_json)
-        print(len(parsed_json["inGameTimerVector"]))
         sqlite_file = 'db.db'
         conn, c = connect(sqlite_file)
 
@@ -22,7 +20,7 @@ def backend_score_submission():
         conn.commit()
         conn.close()
 
-        print("game id is: " + str(game_id))
+        print("game " + str(game_id) + " submitted.")
 
         return "JSON Message: " + json.dumps(request.json)
     else:
@@ -65,4 +63,4 @@ def insert_states(c, parsed_json, game_id):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=66600)
+    app.run(host='0.0.0.0', port=5666)
