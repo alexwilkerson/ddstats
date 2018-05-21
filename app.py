@@ -4,6 +4,7 @@ from flask import json
 import sqlite3
 
 app = Flask(__name__)
+sqlite_file = 'db.db'
 
 
 @app.route('/backend_score_submission', methods=['POST'])
@@ -11,7 +12,6 @@ def backend_score_submission():
     if request.headers['Content-Type'] == 'application/json':
         parsed_json = request.json
 
-        sqlite_file = 'db.db'
         conn, c = connect(sqlite_file)
 
         game_id = insert_game(c, parsed_json)
@@ -25,6 +25,47 @@ def backend_score_submission():
         return "JSON Message: " + json.dumps(request.json)
     else:
         return ":( i am not a happy person and i need therapy."
+
+
+@app.route('/ddstats/<int:player_id>')
+def show_player_games(player_id):
+    conn, c = connect(sqlite_file)
+    sql = "SELECT id FROM games WHERE playerID=?"
+    c.execute(sql, (player_id,))
+
+    rows = c.fetchall()
+
+    if len(rows) is 0:
+        html = "no user found"
+    else:
+        html = ""
+        for row in rows:
+            game_id = str(row[0])
+            html += "<a href='{}/{}'>{}</a><br>".format(player_id, game_id, game_id)
+
+    conn.close()
+    return html
+
+
+@app.route('/ddstats/<int:player_id>/<int:game_id>')
+def show_game(player_id, game_id):
+    conn, c = connect(sqlite_file)
+    sql = "SELECT * FROM games WHERE playerID=? AND id=?"
+    c.execute(sql, (player_id, game_id))
+
+    html = ""
+    if c.fetchone() is None:
+        html = "game not found."
+    else:
+        sql = "SELECT * FROM states WHERE game_id=?"
+        c.execute(sql, (game_id,))
+        rows = c.fetchall()
+        for row in rows:
+            gems = row[3]
+            html += str(gems) + "<br>"
+
+    conn.close()
+    return html
 
 
 @app.route('/')
