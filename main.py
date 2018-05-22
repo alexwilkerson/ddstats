@@ -1,11 +1,12 @@
 import os
+import requests
 from datetime import datetime
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI'] \
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI') \
     or 'sqlite:////Users/alex/code/ddstats/app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JSON_SORT_KEYS'] = False
@@ -50,6 +51,13 @@ class State(db.Model):
                 'enemies_alive': self.enemies_alive,
                 'enemies_killed': self.enemies_killed
                }
+
+
+@app.route('/classic_homing_log/<game_number>', methods=['GET'])
+def get_classic_homing(game_number):
+    r = requests.get('http://uncorrected.com:5666/api/game/{}/homing_daggers'.format(game_number))
+    data = r.json()
+    return data
 
 
 @app.route('/api/user', methods=['GET'])
