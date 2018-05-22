@@ -61,8 +61,8 @@ def show_game(player_id, game_id):
         c.execute(sql, (game_id,))
         rows = c.fetchall()
         for row in rows:
-            gems = row[3]
-            html += str(gems) + "<br>"
+            homing_daggers = row[4]
+            html += str(homing_daggers) + "<br>"
 
     conn.close()
     return html
