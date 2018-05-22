@@ -175,6 +175,18 @@ def get_game_enemies_alive(game_number):
         return jsonify(enemies_alive)
 
 
+@app.route('/game', methods=['GET'])
+def get_all_games():
+
+    query = db.session.query(Game.id.label("id"))
+    games = [row.id for row in query.all()]
+
+    if len(games) is 0:
+        return jsonify({'message': 'No games found.'})
+    else:
+        return jsonify(games)
+
+
 @app.route('/game/<game_number>/enemies_killed', methods=['GET'])
 def get_game_enemies_killed(game_number):
 
