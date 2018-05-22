@@ -1,10 +1,12 @@
+import os
 from datetime import datetime
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/alex/code/ddstats/app.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI'] \
+    or 'sqlite:////Users/alex/code/ddstats/app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JSON_SORT_KEYS'] = False
 
@@ -50,7 +52,7 @@ class State(db.Model):
                }
 
 
-@app.route('/user', methods=['GET'])
+@app.route('/api/user', methods=['GET'])
 def get_all_users():
 
     query = db.session.query(Game.player_id.distinct().label("player_id"))
@@ -62,7 +64,7 @@ def get_all_users():
         return jsonify(users)
 
 
-@app.route('/user/<user_id>', methods=['GET'])
+@app.route('/api/user/<user_id>', methods=['GET'])
 def get_all_games_by_user(user_id):
 
     query = db.session.query(Game).filter_by(player_id=user_id)
@@ -74,7 +76,7 @@ def get_all_games_by_user(user_id):
         return jsonify(game_ids)
 
 
-@app.route('/game/<game_id>', methods=['GET'])
+@app.route('/api/game/<game_id>', methods=['GET'])
 def get_game_stats(game_id):
 
     query = db.session.query(Game).filter_by(id=game_id)
@@ -91,7 +93,7 @@ def get_game_stats(game_id):
                         "enemies_killed": game.enemies_killed})
 
 
-@app.route('/game/<game_number>/all', methods=['GET'])
+@app.route('/api/game/<game_number>/all', methods=['GET'])
 def get_all_game_states(game_number):
 
     query = db.session.query(State).filter_by(game_id=game_number)
@@ -103,7 +105,7 @@ def get_all_game_states(game_number):
         return jsonify(states)
 
 
-@app.route('/game/<game_number>/game_time', methods=['GET'])
+@app.route('/api/game/<game_number>/game_time', methods=['GET'])
 def get_game_time(game_number):
 
     query = db.session.query(State).filter_by(game_id=game_number)
@@ -115,7 +117,7 @@ def get_game_time(game_number):
         return jsonify(game_time)
 
 
-@app.route('/game/<game_number>/gems', methods=['GET'])
+@app.route('/api/game/<game_number>/gems', methods=['GET'])
 def get_game_gems(game_number):
 
     query = db.session.query(State).filter_by(game_id=game_number)
@@ -127,7 +129,7 @@ def get_game_gems(game_number):
         return jsonify(gems)
 
 
-@app.route('/game/<game_number>/homing_daggers', methods=['GET'])
+@app.route('/api/game/<game_number>/homing_daggers', methods=['GET'])
 def get_game_homing_daggers(game_number):
 
     query = db.session.query(State).filter_by(game_id=game_number)
@@ -139,7 +141,7 @@ def get_game_homing_daggers(game_number):
         return jsonify(homing_daggers)
 
 
-@app.route('/game/<game_number>/daggers_hit', methods=['GET'])
+@app.route('/api/game/<game_number>/daggers_hit', methods=['GET'])
 def get_game_daggers_hit(game_number):
 
     query = db.session.query(State).filter_by(game_id=game_number)
@@ -151,7 +153,7 @@ def get_game_daggers_hit(game_number):
         return jsonify(daggers_hit)
 
 
-@app.route('/game/<game_number>/daggers_fired', methods=['GET'])
+@app.route('/api/game/<game_number>/daggers_fired', methods=['GET'])
 def get_game_daggers_fired(game_number):
 
     query = db.session.query(State).filter_by(game_id=game_number)
@@ -163,7 +165,7 @@ def get_game_daggers_fired(game_number):
         return jsonify(daggers_fired)
 
 
-@app.route('/game/<game_number>/enemies_alive', methods=['GET'])
+@app.route('/api/game/<game_number>/enemies_alive', methods=['GET'])
 def get_game_enemies_alive(game_number):
 
     query = db.session.query(State).filter_by(game_id=game_number)
@@ -175,7 +177,7 @@ def get_game_enemies_alive(game_number):
         return jsonify(enemies_alive)
 
 
-@app.route('/game', methods=['GET'])
+@app.route('/api/game', methods=['GET'])
 def get_all_games():
 
     query = db.session.query(Game.id.label("id"))
@@ -187,7 +189,7 @@ def get_all_games():
         return jsonify(games)
 
 
-@app.route('/game/<game_number>/enemies_killed', methods=['GET'])
+@app.route('/api/game/<game_number>/enemies_killed', methods=['GET'])
 def get_game_enemies_killed(game_number):
 
     query = db.session.query(State).filter_by(game_id=game_number)
@@ -228,4 +230,4 @@ def create_game():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5666, debug=True)
+    app.run(host='0.0.0.0', port=5666)
