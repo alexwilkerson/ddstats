@@ -1,7 +1,8 @@
 import os
+import math
 import requests
 from datetime import datetime
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -57,7 +58,17 @@ class State(db.Model):
 def get_classic_homing(game_number):
     r = requests.get('http://uncorrected.com:5666/api/game/{}/homing_daggers'.format(game_number))
     data = r.json()
-    return data
+    text = ""
+    last = 0
+    for row in data["homing_daggers_list"]:
+        if int(row["game_time"]) >= 10 and int(row["game_time"]) % 10 is 0:
+            text += str(int(row["game_time"])-10) + "s:\t" +\
+                    str(row["homing_daggers"]) + "\t|" +\
+                    ("~" * math.ceil(row["homing_daggers"]/10)) + "\n"
+            last = int(row["game_time"])
+    text += str(last) + "s:\t" + str(data["homing_daggers_list"][-1]["homing_daggers"]) +\
+        "\t|" + ("~" * math.ceil(data["homing_daggers_list"][-1]["homing_daggers"]/10))
+    return Response(text, mimetype='text/plain')
 
 
 @app.route('/api/user', methods=['GET'])
@@ -201,7 +212,7 @@ def get_game_daggers_fired(game_number):
     daggers_fired_list = []
     for row in query.all():
         daggers_fired_list.append({"game_time": round(row.game_time, 4),
-                                    "daggers_fired": row.daggers_fired})
+                                   "daggers_fired": row.daggers_fired})
 
     daggers_fired = {"daggers_fired_list": daggers_fired_list}
 
