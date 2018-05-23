@@ -93,7 +93,8 @@ def get_game_stats(game_id):
     if game is None:
         return jsonify({'message': 'Game not found.'})
     else:
-        return jsonify({"game_id": game.id, "game_time": game.game_time,
+        return jsonify({"game_id": game.id, "player_id": game.player_id,
+                        "game_time": game.game_time,
                         "gems": game.gems, "homing_daggers": game.homing_daggers,
                         "daggers_hit": game.daggers_hit,
                         "daggers_fired": game.daggers_fired,
@@ -137,13 +138,31 @@ def get_game_gems(game_number):
         return jsonify(gems)
 
 
+@app.route('/api/game', methods=['GET'])
+def get_all_games():
+
+    query = db.session.query(Game.id.label("id"))
+    games = [row.id for row in query.all()]
+    game_id_list = {"game_id_list": games}
+
+    if len(games) is 0:
+        return jsonify({'message': 'No games found.'})
+    else:
+        return jsonify(game_id_list)
+
+
 @app.route('/api/game/<game_number>/homing_daggers', methods=['GET'])
 def get_game_homing_daggers(game_number):
 
     query = db.session.query(State).filter_by(game_id=game_number)
-    homing_daggers = [row.homing_daggers for row in query.all()]
+    homing_daggers_list = []
+    for row in query.all():
+        homing_daggers_list.append({"game_time": round(row.game_time, 4),
+                                 "homing_daggers": row.homing_daggers})
 
-    if len(homing_daggers) is 0:
+    homing_daggers = {"homing_daggers_list": homing_daggers_list}
+
+    if len(homing_daggers_list) is 0:
         return jsonify({'message': 'Game not found.'})
     else:
         return jsonify(homing_daggers)
@@ -153,9 +172,14 @@ def get_game_homing_daggers(game_number):
 def get_game_daggers_hit(game_number):
 
     query = db.session.query(State).filter_by(game_id=game_number)
-    daggers_hit = [row.daggers_hit for row in query.all()]
+    daggers_hit_list = []
+    for row in query.all():
+        daggers_hit_list.append({"game_time": round(row.game_time, 4),
+                                 "daggers_hit": row.daggers_hit})
 
-    if len(daggers_hit) is 0:
+    daggers_hit = {"daggers_hit_list": daggers_hit_list}
+
+    if len(daggers_hit_list) is 0:
         return jsonify({'message': 'Game not found.'})
     else:
         return jsonify(daggers_hit)
@@ -165,48 +189,51 @@ def get_game_daggers_hit(game_number):
 def get_game_daggers_fired(game_number):
 
     query = db.session.query(State).filter_by(game_id=game_number)
-    daggers_fired = [row.daggers_fired for row in query.all()]
+    daggers_fired_list = []
+    for row in query.all():
+        daggers_fired_list.append({"game_time": round(row.game_time, 4),
+                                    "daggers_fired": row.daggers_fired})
 
-    if len(daggers_fired) is 0:
+    daggers_fired = {"daggers_fired_list": daggers_fired_list}
+
+    if len(daggers_fired_list) is 0:
         return jsonify({'message': 'Game not found.'})
     else:
         return jsonify(daggers_fired)
-
-
-@app.route('/api/game/<game_number>/enemies_alive', methods=['GET'])
-def get_game_enemies_alive(game_number):
-
-    query = db.session.query(State).filter_by(game_id=game_number)
-    enemies_alive = [row.enemies_alive for row in query.all()]
-
-    if len(enemies_alive) is 0:
-        return jsonify({'message': 'Game not found.'})
-    else:
-        return jsonify(enemies_alive)
-
-
-@app.route('/api/game', methods=['GET'])
-def get_all_games():
-
-    query = db.session.query(Game.id.label("id"))
-    games = [row.id for row in query.all()]
-
-    if len(games) is 0:
-        return jsonify({'message': 'No games found.'})
-    else:
-        return jsonify(games)
 
 
 @app.route('/api/game/<game_number>/enemies_killed', methods=['GET'])
 def get_game_enemies_killed(game_number):
 
     query = db.session.query(State).filter_by(game_id=game_number)
-    enemies_killed = [row.enemies_killed for row in query.all()]
+    enemies_killed_list = []
+    for row in query.all():
+        enemies_killed_list.append({"game_time": round(row.game_time, 4),
+                                    "enemies_killed": row.enemies_killed})
 
-    if len(enemies_killed) is 0:
+    enemies_killed = {"enemies_killed_list": enemies_killed_list}
+
+    if len(enemies_killed_list) is 0:
         return jsonify({'message': 'Game not found.'})
     else:
         return jsonify(enemies_killed)
+
+
+@app.route('/api/game/<game_number>/enemies_alive', methods=['GET'])
+def get_game_enemies_alive(game_number):
+
+    query = db.session.query(State).filter_by(game_id=game_number)
+    enemies_alive_list = []
+    for row in query.all():
+        enemies_alive_list.append({"game_time": round(row.game_time, 4),
+                                   "enemies_alive": row.enemies_alive})
+
+    enemies_alive = {"enemies_alive_list": enemies_alive_list}
+
+    if len(enemies_alive_list) is 0:
+        return jsonify({'message': 'Game not found.'})
+    else:
+        return jsonify(enemies_alive)
 
 
 @app.route('/submit_game', methods=['POST'])
