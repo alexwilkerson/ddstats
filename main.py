@@ -281,7 +281,7 @@ def create_game():
         db.session.add(new_state)
     db.session.commit()
 
-    return jsonify({'message': 'Game submitted.', 'game_id': new_game})
+    return jsonify({'message': 'Game submitted.'})
 
 
 if __name__ == '__main__':
