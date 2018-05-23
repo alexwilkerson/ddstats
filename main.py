@@ -64,7 +64,8 @@ def get_classic_homing(game_number):
 def get_all_users():
 
     query = db.session.query(Game.player_id.distinct().label("player_id"))
-    users = [row.player_id for row in query.all()]
+    user_list = [row.player_id for row in query.all()]
+    users = {"user_list": user_list}
 
     if len(users) is 0:
         return jsonify({'message': 'No users found.'})
@@ -76,7 +77,8 @@ def get_all_users():
 def get_all_games_by_user(user_id):
 
     query = db.session.query(Game).filter_by(player_id=user_id)
-    game_ids = [row.id for row in query.all()]
+    game_id_list = [row.id for row in query.all()]
+    game_ids = {"player_id": user_id, "game_id_list": game_id_list}
 
     if len(game_ids) == 0:
         return jsonify({'message': 'No games found.'})
@@ -106,7 +108,8 @@ def get_game_stats(game_id):
 def get_all_game_states(game_number):
 
     query = db.session.query(State).filter_by(game_id=game_number)
-    states = [row.serialize for row in query.all()]
+    state_list = [row.serialize for row in query.all()]
+    states = {"state_list": state_list}
 
     if states is None:
         return jsonify({'message': 'Game not found.'})
@@ -118,24 +121,13 @@ def get_all_game_states(game_number):
 def get_game_time(game_number):
 
     query = db.session.query(State).filter_by(game_id=game_number)
-    game_time = [row.game_time for row in query.all()]
+    game_time_list = [row.game_time for row in query.all()]
+    game_time = {"game_time_list": game_time_list}
 
     if len(game_time) is 0:
         return jsonify({'message': 'Game not found.'})
     else:
         return jsonify(game_time)
-
-
-@app.route('/api/game/<game_number>/gems', methods=['GET'])
-def get_game_gems(game_number):
-
-    query = db.session.query(State).filter_by(game_id=game_number)
-    gems = [row.gems for row in query.all()]
-
-    if len(gems) is 0:
-        return jsonify({'message': 'Game not found.'})
-    else:
-        return jsonify(gems)
 
 
 @app.route('/api/game', methods=['GET'])
@@ -151,6 +143,23 @@ def get_all_games():
         return jsonify(game_id_list)
 
 
+@app.route('/api/game/<game_number>/gems', methods=['GET'])
+def get_game_gems(game_number):
+
+    query = db.session.query(State).filter_by(game_id=game_number)
+    gems_list = []
+    for row in query.all():
+        gems_list.append({"game_time": round(row.game_time, 4),
+                          "gems": row.gems})
+
+    gems = {"gems_list": gems_list}
+
+    if len(gems_list) is 0:
+        return jsonify({'message': 'Game not found.'})
+    else:
+        return jsonify(gems)
+
+
 @app.route('/api/game/<game_number>/homing_daggers', methods=['GET'])
 def get_game_homing_daggers(game_number):
 
@@ -158,7 +167,7 @@ def get_game_homing_daggers(game_number):
     homing_daggers_list = []
     for row in query.all():
         homing_daggers_list.append({"game_time": round(row.game_time, 4),
-                                 "homing_daggers": row.homing_daggers})
+                                    "homing_daggers": row.homing_daggers})
 
     homing_daggers = {"homing_daggers_list": homing_daggers_list}
 
