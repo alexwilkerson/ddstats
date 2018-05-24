@@ -256,7 +256,7 @@ def get_game_enemies_alive(game_number):
         return jsonify(enemies_alive)
 
 
-@app.route('/submit_game', methods=['POST'])
+@app.route('/api/submit_game', methods=['POST'])
 def create_game():
     data = request.get_json()
 
