@@ -2,7 +2,7 @@ import os
 import math
 import requests
 from datetime import datetime
-from flask import Flask, request, jsonify, Response
+from flask import Flask, request, jsonify, Response, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -282,6 +282,11 @@ def create_game():
     db.session.commit()
 
     return jsonify({'message': 'Game submitted.'})
+
+
+@app.route('/')
+def index():
+    return 'this site is currently<br /><img src="' + url_for('static', filename='img/under_construction.gif') + '" />'
 
 
 if __name__ == '__main__':
