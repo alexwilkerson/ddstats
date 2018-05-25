@@ -281,7 +281,7 @@ def create_game():
         db.session.add(new_state)
     db.session.commit()
 
-    return jsonify({'message': 'Game submitted.'})
+    return jsonify({'message': 'Game submitted.', 'game_id': new_game.id})
 
 
 @app.route('/')
@@ -290,4 +290,6 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5666)
+    app.run(host='0.0.0.0', port=5666,
+            ssl_context=('/etc/letsencrypt/live/www.ddstats.com/fullchain.pem',
+                         '/etc/letsencrypt/live/www.ddstats.com/key.pem'))
