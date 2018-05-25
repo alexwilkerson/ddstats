@@ -290,6 +290,4 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5666,
-            ssl_context=('/etc/letsencrypt/live/www.ddstats.com/fullchain.pem',
-                         '/etc/letsencrypt/live/www.ddstats.com/key.pem'))
+    app.run(host='0.0.0.0', port=5666)
