@@ -286,7 +286,26 @@ def create_game():
 
 @app.route('/')
 def index():
-    return 'this site is currently<br /><img src="' + url_for('static', filename='img/under_construction.gif') + '" />'
+    content = get_file('dagger.txt')
+    return Response(content, mimetype="text/plain")
+    # return 'this site is currently<br /><img src="' + url_for('static', filename='img/under_construction.gif') + '" />'
+
+
+def root_dir():  # pragma: no cover
+    return os.path.abspath(os.path.dirname(__file__))
+
+
+def get_file(filename):  # pragma: no cover
+    try:
+        src = os.path.join(root_dir(), filename)
+        # Figure out how flask returns static files
+        # Tried:
+        # - render_template
+        # - send_file
+        # This should not be so non-obvious
+        return open(src).read()
+    except IOError as exc:
+        return str(exc)
 
 
 if __name__ == '__main__':
