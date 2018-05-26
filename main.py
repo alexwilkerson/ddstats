@@ -4,8 +4,10 @@ import requests
 from datetime import datetime
 from flask import Flask, request, jsonify, Response, url_for
 from flask_sqlalchemy import SQLAlchemy
+from flask_bower import Bower
 
 app = Flask(__name__)
+Bower(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI') \
     or 'sqlite:////Users/alex/code/ddstats/app.db'
