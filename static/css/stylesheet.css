@@ -1,11 +1,11 @@
 @font-face {
     font-family: 'Goethe';
-    src: url('GoetheBold.eot');
-    src: url('GoetheBold.eot?#iefix') format('embedded-opentype'),
-        url('GoetheBold.woff2') format('woff2'),
-        url('GoetheBold.woff') format('woff'),
-        url('GoetheBold.ttf') format('truetype'),
-        url('GoetheBold.svg#GoetheBold') format('svg');
+    src: url('../font/GoetheBold.eot');
+    src: url('../font/GoetheBold.eot?#iefix') format('embedded-opentype'),
+        url('../font/GoetheBold.woff2') format('woff2'),
+        url('../font/GoetheBold.woff') format('woff'),
+        url('../font/GoetheBold.ttf') format('truetype'),
+        url('../font/GoetheBold.svg#GoetheBold') format('svg');
     font-weight: bold;
     font-style: normal;
 }
