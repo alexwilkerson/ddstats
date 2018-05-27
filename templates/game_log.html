@@ -5,12 +5,7 @@
     <script src="{{ url_for('bower.static', filename='highcharts/highcharts.js') }}"></script>
     <script src="{{ url_for('bower.static', filename='highcharts/js/themes/dark-unica.js') }}"></script>
     <script src="{{ url_for('bower.static', filename='jquery/dist/jquery.min.js') }}"></script>
-    <script type="text/css">
-        @font-face {
-            font-family: 'goethe';
-            src: url("https://ddstats.com/static/fonts/Goethe-Bold.ttf");
-        }
-    </script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/stylesheet.css') }}">
   </head>
   <body>
     <div id="container" style="width:100%; height:400px;"></div>
