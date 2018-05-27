@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Homing Log</title>
+    <title>GAME LOG</title>
     <script src="{{ url_for('bower.static', filename='highcharts/highcharts.js') }}"></script>
     <script src="{{ url_for('bower.static', filename='highcharts/js/themes/dark-unica.js') }}"></script>
     <script src="{{ url_for('bower.static', filename='jquery/dist/jquery.min.js') }}"></script>
+    <script type="text/css">
+        @font-face {
+            font-family: 'goethe';
+            src: url("{{ url_for('static', filename='font/GoetheBold.ttf') }}");
+        }
+    </script>
   </head>
   <body>
     <div id="container" style="width:100%; height:400px;"></div>
@@ -16,11 +22,16 @@
                 type: 'line'
             },
             title: {
-                text: 'Game Log'
+                text: 'GAME LOG'
             },
             xAxis: {
                 title: {
-                    text: 'Time in Seconds'
+                    text: 'TIME IN SECONDS'
+                }
+            },
+            legend: {
+                itemStyle: {
+                    fontSize: '20px'
                 }
             },
             tooltip: {
@@ -35,7 +46,7 @@
             },
             yAxis: {
                 title: {
-                    text: 'Game Stats'
+                    text: 'GAME STATS'
                 }
             },
             plotOptions: {
@@ -46,30 +57,47 @@
             colors: ['red', 'blue', 'yellow', 'green', 'orange'],
             series: [
                 {
-                    name: 'Gems',
+                    name: 'GEMS',
                     data: {{gems_list}}
                 },
                 {
-                    name: 'Homing Daggers',
+                    name: 'HOMING DAGGERS',
                     data: {{homing_daggers_list}}
                 },
                 {
-                    name: 'Accuracy',
+                    name: 'ACCURACY',
                     data: {{accuracy_list}}
                 },
                 {
-                    name: 'Enemies Alive',
+                    name: 'ENEMIES ALIVE',
                     data: {{enemies_alive_list}}
                 },
                 {
-                    name: 'Enemies Killed',
+                    name: 'ENEMIES KILLED',
                     data: {{enemies_killed_list}}
                 }
             ],
             credits: {
                 enabled: false
+            },
+            exporting: {
+                chartOptions: {
+                    chart: {
+                        style: {
+                            fontFamily: 'goethe'
+                        }
+                    }
+                }
             }
         });
+    });
+
+    Highcharts.setOptions({
+        chart: {
+            style: {
+                fontFamily: 'goethe'
+            }
+        }
     });
     </script>
   </body>
