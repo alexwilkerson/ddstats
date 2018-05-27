@@ -3,6 +3,7 @@ import math
 import requests
 from datetime import datetime
 from flask import Flask, request, jsonify, Response, url_for
+from flask import render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_bower import Bower
 
@@ -54,6 +55,11 @@ class State(db.Model):
                 'enemies_alive': self.enemies_alive,
                 'enemies_killed': self.enemies_killed
                }
+
+
+@app.route('/chartist_test/')
+def chartist_test():
+    return render_template('chartist_test.html')
 
 
 @app.route('/classic_homing_log/<game_number>', methods=['GET'])
