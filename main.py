@@ -57,6 +57,21 @@ class State(db.Model):
                }
 
 
+@app.route('/homing_log/<game_number>/')
+def homing_log(game_number):
+    r = requests.get('http://uncorrected.com:5666/api/game/{}/homing_daggers'.format(game_number))
+    data = r.json()
+    homing_daggers_list = []
+    for row in data["homing_daggers_list"]:
+        homing_daggers_list.append(row["homing_daggers"])
+    return render_template('homing_log.html', homing_daggers_list=homing_daggers_list)
+
+
+@app.route('/highcharts_test/')
+def highcharts_test():
+    return render_template('highcharts_test.html')
+
+
 @app.route('/chartist_test/')
 def chartist_test():
     return render_template('chartist_test.html')
@@ -296,7 +311,6 @@ def create_game():
 def index():
     content = get_file('dagger.txt')
     return Response(content, mimetype="text/plain")
-    # return 'this site is currently<br /><img src="' + url_for('static', filename='img/under_construction.gif') + '" />'
 
 
 def root_dir():  # pragma: no cover
