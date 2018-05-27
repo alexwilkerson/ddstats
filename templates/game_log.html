@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Homing Log</title>
+    <script src="{{ url_for('bower.static', filename='highcharts/highcharts.js') }}"></script>
+    <script src="{{ url_for('bower.static', filename='highcharts/js/themes/dark-unica.js') }}"></script>
+    <script src="{{ url_for('bower.static', filename='jquery/dist/jquery.min.js') }}"></script>
+  </head>
+  <body>
+    <div id="container" style="width:100%; height:400px;"></div>
+
+    <script>
+    $(function () {
+        var myChart = Highcharts.chart('container', {
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: 'Game Log'
+            },
+            xAxis: {
+                title: {
+                    text: 'Time in Seconds'
+                }
+            },
+            tooltip: {
+                <!-- formatter: function () { -->
+                <!--     var s = '<b>' + this.x + ' seconds:</b>'; -->
+                <!--     $.each(this.points, function () { -->
+                <!--         s += '<br/>' + this.y + ' Homing Daggers'; -->
+                <!--     }); -->
+                <!--     return s; -->
+                <!-- }, -->
+                shared: true
+            },
+            yAxis: {
+                title: {
+                    text: 'Game Stats'
+                }
+            },
+            plotOptions: {
+                series: {
+                    pointStart: 0
+                }
+            },
+            colors: ['red', 'blue', 'yellow', 'green', 'orange'],
+            series: [
+                {
+                    name: 'Gems',
+                    data: {{gems_list}}
+                },
+                {
+                    name: 'Homing Daggers',
+                    data: {{homing_daggers_list}}
+                },
+                {
+                    name: 'Accuracy',
+                    data: {{accuracy_list}}
+                },
+                {
+                    name: 'Enemies Alive',
+                    data: {{enemies_alive_list}}
+                },
+                {
+                    name: 'Enemies Killed',
+                    data: {{enemies_killed_list}}
+                }
+            ],
+            credits: {
+                enabled: false
+            }
+        });
+    });
+    </script>
+  </body>
+</html>

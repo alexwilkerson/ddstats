@@ -57,9 +57,35 @@ class State(db.Model):
                }
 
 
+@app.route('/game_log/<game_number>')
+def game_log(game_number):
+    r = requests.get('http://ddstats.com/api/game/{}/all'.format(game_number))
+    data = r.json()
+    gems_list = []
+    homing_daggers_list = []
+    accuracy_list = []
+    enemies_killed_list = []
+    enemies_alive_list = []
+    for row in data["state_list"]:
+        gems_list.append(row["gems"])
+        homing_daggers_list.append(row["homing_daggers"])
+        if row["daggers_fired"] is 0:
+            accuracy_list.append(0)
+        else:
+            accuracy_list.append(round((row["daggers_hit"]/row["daggers_fired"])*100, 2))
+        enemies_killed_list.append(row["enemies_killed"])
+        enemies_alive_list.append(row["enemies_alive"])
+    return render_template('game_log.html',
+                           gems_list=gems_list,
+                           homing_daggers_list=homing_daggers_list,
+                           accuracy_list=accuracy_list,
+                           enemies_killed_list=enemies_killed_list,
+                           enemies_alive_list=enemies_alive_list)
+
+
 @app.route('/homing_log/<game_number>/')
 def homing_log(game_number):
-    r = requests.get('http://uncorrected.com:5666/api/game/{}/homing_daggers'.format(game_number))
+    r = requests.get('http://ddstats.com/api/game/{}/homing_daggers'.format(game_number))
     data = r.json()
     homing_daggers_list = []
     for row in data["homing_daggers_list"]:
