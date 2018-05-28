@@ -337,7 +337,9 @@ def create_game():
 def get_motd():
     # data = request.get_json()
 
-    return jsonify({'motd': 'Hi, thanks for using this.'})
+    return jsonify({'motd': 'Hi, thanks for using this.',
+                    'valid_version': True,
+                    'update_available': False})
 
 
 @app.route('/')
