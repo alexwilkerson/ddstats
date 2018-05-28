@@ -339,7 +339,7 @@ def get_motd():
 
     return jsonify({'motd': 'Hi, thanks for using this.',
                     'valid_version': True,
-                    'update_available': False})
+                    'update_available': True})
 
 
 @app.route('/')
