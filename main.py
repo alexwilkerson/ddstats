@@ -338,7 +338,7 @@ def get_motd():
     # data = request.get_json()
 
     return jsonify({'motd': 'Hi, thanks for using this.',
-                    'valid_version': True,
+                    'valid_version': False,
                     'update_available': True})
 
 
