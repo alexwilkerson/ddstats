@@ -88,9 +88,20 @@ def game_log(game_number):
     r = requests.get('http://ddstats.com/api/get_scores?user={}'.format(game_data["player_id"]))
     user_data = r.json()
 
+    if game_data["daggers_fired"] is 0:
+        accuracy = 0.0
+    else:
+        accuracy = round(game_data["daggers_hit"] / game_data["daggers_fired"] * 100, 2)
+
     return render_template('game_log.html',
                            player_name=user_data["player_name"],
                            player_id=game_data["player_id"],
+                           game_time=round(game_data["game_time"], 4),
+                           gems=game_data["gems"],
+                           homing_daggers=game_data["homing_daggers"],
+                           accuracy=accuracy,
+                           enemies_alive=game_data["enemies_alive"],
+                           enemies_killed=game_data["enemies_killed"],
                            gems_list=gems_list,
                            homing_daggers_list=homing_daggers_list,
                            accuracy_list=accuracy_list,
