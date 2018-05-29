@@ -9,7 +9,7 @@ from flask_bower import Bower
 from byte_converters import to_int_16, to_int_32, to_uint_64
 
 # latest release
-current_version = "0.1.10"
+current_version = "0.1.11"
 # lowest release number that is valid
 valid_version = "0.1.9"
 # message of the day
