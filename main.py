@@ -8,6 +8,11 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bower import Bower
 from byte_converters import to_int_16, to_int_32, to_uint_64
 
+# latest release
+current_version = "0.1.10"
+# lowest release number that is valid
+valid_version = "0.1.9"
+# message of the day
 motd = "Don't go outside. Play more Devil Daggers."
 
 death_types = ["FALLEN", "SWARMED", "IMPALED", "GORED", "INFESTED", "OPENED", "PURGED",
@@ -368,11 +373,22 @@ def create_game():
 
 @app.route('/api/get_motd', methods=['POST'])
 def get_motd():
-    # data = request.get_json()
+    update_available = False
+    valid_version = True
+
+    data = request.get_json()
+
+    sv = data['version'].split('.')
+    scv = current_version.split('.')
+    svv = valid_version.split('.')
+    if (int(sv[0]) < int(scv[0])) or (int(sv[1]) < int(scv[1])) or (int(sv[2]) < int(scv[2])):
+        update_available = True
+    if (int(sv[0]) < int(svv[0])) or (int(sv[1]) < int(svv[1])) or (int(sv[2]) < int(svv[2])):
+        valid_version = False
 
     return jsonify({'motd': motd,
-                    'valid_version': True,
-                    'update_available': False})
+                    'valid_version': valid_version,
+                    'update_available': update_available})
 
 
 @app.route('/')
