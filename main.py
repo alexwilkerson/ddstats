@@ -1,11 +1,13 @@
 import os
 import math
 import requests
+import json
 from datetime import datetime
 from flask import Flask, request, jsonify, Response, url_for
 from flask import render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_bower import Bower
+from byte_converters import to_int_16, to_int_32, to_uint_64
 
 app = Flask(__name__)
 Bower(app)
@@ -363,6 +365,224 @@ def get_file(filename):  # pragma: no cover
         return open(src).read()
     except IOError as exc:
         return str(exc)
+
+
+########################################################
+#         devil dagger's backend api conversion        #
+########################################################
+
+death_types = ["FALLEN", "SWARMED", "IMPALED", "GORED", "INFESTED", "OPENED", "PURGED",
+               "DESECRATED", "SACRIFICED", "EVISCERATED", "ANNIHILATED", "INTOXICATED",
+               "ENVENOMATED", "INCARNATED", "DISCARNATED", "BARBED"]
+
+
+class Leaderboard(object):
+    leaderboard_data = ""
+
+    deaths_global = 0
+    kills_global = 0
+    time_global = 0
+    gems_global = 0
+    shots_hit_global = 0
+    shots_fired_global = 0
+    players = 0
+    entries = []
+
+    def __init__(self, offset, user=None):
+        if user is None:
+            self.update(offset)
+
+    def update(self, offset=None):
+        if offset is None:
+            offset = '0'
+
+        post_values = dict(user='0', level='survival', offset=offset)
+
+        req = requests.post("http://dd.hasmodai.com/backend16/get_scores.php", post_values)
+        self.leaderboard_data = req.content
+
+        self.deaths_global      = to_uint_64(self.leaderboard_data, 11)
+        self.kills_global       = to_uint_64(self.leaderboard_data, 19)
+        self.time_global        = to_uint_64(self.leaderboard_data, 35) / 10000
+        self.gems_global        = to_uint_64(self.leaderboard_data, 43)
+        self.shots_hit_global   = to_uint_64(self.leaderboard_data, 51)
+        self.shots_fired_global = to_uint_64(self.leaderboard_data, 27)
+        self.players            = to_int_32(self.leaderboard_data, 75)
+
+        entry_count = to_int_16(self.leaderboard_data, 59)
+        rank_iterator = 0
+        byte_pos = 83
+        self.entries = []
+        while(rank_iterator < entry_count):
+            entry = Entry()
+            username_length = to_int_16(self.leaderboard_data, byte_pos)
+            username_bytes = bytearray(username_length)
+            byte_pos += 2
+            for i in range(byte_pos, byte_pos + username_length):
+                username_bytes[i-byte_pos] = self.leaderboard_data[i]
+
+            byte_pos += username_length
+
+            entry.username = username_bytes.decode("utf-8")
+            entry.rank = to_int_32(self.leaderboard_data, byte_pos)
+            entry.userid = to_int_32(self.leaderboard_data, byte_pos + 4)
+            entry.time = to_int_32(self.leaderboard_data, byte_pos + 12) / 10000
+            entry.kills = to_int_32(self.leaderboard_data, byte_pos + 16)
+            entry.gems = to_int_32(self.leaderboard_data, byte_pos + 28)
+            entry.shots_hit = to_int_32(self.leaderboard_data, byte_pos + 24)
+            entry.shots_fired = to_int_32(self.leaderboard_data, byte_pos + 20)
+            if entry.shots_fired == 0:
+                entry.shots_fired = 1
+            entry.death_type = death_types[to_int_16(self.leaderboard_data, byte_pos + 32)]
+            entry.time_total = to_uint_64(self.leaderboard_data, byte_pos + 60) / 10000
+            entry.kills_total = to_uint_64(self.leaderboard_data, byte_pos + 44)
+            entry.gems_total = to_uint_64(self.leaderboard_data, byte_pos + 68)
+            entry.deaths_total = to_uint_64(self.leaderboard_data, byte_pos + 36)
+            entry.shots_hit_total = to_uint_64(self.leaderboard_data, byte_pos + 76)
+            entry.shots_fired_total = to_uint_64(self.leaderboard_data, byte_pos + 52)
+            if entry.shots_fired_total == 0:
+                entry.shots_fired_total = 1
+
+            byte_pos += 88
+
+            self.entries.append(entry)
+
+            rank_iterator += 1
+
+    def get_user(self, user):
+        post_values = dict(user=user, level='survival', offset='0')
+
+        req = requests.post("http://dd.hasmodai.com/backend16/get_scores.php", post_values)
+        self.leaderboard_data = req.content
+
+        if (user < 1 or user > to_int_32(self.leaderboard_data, 75)):
+            return None
+
+        byte_pos = 83
+
+        entry = Entry()
+
+        print("before while loop")
+
+        while(byte_pos < len(self.leaderboard_data)):
+            username_length = to_int_16(self.leaderboard_data, byte_pos)
+            if (user != to_int_32(self.leaderboard_data, byte_pos + 6 + username_length)):
+                byte_pos += 90 + username_length
+            else:
+                username_length = to_int_16(self.leaderboard_data, byte_pos)
+                username_bytes = bytearray(username_length)
+                byte_pos += 2
+                for i in range(byte_pos, byte_pos + username_length):
+                    username_bytes[i-byte_pos] = self.leaderboard_data[i]
+
+                byte_pos += username_length
+
+                entry.username = username_bytes.decode("utf-8")
+                entry.rank = to_int_32(self.leaderboard_data, byte_pos)
+                entry.userid = to_int_32(self.leaderboard_data, byte_pos + 4)
+                entry.time = to_int_32(self.leaderboard_data, byte_pos + 12) / 10000
+                entry.kills = to_int_32(self.leaderboard_data, byte_pos + 16)
+                entry.gems = to_int_32(self.leaderboard_data, byte_pos + 28)
+                entry.shots_hit = to_int_32(self.leaderboard_data, byte_pos + 24)
+                entry.shots_fired = to_int_32(self.leaderboard_data, byte_pos + 20)
+                if entry.shots_fired == 0:
+                    entry.shots_fired = 1
+                entry.death_type = death_types[to_int_16(self.leaderboard_data, byte_pos + 32)]
+                entry.time_total = to_uint_64(self.leaderboard_data, byte_pos + 60) / 10000
+                entry.kills_total = to_uint_64(self.leaderboard_data, byte_pos + 44)
+                entry.gems_total = to_uint_64(self.leaderboard_data, byte_pos + 68)
+                entry.deaths_total = to_uint_64(self.leaderboard_data, byte_pos + 36)
+                entry.shots_hit_total = to_uint_64(self.leaderboard_data, byte_pos + 76)
+                entry.shots_fired_total = to_uint_64(self.leaderboard_data, byte_pos + 52)
+                if entry.shots_fired_total == 0:
+                    entry.shots_fired_total = 1
+                return entry
+
+
+class Entry(object):
+    username = ""
+    userid = 0
+    rank = 0
+    time = 0
+    kills = 0
+    gems = 0
+    shots_hit = 0
+    shots_fired = 0
+    death_type = ""
+    time_total = 0
+    kills_total = 0
+    gems_total = 0
+    deaths_total = 0
+    shots_hit_total = 0
+    shots_fired_total = 0
+
+    def __eq__(self, other):
+        try:
+            return (self.rank, self.time, self.kills) == (other.rank, other.time,
+                                                          other.kills)
+        except AttributeError:
+            return NotImplemented
+
+
+@app.route('/api/get_scores', methods=['GET'])
+def get_scores():
+    offset = request.args.get('offset', default='0', type=int)
+    user = request.args.get('user', default=None, type=int)
+    leaderboard = Leaderboard(offset, user)
+    if user is None:
+        entry_list = []
+        for entry in leaderboard.entries:
+            entry_list.append({"player_name": entry.username,
+                               "player_id": entry.userid,
+                               "rank": entry.rank,
+                               "game_time": entry.time,
+                               "gems": entry.gems,
+                               "daggers_hit": entry.shots_hit,
+                               "daggers_fired": entry.shots_fired,
+                               "enemies_killed": entry.kills,
+                               "death_type": entry.death_type,
+                               "total_game_time": entry.time_total,
+                               "total_gems": entry.gems_total,
+                               "total_daggers_hit": entry.shots_hit_total,
+                               "total_daggers_fired": entry.shots_fired_total,
+                               "total_enemies_killed": entry.kills_total,
+                               "total_deaths": entry.deaths_total})
+
+        leaderboard_json = {"global_player_count": leaderboard.players,
+                            "global_time": leaderboard.time_global,
+                            "global_gems": leaderboard.gems_global,
+                            "global_daggers_hit": leaderboard.shots_hit_global,
+                            "global_daggers_fired": leaderboard.shots_fired_global,
+                            "global_enemies_killed": leaderboard.kills_global,
+                            "global_deaths": leaderboard.deaths_global,
+                            "entry_list": entry_list}
+    else:
+        entry = leaderboard.get_user(user)
+        if entry is not None:
+            leaderboard_json = {"player_name": entry.username,
+                                "player_id": entry.userid,
+                                "rank": entry.rank,
+                                "game_time": entry.time,
+                                "gems": entry.gems,
+                                "daggers_hit": entry.shots_hit,
+                                "daggers_fired": entry.shots_fired,
+                                "enemies_killed": entry.kills,
+                                "death_type": entry.death_type,
+                                "total_game_time": entry.time_total,
+                                "total_gems": entry.gems_total,
+                                "total_daggers_hit": entry.shots_hit_total,
+                                "total_daggers_fired": entry.shots_fired_total,
+                                "total_enemies_killed": entry.kills_total,
+                                "total_deaths": entry.deaths_total}
+        else:
+            leaderboard_json = {"message": "Invalid user ID."}
+
+    return jsonify(leaderboard_json)
+
+
+########################################################
+#     end of devil dagger's backend api conversion     #
+########################################################
 
 
 if __name__ == '__main__':
