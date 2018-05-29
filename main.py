@@ -132,6 +132,12 @@ def highcharts_test():
     return render_template('highcharts_test.html')
 
 
+@app.route('/releases')
+def releases():
+    return render_template('releases.html', version=current_version,
+                           link=url_for('static', filename='releases/ddstats'+current_version+'.zip'))
+
+
 @app.route('/classic_homing_log/<game_number>', methods=['GET'])
 def get_classic_homing(game_number):
     r = requests.get('http://uncorrected.com:5666/api/game/{}/homing_daggers'.format(game_number))
