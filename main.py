@@ -83,7 +83,14 @@ def game_log(game_number):
             accuracy_list.append(round((row["daggers_hit"]/row["daggers_fired"])*100, 2))
         enemies_killed_list.append(row["enemies_killed"])
         enemies_alive_list.append(row["enemies_alive"])
+    r = requests.get('http://ddstats.com/api/game/{}'.format(game_number))
+    game_data = r.json()
+    r = requests.get('http://ddstats.com/api/get_scores?user={}'.format(game_data["player_id"]))
+    user_data = r.json()
+
     return render_template('game_log.html',
+                           player_name=user_data["player_name"],
+                           player_id=game_data["player_id"],
                            gems_list=gems_list,
                            homing_daggers_list=homing_daggers_list,
                            accuracy_list=accuracy_list,
