@@ -8,6 +8,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bower import Bower
 from byte_converters import to_int_16, to_int_32, to_uint_64
 
+motd = "Don't go outside. Play more Devil Daggers."
+
 death_types = ["FALLEN", "SWARMED", "IMPALED", "GORED", "INFESTED", "OPENED", "PURGED",
                "DESECRATED", "SACRIFICED", "EVISCERATED", "ANNIHILATED", "INTOXICATED",
                "ENVENOMATED", "INCARNATED", "DISCARNATED", "BARBED"]
@@ -349,7 +351,7 @@ def create_game():
 def get_motd():
     # data = request.get_json()
 
-    return jsonify({'motd': 'Hi, thanks for using this.',
+    return jsonify({'motd': motd,
                     'valid_version': True,
                     'update_available': False})
 
