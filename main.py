@@ -376,8 +376,10 @@ def create_game():
 @app.route('/api/get_motd', methods=['POST'])
 def get_motd():
 
+    motd = ""
     with open('motd.json') as f:
         data = json.load(f)
+        motd = data["motd"]
 
     update_available = True
     valid = False
@@ -402,7 +404,7 @@ def get_motd():
     elif (int(sv[1]) == int(svv[1])) and (int(sv[2]) >= int(svv[2])):
         valid = True
 
-    return jsonify({'motd': data["motd"],
+    return jsonify({'motd': motd,
                     'valid_version': valid,
                     'update_available': update_available})
 
