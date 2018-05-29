@@ -378,7 +378,8 @@ def get_motd():
 
     data = request.get_json()
 
-    sv = data['version'].split('.')
+    sv = data["version"].split('.')
+    print(sv)
     scv = current_version.split('.')
     svv = valid_version.split('.')
     if (int(sv[0]) < int(scv[0])) or (int(sv[1]) < int(scv[1])) or (int(sv[2]) < int(scv[2])):
