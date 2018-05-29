@@ -8,6 +8,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bower import Bower
 from byte_converters import to_int_16, to_int_32, to_uint_64
 
+death_types = ["FALLEN", "SWARMED", "IMPALED", "GORED", "INFESTED", "OPENED", "PURGED",
+               "DESECRATED", "SACRIFICED", "EVISCERATED", "ANNIHILATED", "INTOXICATED",
+               "ENVENOMATED", "INCARNATED", "DISCARNATED", "BARBED"]
+
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 Bower(app)
@@ -157,8 +161,13 @@ def get_game_stats(game_id):
     if game is None:
         return jsonify({'message': 'Game not found.'})
     else:
+        if game.death_type is -1:
+            death_type = "RESTART"
+        else:
+            death_type = death_types[game.death_type]
         return jsonify({"game_id": game.id, "player_id": game.player_id,
                         "game_time": game.game_time,
+                        "death_type": death_type,
                         "gems": game.gems, "homing_daggers": game.homing_daggers,
                         "daggers_hit": game.daggers_hit,
                         "daggers_fired": game.daggers_fired,
@@ -370,11 +379,6 @@ def get_file(filename):  # pragma: no cover
 ########################################################
 #         devil dagger's backend api conversion        #
 ########################################################
-
-death_types = ["FALLEN", "SWARMED", "IMPALED", "GORED", "INFESTED", "OPENED", "PURGED",
-               "DESECRATED", "SACRIFICED", "EVISCERATED", "ANNIHILATED", "INTOXICATED",
-               "ENVENOMATED", "INCARNATED", "DISCARNATED", "BARBED"]
-
 
 class Leaderboard(object):
     leaderboard_data = ""
