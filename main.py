@@ -97,6 +97,7 @@ def game_log(game_number):
                            player_name=user_data["player_name"],
                            player_id=game_data["player_id"],
                            game_time=round(game_data["game_time"], 4),
+                           death_type=game_data["death_type"],
                            gems=game_data["gems"],
                            homing_daggers=game_data["homing_daggers"],
                            accuracy=accuracy,
