@@ -1,7 +1,6 @@
 import os
 import math
 import requests
-import json
 from datetime import datetime
 from flask import Flask, request, jsonify, Response, url_for
 from flask import render_template
@@ -10,6 +9,7 @@ from flask_bower import Bower
 from byte_converters import to_int_16, to_int_32, to_uint_64
 
 app = Flask(__name__)
+app.url_map.strict_slashes = False
 Bower(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI') \
