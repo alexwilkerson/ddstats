@@ -172,7 +172,8 @@ def get_game_stats(game_id):
                         "daggers_hit": game.daggers_hit,
                         "daggers_fired": game.daggers_fired,
                         "enemies_alive": game.enemies_alive,
-                        "enemies_killed": game.enemies_killed})
+                        "enemies_killed": game.enemies_killed,
+                        "time_stamp": game.time_stamp})
 
 
 @app.route('/api/game/<game_number>/all', methods=['GET'])
