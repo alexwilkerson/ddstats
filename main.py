@@ -1,6 +1,7 @@
 import os
 import math
 import requests
+import json
 from datetime import datetime
 from flask import Flask, request, jsonify, Response, url_for
 from flask import render_template
@@ -12,8 +13,6 @@ from byte_converters import to_int_16, to_int_32, to_uint_64
 current_version = "0.1.11"
 # lowest release number that is valid
 valid_version = "0.1.9"
-# message of the day
-motd = "Don't go outside. Play more Devil Daggers."
 
 death_types = ["FALLEN", "SWARMED", "IMPALED", "GORED", "INFESTED", "OPENED", "PURGED",
                "DESECRATED", "SACRIFICED", "EVISCERATED", "ANNIHILATED", "INTOXICATED",
@@ -376,6 +375,10 @@ def create_game():
 
 @app.route('/api/get_motd', methods=['POST'])
 def get_motd():
+
+    with open('motd.json') as f:
+        data = json.load(f)
+
     update_available = True
     valid = False
 
@@ -399,7 +402,7 @@ def get_motd():
     elif (int(sv[1]) == int(svv[1])) and (int(sv[2]) >= int(svv[2])):
         valid = True
 
-    return jsonify({'motd': motd,
+    return jsonify({'motd': data["motd"],
                     'valid_version': valid,
                     'update_available': update_available})
 
