@@ -370,7 +370,7 @@ def create_game():
 
 @app.route('/api/get_motd', methods=['POST'])
 def get_motd():
-    update_available = False
+    update_available = True
     valid = False
 
     data = request.get_json()
@@ -379,12 +379,12 @@ def get_motd():
     scv = current_version.split('.')
     svv = valid_version.split('.')
 
-    if (int(sv[0]) < int(scv[0])):
-        update_available = True
-    elif (int(sv[1]) < int(scv[1])):
-        update_available = True
-    elif (int(sv[2]) < int(scv[2])):
-        update_available = True
+    if (int(sv[0]) > int(scv[0])):
+        update_available = False
+    elif (int(sv[0]) == int(scv[0])) and (int(sv[1]) > int(scv[1])):
+        update_available = False
+    elif (int(sv[1]) == int(scv[1])) and (int(sv[2]) >= int(scv[2])):
+        update_available = False
 
     if (int(sv[0]) > int(svv[0])):
         valid = True
