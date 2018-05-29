@@ -74,6 +74,8 @@ class State(db.Model):
 def game_log(game_number):
     r = requests.get('http://ddstats.com/api/game/{}/all'.format(game_number))
     data = r.json()
+    if "message" in data:
+        return data["message"]
     gems_list = []
     homing_daggers_list = []
     accuracy_list = []
@@ -128,11 +130,6 @@ def homing_log(game_number):
 @app.route('/highcharts_test/')
 def highcharts_test():
     return render_template('highcharts_test.html')
-
-
-@app.route('/chartist_test/')
-def chartist_test():
-    return render_template('chartist_test.html')
 
 
 @app.route('/classic_homing_log/<game_number>', methods=['GET'])
@@ -209,7 +206,7 @@ def get_all_game_states(game_number):
     state_list = [row.serialize for row in query.all()]
     states = {"state_list": state_list}
 
-    if states is None:
+    if len(state_list) is 0:
         return jsonify({'message': 'Game not found.'})
     else:
         return jsonify(states)
@@ -503,8 +500,6 @@ class Leaderboard(object):
         byte_pos = 83
 
         entry = Entry()
-
-        print("before while loop")
 
         while(byte_pos < len(self.leaderboard_data)):
             username_length = to_int_16(self.leaderboard_data, byte_pos)
