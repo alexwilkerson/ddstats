@@ -86,54 +86,46 @@
                 series: {
                     marker: {
                         enabled: false
-                    },
-                    events: {
-                        legendItemClick: function (e) {
-                            var seriesArr=$('#game').highcharts().series;
-                            var visible = this.visible;
-                            var index = this.index;
-                            for(var i=0; i<seriesArr.length;i++)
-                            {
-                                if(i!=index)
-                                {
-                                    seriesArr[i].setVisible(false, false);
-                                }
-                            }
-
-                            this.visible=false;  
-                        }
                     }
+                    //events: {
+                    //    legendItemClick: function (e) {
+                    //        var seriesArr=$('#game').highcharts().series;
+                    //        var visible = this.visible;
+                    //        var index = this.index;
+                    //        for(var i=0; i<seriesArr.length;i++)
+                    //        {
+                    //            if(i!=index)
+                    //            {
+                    //                seriesArr[i].setVisible(false, false);
+                    //            }
+                    //        }
+                    //
+                    //        this.visible=false;  
+                    //    }
+                    //}
                 }
             },
+            colors: ['red', 'blue', 'yellow', 'green', 'orange'],
             series: [
                 {
                     name: 'Gems',
                     data: {{gems_list}},
-                    color: "#D5056C"
                 },
                 {
                     name: 'Homing',
                     data: {{homing_daggers_list}},
-                    color: "#9F040C",
-                    visible: false
                 },
                 {
                     name: 'Accuracy',
                     data: {{accuracy_list}},
-                    color: "#CB9627",
-                    visible: false
                 },
                 {
                     name: 'Enemies Alive',
                     data: {{enemies_alive_list}},
-                    color: "#FF785F",
-                    visible: false
                 },
                 {
                     name: 'Enemies Killed',
                     data: {{enemies_killed_list}},
-                    color: "#2B65DA",
-                    visible: false
                 },
             ],
             credits: {
