@@ -5,9 +5,34 @@
     <script src="{{ url_for('bower.static', filename='jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ url_for('bower.static', filename='highcharts/highcharts.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/stylesheet.css') }}">
+<style>
+body {
+background-color: #000;
+}
+
+.ascii {
+    text-align: center;
+    width: 800px;
+    margin: auto;
+    font-family: "CMU Typewriter Text";
+        color: #760202;
+white-space: pre;
+}
+</style>
   </head>
   <body>
-    <div id="game" style="width:66%; height:350px;"></div>
+      <div class="ascii">@@@@@@@   @@@@@@@    @@@@@@   @@@@@@@   @@@@@@   @@@@@@@   @@@@@@   
+@@@@@@@@  @@@@@@@@  @@@@@@@   @@@@@@@  @@@@@@@@  @@@@@@@  @@@@@@@   
+@@!  @@@  @@!  @@@  !@@         @@!    @@!  @@@    @@!    !@@       
+!@!  @!@  !@!  @!@  !@!         !@!    !@!  @!@    !@!    !@!       
+@!@  !@!  @!@  !@!  !!@@!!      @!!    @!@!@!@!    @!!    !!@@!!    
+!@!  !!!  !@!  !!!   !!@!!!     !!!    !!!@!!!!    !!!     !!@!!!   
+!!:  !!!  !!:  !!!       !:!    !!:    !!:  !!!    !!:         !:!  
+:!:  !:!  :!:  !:!      !:!     :!:    :!:  !:!    :!:        !:!   
+ :::: ::   :::: ::  :::: ::      ::    ::   :::     ::    :::: ::   
+:: :  :   :: :  :   :: : :       :      :   : :     :     :: : :    
+      </div>
+    <div id="game" style="width:66%; height:350px; margin: auto;"></div>
       user: {{player_name}} ({{player_id}})<br/>
       time: {{game_time}}<br/>
       death: {{death_type}}<br/>
