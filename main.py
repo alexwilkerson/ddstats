@@ -75,12 +75,14 @@ def game_log(game_number):
     data = r.json()
     if "message" in data:
         return data["message"]
+    game_time_list = []
     gems_list = []
     homing_daggers_list = []
     accuracy_list = []
     enemies_killed_list = []
     enemies_alive_list = []
     for row in data["state_list"]:
+        game_time_list.append(math.floor(row["game_time"]))
         gems_list.append(row["gems"])
         homing_daggers_list.append(row["homing_daggers"])
         if row["daggers_fired"] is 0:
@@ -99,9 +101,13 @@ def game_log(game_number):
     else:
         accuracy = round(game_data["daggers_hit"] / game_data["daggers_fired"] * 100, 2)
 
+    game_time_list = game_time_list[:-1]
+    game_time_list.append(round(game_data["game_time"], 4))
+
     return render_template('game_log.html',
                            player_name=user_data["player_name"],
                            player_id=game_data["player_id"],
+                           game_number=game_number,
                            game_time=round(game_data["game_time"], 4),
                            death_type=game_data["death_type"],
                            gems=game_data["gems"],
@@ -109,8 +115,11 @@ def game_log(game_number):
                            accuracy=accuracy,
                            enemies_alive=game_data["enemies_alive"],
                            enemies_killed=game_data["enemies_killed"],
+                           game_time_list=game_time_list,
                            gems_list=gems_list,
                            homing_daggers_list=homing_daggers_list,
+                           max_homing=max(homing_daggers_list),
+                           max_homing_time=homing_daggers_list.index(max(homing_daggers_list)),
                            accuracy_list=accuracy_list,
                            enemies_killed_list=enemies_killed_list,
                            enemies_alive_list=enemies_alive_list)

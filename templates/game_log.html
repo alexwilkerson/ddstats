@@ -2,13 +2,12 @@
 <html>
   <head>
     <title>GAME LOG</title>
-    <script src="{{ url_for('bower.static', filename='highcharts/highcharts.js') }}"></script>
-    <script src="{{ url_for('bower.static', filename='highcharts/js/themes/dark-unica.js') }}"></script>
     <script src="{{ url_for('bower.static', filename='jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ url_for('bower.static', filename='highcharts/highcharts.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/stylesheet.css') }}">
   </head>
   <body>
-    <div id="container" style="width:100%; height:400px;"></div>
+    <div id="game" style="width:66%; height:350px;"></div>
       user: {{player_name}} ({{player_id}})<br/>
       time: {{game_time}}<br/>
       death: {{death_type}}<br/>
@@ -20,65 +19,122 @@
 
     <script>
     $(function () {
-        var myChart = Highcharts.chart('container', {
+        var game_time_list = {{game_time_list}}
+
+        $('#game').highcharts({
             chart: {
+                backgroundColor: '#282828',
+                borderRadius: 10,
                 type: 'line'
             },
             title: {
-                text: 'GAME LOG'
+                text: '{{player_name}} | {{game_time}}s',
+                align: 'left',
+                style: {
+                    fontSize: "16px",
+                    fontWeight: "bold",
+                    color: "#CCC"
+                }
+            },
+            subtitle: {
+                text: "Game: {{game_number}}",
+                align: 'left',
+                style: {
+                    fontSize: "14px",
+                    color: "#CCC"
+                }
             },
             xAxis: {
                 title: {
-                    text: 'TIME IN SECONDS'
-                }
+                    text: 'SECONDS'
+                },
+                categories: game_time_list,
+                labels: {
+                    //formatter: function () {
+                    //    return this.value + "s"
+                    //},
+                },
+                tickInterval: Math.round({{game_time}} / 10)
             },
             legend: {
                 itemStyle: {
-                    fontSize: '20px'
+                    color: "#CCC"
+                },
+                itemHiddenStyle: {
+                    color: "#828282"
                 }
             },
             tooltip: {
-                <!-- formatter: function () { -->
-                <!--     var s = '<b>' + this.x + ' seconds:</b>'; -->
-                <!--     $.each(this.points, function () { -->
-                <!--         s += '<br/>' + this.y + ' Homing Daggers'; -->
-                <!--     }); -->
-                <!--     return s; -->
-                <!-- }, -->
+                formatter: function () {
+                    var s = '<b>' + this.x + ' seconds</b>';
+                    $.each(this.points, function () {
+                        if (this.series.name == 'Accuracy')
+                            s += '<br/>' + this.series.name + ': ' + this.y + '%';
+                        else
+                            s += '<br/>' + this.series.name + ': ' + this.y;
+                    });
+                    return s;
+                },
                 shared: true
             },
             yAxis: {
                 title: {
-                    text: 'GAME STATS'
+                    enabled: false
                 }
             },
             plotOptions: {
                 series: {
-                    pointStart: 0
+                    marker: {
+                        enabled: false
+                    },
+                    events: {
+                        legendItemClick: function (e) {
+                            var seriesArr=$('#game').highcharts().series;
+                            var visible = this.visible;
+                            var index = this.index;
+                            for(var i=0; i<seriesArr.length;i++)
+                            {
+                                if(i!=index)
+                                {
+                                    seriesArr[i].setVisible(false, false);
+                                }
+                            }
+
+                            this.visible=false;  
+                        }
+                    }
                 }
             },
-            colors: ['red', 'blue', 'yellow', 'green', 'orange'],
             series: [
                 {
-                    name: 'GEMS',
-                    data: {{gems_list}}
+                    name: 'Gems',
+                    data: {{gems_list}},
+                    color: "#D5056C"
                 },
                 {
-                    name: 'HOMING DAGGERS',
-                    data: {{homing_daggers_list}}
+                    name: 'Homing',
+                    data: {{homing_daggers_list}},
+                    color: "#9F040C",
+                    visible: false
                 },
                 {
-                    name: 'ACCURACY',
-                    data: {{accuracy_list}}
+                    name: 'Accuracy',
+                    data: {{accuracy_list}},
+                    color: "#CB9627",
+                    visible: false
                 },
                 {
-                    name: 'ENEMIES ALIVE',
-                    data: {{enemies_alive_list}}
+                    name: 'Enemies Alive',
+                    data: {{enemies_alive_list}},
+                    color: "#FF785F",
+                    visible: false
                 },
                 {
-                    name: 'ENEMIES KILLED',
-                    data: {{enemies_killed_list}}
-                }
+                    name: 'Enemies Killed',
+                    data: {{enemies_killed_list}},
+                    color: "#2B65DA",
+                    visible: false
+                },
             ],
             credits: {
                 enabled: false
@@ -87,7 +143,7 @@
                 chartOptions: {
                     chart: {
                         style: {
-                            fontFamily: 'Goethe'
+                            fontFamily: 'Helvetica Neue'
                         }
                     }
                 }
@@ -98,7 +154,7 @@
     Highcharts.setOptions({
         chart: {
             style: {
-                fontFamily: 'Goethe'
+                fontFamily: 'Helvetica Neue'
             }
         }
     });
