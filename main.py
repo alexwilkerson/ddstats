@@ -162,38 +162,40 @@ def highchart_dataset(game_number):
     game_time_list = game_time_list[:-1]
     game_time_list.append(round(game_data["game_time"], 4))
 
+    datasets = []
+    if (sum(gems_list) is not 0):
+        datasets.append({'name': 'Gems',
+                         'data': gems_list,
+                         'unit': 'gems',
+                         'type': 'area',
+                         'valueDecimals': 0})
+    if (sum(homing_daggers_list) is not 0):
+        datasets.append({'name': 'Homing Daggers',
+                         'data': homing_daggers_list,
+                         'unit': 'homing daggers',
+                         'type': 'area',
+                         'valueDecimals': 0})
+    if (sum(accuracy_list) is not 0.0):
+        datasets.append({'name': 'Accuracy',
+                         'data': accuracy_list,
+                         'unit': '%',
+                         'type': 'area',
+                         'valueDecimals': 1})
+    if (sum(enemies_alive_list) is not 0):
+        datasets.append({'name': 'Enemies Alive',
+                         'data': enemies_alive_list,
+                         'unit': 'enemies alive',
+                         'type': 'area',
+                         'valueDecimals': 0})
+    if (sum(enemies_killed_list) is not 0):
+        datasets.append({'name': 'Enemies Killed',
+                         'data': enemies_killed_list,
+                         'unit': 'enemies_killed_list',
+                         'type': 'area',
+                         'valueDecimals': 0})
+
     dataset = {'xData': game_time_list,
-               'datasets': [{
-                   'name': 'Gems',
-                   'data': gems_list,
-                   'unit': 'gems',
-                   'type': 'area',
-                   'valueDecimals': 0
-                }, {
-                   'name': 'Homing Daggers',
-                   'data': homing_daggers_list,
-                   'unit': 'homing daggers',
-                   'type': 'area',
-                   'valueDecimals': 0
-                }, {
-                   'name': 'Accuracy',
-                   'data': accuracy_list,
-                   'unit': '%',
-                   'type': 'area',
-                   'valueDecimals': 1
-                }, {
-                   'name': 'Enemies Alive',
-                   'data': enemies_alive_list,
-                   'unit': 'enemies alive',
-                   'type': 'area',
-                   'valueDecimals': 0
-                }, {
-                   'name': 'Enemies Killed',
-                   'data': enemies_killed_list,
-                   'unit': 'enemies killed',
-                   'type': 'area',
-                   'valueDecimals': 0
-                }]}
+               'datasets': datasets}
     return jsonify(dataset)
 
 

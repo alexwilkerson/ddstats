@@ -8,7 +8,7 @@
     <style>
     .chart {
         min-width: 320px;
-        max-width: 600px;
+        max-width: 700px;
         height: 200px;
         margin: 0 auto;
     }
@@ -101,7 +101,7 @@
 
         // Get the data. The contents of the data file can be viewed at
         $.getJSON(
-            'http://localhost:5666/api/dataset/227',
+            'https://ddstats.com/api/dataset/{{game_number}}',
             function (activity) {
                 $.each(activity.datasets, function (i, dataset) {
 
@@ -114,12 +114,16 @@
                         .appendTo('#container')
                         .highcharts({
                             chart: {
-                                marginLeft: 40, // Keep all charts left aligned
+                                backgroundColor: '#333',
+                                marginLeft: 45, // Keep all charts left aligned
                                 spacingTop: 20,
                                 spacingBottom: 20
                             },
                             title: {
                                 text: dataset.name,
+                                style: {
+                                    color: '#DDD'
+                                },
                                 align: 'left',
                                 margin: 0,
                                 x: 30
@@ -136,7 +140,7 @@
                                     setExtremes: syncExtremes
                                 },
                                 labels: {
-                                    format: '{value} km'
+                                    format: '{value} sec'
                                 }
                             },
                             yAxis: {
@@ -154,10 +158,11 @@
                                 },
                                 borderWidth: 0,
                                 backgroundColor: 'none',
-                                pointFormat: '{point.y}',
+                                pointFormat: '{point.y} at {point.x}s',
                                 headerFormat: '',
                                 shadow: false,
                                 style: {
+                                    color: '#DDD',
                                     fontSize: '18px'
                                 },
                                 valueDecimals: dataset.valueDecimals
@@ -167,7 +172,7 @@
                                 name: dataset.name,
                                 type: dataset.type,
                                 color: Highcharts.getOptions().colors[i],
-                                fillOpacity: 0.3,
+                                fillOpacity: 0.2,
                                 tooltip: {
                                     valueSuffix: ' ' + dataset.unit
                                 }
@@ -176,6 +181,12 @@
                 });
             }
         );
+        Highcharts.setOptions({
+            lang: {
+                thousandsSep: ','
+            },
+            colors: ['red', 'orange', 'yellow', 'green', 'blue']
+        });
     </script>
   </body>
 </html>
