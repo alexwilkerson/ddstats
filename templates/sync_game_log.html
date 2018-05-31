@@ -6,6 +6,16 @@
     <script src="{{ url_for('bower.static', filename='highcharts/highcharts.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/stylesheet.css') }}">
     <style>
+    body {
+        background-color: #000;
+    }
+    #container {
+        background-color: #333;
+        border-radius: 10px;
+        max-width: 720px;
+        margin: 0 auto;
+        box-shadow: 5px 5px #9A1000;
+    }
     .chart {
         min-width: 320px;
         max-width: 700px;
