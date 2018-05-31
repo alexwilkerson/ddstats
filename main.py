@@ -112,11 +112,13 @@ def game_log(game_number):
                            game_number=game_number,
                            game_time=round(game_data["game_time"], 4),
                            death_type=game_data["death_type"],
-                           gems=game_data["gems"],
-                           homing_daggers=game_data["homing_daggers"],
+                           gems="{:,}".format(game_data["gems"]),
+                           homing_daggers="{:,}".format(game_data["homing_daggers"]),
                            accuracy=accuracy,
-                           enemies_alive=game_data["enemies_alive"],
-                           enemies_killed=game_data["enemies_killed"],
+                           enemies_alive="{:,}".format(game_data["enemies_alive"]),
+                           daggers_hit="{:,}".format(game_data["daggers_hit"]),
+                           daggers_fired="{:,}".format(game_data["daggers_fired"]),
+                           enemies_killed="{:,}".format(game_data["enemies_killed"]),
                            game_time_list=game_time_list,
                            gems_list=gems_list,
                            homing_daggers_list=homing_daggers_list,
@@ -124,7 +126,8 @@ def game_log(game_number):
                            max_homing_time=homing_daggers_list.index(max(homing_daggers_list)),
                            accuracy_list=accuracy_list,
                            enemies_killed_list=enemies_killed_list,
-                           enemies_alive_list=enemies_alive_list)
+                           enemies_alive_list=enemies_alive_list,
+                           time_stamp=game_data["time_stamp"])
 
 
 @app.route('/api/dataset/<game_number>')
