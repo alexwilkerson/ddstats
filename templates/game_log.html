@@ -50,7 +50,7 @@ white-space: pre;
             chart: {
                 backgroundColor: '#282828',
                 borderRadius: 10,
-                type: 'line'
+                type: 'area'
             },
             title: {
                 text: '{{player_name}} | {{game_time}}s',
@@ -112,7 +112,8 @@ white-space: pre;
                 series: {
                     marker: {
                         enabled: false
-                    }
+                    },
+                    fillOpacity: 0.2,
                     //events: {
                     //    legendItemClick: function (e) {
                     //        var seriesArr=$('#game').highcharts().series;
@@ -135,7 +136,7 @@ white-space: pre;
             series: [
                 {
                     name: 'Gems',
-                    data: {{gems_list}}
+                    data: {{gems_list}},
                 },
                 {
                     name: 'Homing',

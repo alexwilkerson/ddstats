@@ -125,6 +125,64 @@ def game_log(game_number):
                            enemies_alive_list=enemies_alive_list)
 
 
+@app.route('/api/dataset/<game_number>')
+def highchart_dataset(game_number):
+    r = requests.get('http://ddstats.com/api/game/{}/all'.format(game_number))
+    data = r.json()
+    if "message" in data:
+        return data["message"]
+    game_time_list = []
+    gems_list = []
+    homing_daggers_list = []
+    accuracy_list = []
+    enemies_killed_list = []
+    enemies_alive_list = []
+    for row in data["state_list"]:
+        game_time_list.append(math.floor(row["game_time"]))
+        gems_list.append(row["gems"])
+        homing_daggers_list.append(row["homing_daggers"])
+        if row["daggers_fired"] is 0:
+            accuracy_list.append(0)
+        else:
+            accuracy_list.append(round((row["daggers_hit"]/row["daggers_fired"])*100, 2))
+        enemies_killed_list.append(row["enemies_killed"])
+        enemies_alive_list.append(row["enemies_alive"])
+    r = requests.get('http://ddstats.com/api/game/{}'.format(game_number))
+    game_data = r.json()
+    r = requests.get('http://ddstats.com/api/get_scores?user={}'.format(game_data["player_id"]))
+    user_data = r.json()
+
+    if game_data["daggers_fired"] is 0:
+        accuracy = 0.0
+    else:
+        accuracy = round(game_data["daggers_hit"] / game_data["daggers_fired"] * 100, 2)
+
+    game_time_list = game_time_list[:-1]
+    game_time_list.append(round(game_data["game_time"], 4))
+
+    dataset = { 'xData': game_time_list,
+                'datasets': [{
+                    'name': 'Gems',
+                    'data': gems_list,
+                    'unit': 'gems',
+                    'type': 'line',
+                    'valueDecimals': 1
+                }, {
+                    'name': 'Homing Daggers',
+                    'data': homing_daggers_list,
+                    'unit': 'homing daggers',
+                    'type': 'line',
+                    'valueDecimals': 1
+                }, {
+                    'name': 'Accuracy',
+                    'data': accuracy_list,
+                    'unit': '%',
+                    'type': 'line',
+                    'valueDecimals': 1
+                }]}
+    return jsonify(dataset)
+
+
 @app.route('/homing_log/<game_number>/')
 def homing_log(game_number):
     r = requests.get('http://ddstats.com/api/game/{}/homing_daggers'.format(game_number))
