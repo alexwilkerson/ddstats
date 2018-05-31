@@ -167,19 +167,19 @@ def highchart_dataset(game_number):
                     'name': 'Gems',
                     'data': gems_list,
                     'unit': 'gems',
-                    'type': 'line',
+                    'type': 'area',
                     'valueDecimals': 0
                 }, {
                     'name': 'Homing Daggers',
                     'data': homing_daggers_list,
                     'unit': 'homing daggers',
-                    'type': 'line',
+                    'type': 'area',
                     'valueDecimals': 0
                 }, {
                     'name': 'Accuracy',
                     'data': accuracy_list,
                     'unit': '%',
-                    'type': 'line',
+                    'type': 'area',
                     'valueDecimals': 1
                 }]}
     return jsonify(dataset)
