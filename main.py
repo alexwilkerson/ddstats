@@ -168,13 +168,13 @@ def highchart_dataset(game_number):
                     'data': gems_list,
                     'unit': 'gems',
                     'type': 'line',
-                    'valueDecimals': 1
+                    'valueDecimals': 0
                 }, {
                     'name': 'Homing Daggers',
                     'data': homing_daggers_list,
                     'unit': 'homing daggers',
                     'type': 'line',
-                    'valueDecimals': 1
+                    'valueDecimals': 0
                 }, {
                     'name': 'Accuracy',
                     'data': accuracy_list,
