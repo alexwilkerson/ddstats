@@ -102,12 +102,23 @@
         // Get the data. The contents of the data file can be viewed at
         $.getJSON(
             'https://ddstats.com/api/dataset/{{game_number}}',
-            function (activity) {
-                $.each(activity.datasets, function (i, dataset) {
+            function (game) {
+                $.each(game.datasets, function (i, dataset) {
+                    var color_ = 0
+                    if (dataset.name == 'Gems')
+                        color_ = 0
+                    else if (dataset.name == 'Homing Daggers')
+                        color_ = 1
+                    else if (dataset.name == 'Accuracy')
+                        color_ = 2
+                    else if (dataset.name == 'Enemies Alive')
+                        color_ = 3
+                    else if (dataset.name == 'Enemies Killed')
+                        color_ = 4
 
                     // Add X values
                     dataset.data = Highcharts.map(dataset.data, function (val, j) {
-                        return [activity.xData[j], val];
+                        return [game.xData[j], val];
                     });
 
                     $('<div class="chart">')
@@ -171,8 +182,9 @@
                                 data: dataset.data,
                                 name: dataset.name,
                                 type: dataset.type,
-                                color: Highcharts.getOptions().colors[i],
-                                fillOpacity: 0.2,
+                                lineWidth: 1,
+                                color: Highcharts.getOptions().colors[color_],
+                                fillOpacity: 0.7,
                                 tooltip: {
                                     valueSuffix: ' ' + dataset.unit
                                 }
@@ -185,7 +197,7 @@
             lang: {
                 thousandsSep: ','
             },
-            colors: ['red', 'orange', 'yellow', 'green', 'blue']
+            colors: ['#9A1000', '#D39C00', '#2DA800', '#006EC2', '#F049FF']
         });
     </script>
   </body>

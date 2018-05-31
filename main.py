@@ -190,7 +190,7 @@ def highchart_dataset(game_number):
     if (sum(enemies_killed_list) is not 0):
         datasets.append({'name': 'Enemies Killed',
                          'data': enemies_killed_list,
-                         'unit': 'enemies_killed_list',
+                         'unit': 'enemies killed',
                          'type': 'area',
                          'valueDecimals': 0})
 
