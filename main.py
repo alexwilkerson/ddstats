@@ -96,7 +96,10 @@ def game_log(game_number):
         enemies_alive_list.append(row["enemies_alive"])
     r = requests.get('http://ddstats.com/api/game/{}'.format(game_number))
     game_data = r.json()
-    r = requests.get('http://ddstats.com/api/get_scores?user={}'.format(game_data["player_id"]))
+    player_id = game_data["player_id"]
+    if game_data["replay"] is not 0:
+        player_id = game_data["replay"]
+    r = requests.get('http://ddstats.com/api/get_scores?user={}'.format(player_id))
     user_data = r.json()
 
     if game_data["daggers_fired"] is 0:
@@ -109,7 +112,7 @@ def game_log(game_number):
 
     return render_template('sync_game_log.html',
                            player_name=user_data["player_name"],
-                           player_id=game_data["player_id"],
+                           player_id=player_id,
                            game_number=game_number,
                            game_time=round(game_data["game_time"], 4),
                            death_type=game_data["death_type"],
