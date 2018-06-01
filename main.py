@@ -607,7 +607,8 @@ class Leaderboard(object):
         req = requests.post("http://dd.hasmodai.com/backend16/get_scores.php", post_values)
         self.leaderboard_data = req.content
 
-        if (user < 1 or user > to_int_32(self.leaderboard_data, 75)):
+        #if (user < 1 or user > to_int_32(self.leaderboard_data, 75)):
+        if (user < 1 or user 200000 > to_int_32(self.leaderboard_data, 75)):
             return None
 
         byte_pos = 83
