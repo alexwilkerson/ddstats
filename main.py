@@ -45,6 +45,13 @@ class Game(db.Model):
     enemies_alive = db.Column(db.Integer, nullable=False)
     enemies_killed = db.Column(db.Integer, nullable=False)
     time_stamp = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+    replay = db.Column(db.Boolean, default=False, nullable=False)
+
+
+class Replay(db.Model):
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    player_id = db.Column(db.Integer, nullable=False)
+    game_id = db.Column(db.Integer, db.ForeignKey('game.id'), nullable=False)
 
 
 class State(db.Model):
