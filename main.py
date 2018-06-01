@@ -11,7 +11,7 @@ from flask_cors import CORS
 from byte_converters import to_int_16, to_int_32, to_uint_64
 
 # latest release
-current_version = "0.1.11"
+current_version = "0.2.0"
 # lowest release number that is valid
 valid_version = "0.1.9"
 
@@ -45,13 +45,7 @@ class Game(db.Model):
     enemies_alive = db.Column(db.Integer, nullable=False)
     enemies_killed = db.Column(db.Integer, nullable=False)
     time_stamp = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
-    replay = db.Column(db.Boolean, default=False, nullable=False)
-
-
-class Replay(db.Model):
-    id = db.Column(db.Integer, primary_key=True, nullable=False)
-    player_id = db.Column(db.Integer, nullable=False)
-    game_id = db.Column(db.Integer, db.ForeignKey('game.id'), nullable=False)
+    replay = db.Column(db.Integer, default=0, nullable=False)
 
 
 class State(db.Model):
@@ -446,7 +440,8 @@ def create_game():
                     game_time=data['inGameTimer'], death_type=data['deathType'],
                     gems=data['gems'], homing_daggers=data['homingDaggers'],
                     daggers_fired=data['daggersFired'], daggers_hit=data['daggersHit'],
-                    enemies_alive=data['enemiesAlive'], enemies_killed=data['enemiesKilled'])
+                    enemies_alive=data['enemiesAlive'], enemies_killed=data['enemiesKilled'],
+                    replay=data["replayPlayerID"])
     db.session.add(new_game)
     db.session.commit()
     db.session.refresh(new_game)
