@@ -450,7 +450,7 @@ def create_game():
     data = request.get_json()
 
     if data["replayPlayerID"] > 0:
-        existing = db.session.query(Game.game_id).filter(and_(
+        existing = db.session.query(Game.id).filter(and_(
                                                  # remove this to disable multiple users rec
                                                  # same game...for now it is fine.
                                                  Game.player_id == data["playerID"],
