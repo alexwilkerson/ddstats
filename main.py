@@ -12,7 +12,7 @@ from flask_cors import CORS
 from byte_converters import to_int_16, to_int_32, to_uint_64
 
 # latest release
-current_version = "0.2.0"
+current_version = "0.2.1"
 # lowest release number that is valid
 valid_version = "0.1.9"
 
