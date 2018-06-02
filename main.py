@@ -6,6 +6,7 @@ from datetime import datetime
 from flask import Flask, request, jsonify, Response, url_for
 from flask import render_template
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import and_
 from flask_bower import Bower
 from flask_cors import CORS
 from byte_converters import to_int_16, to_int_32, to_uint_64
@@ -45,7 +46,7 @@ class Game(db.Model):
     enemies_alive = db.Column(db.Integer, nullable=False)
     enemies_killed = db.Column(db.Integer, nullable=False)
     time_stamp = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
-    replay = db.Column(db.Integer, default=0, nullable=False)
+    replay_player_id = db.Column(db.Integer, default=0, nullable=False)
 
 
 class State(db.Model):
@@ -99,9 +100,9 @@ def game_log(game_number):
     player_id = game_data["player_id"]
     submitter_id = 0
     submitter_name = ""
-    if game_data["replay"] is not 0:
+    if game_data["replay_player_id"] is not 0:
         submitter_id = player_id
-        player_id = game_data["replay"]
+        player_id = game_data["replay_player_id"]
         r = requests.get('http://ddstats.com/api/get_scores?user={}'.format(submitter_id))
         submitter_data = r.json()
         submitter_name = submitter_data["player_name"]
@@ -235,9 +236,9 @@ def releases():
                            link=url_for('static', filename='releases/ddstats'+current_version+'.zip'))
 
 
-@app.route('/classic_homing_log/<game_number>', methods=['GET'])
+@app.route('/classic_homing_log/<int:game_number>.txt', methods=['GET'])
 def get_classic_homing(game_number):
-    r = requests.get('http://uncorrected.com:5666/api/game/{}/homing_daggers'.format(game_number))
+    r = requests.get('https://ddstats.com/api/game/{}/homing_daggers'.format(game_number))
     data = r.json()
     text = ""
     last = 0
@@ -300,7 +301,7 @@ def get_game_stats(game_id):
                         "enemies_alive": game.enemies_alive,
                         "enemies_killed": game.enemies_killed,
                         "time_stamp": game.time_stamp,
-                        "replay": game.replay})
+                        "replay_player_id": game.replay_player_id})
 
 
 @app.route('/api/game/<game_number>/all', methods=['GET'])
@@ -448,12 +449,30 @@ def get_game_enemies_alive(game_number):
 def create_game():
     data = request.get_json()
 
+    if data["replayPlayerID"] > 0:
+        existing = db.session.query(Game.game_id).filter(and_(
+                                                 # remove this to disable multiple users rec
+                                                 # same game...for now it is fine.
+                                                 Game.player_id == data["playerID"],
+                                                 Game.replay_player_id == data["replayPlayerID"],
+                                                 Game.game_time == data["inGameTimer"],
+                                                 Game.death_type == data["deathType"],
+                                                 Game.gems == data["gems"],
+                                                 Game.homing_daggers == data["homingDaggers"],
+                                                 Game.daggers_fired == data["daggersFired"],
+                                                 Game.daggers_hit == data["daggersHit"],
+                                                 Game.enemies_alive == data["enemiesAlive"],
+                                                 Game.enemies_killed == data["enemiesKilled"]
+                                                )).first()
+        if existing is not None:
+            return jsonify({'message': 'Replay already recorded.', 'game_id': existing.id})
+
     new_game = Game(player_id=data['playerID'], granularity=data['granularity'],
                     game_time=data['inGameTimer'], death_type=data['deathType'],
                     gems=data['gems'], homing_daggers=data['homingDaggers'],
                     daggers_fired=data['daggersFired'], daggers_hit=data['daggersHit'],
                     enemies_alive=data['enemiesAlive'], enemies_killed=data['enemiesKilled'],
-                    replay=data["replayPlayerID"])
+                    replay_player_id=data["replayPlayerID"])
     db.session.add(new_game)
     db.session.commit()
     db.session.refresh(new_game)

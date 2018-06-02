@@ -49,3 +49,87 @@
     font-weight: bold;
     font-style: italic;
 }
+
+body {
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    background-color: #000;
+}
+h1 {
+    margin: 5px auto;
+    text-size: 20px;
+    text-align: center;
+}
+h2 {
+    color: #D39C00;
+    font-size: 18px;
+    font-weight: normal;
+    padding: 0 20px;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+}
+#header {
+    color: #9A1000;
+    max-width: 720px;
+    margin: 0 auto;
+}
+footer {
+    color: #9A1000;
+    font-size: 12px;
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: right;
+}
+#graphs, #stats{
+    background-color: #333;
+    border-radius: 8px;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 10px;
+    box-shadow: 3px 3px #9A1000;
+}
+#stats {
+    color: #DDD;
+    margin-bottom: 10px;
+}
+.chart {
+    min-width: 320px;
+    max-width: 700px;
+    height: 200px;
+    margin: 0 auto;
+}
+.alignleft {
+    float: left;
+}
+.alignright {
+    float: right;
+}
+#statsleft {
+    padding-left: 20px;
+    padding-bottom: 5px;
+}
+#statsright {
+    padding-right: 20px;
+    padding-bottom: 5px;
+    text-align: right;
+}
+#submitter {
+    color: #2DA800;
+    padding-right: 20px;
+    margin: 0 auto;
+}
+#statsfooter {
+    padding-left: 20px;
+    font-size: 12px;
+    min-width: 320px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+#statsfooter a {
+    color: #006EC2;
+}
+#statsfooter a:hover {
+    color: #F049FF;
+}

@@ -5,91 +5,6 @@
     <script src="{{ url_for('bower.static', filename='jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ url_for('bower.static', filename='highcharts/highcharts.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/stylesheet.css') }}">
-    <style>
-    body {
-        font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
-        font-size: 14px;
-        background-color: #000;
-    }
-    h1 {
-        margin: 5px auto;
-        text-size: 20px;
-        text-align: center;
-    }
-    h2 {
-        color: #D39C00;
-        font-size: 18px;
-        font-weight: normal;
-        padding: 0 20px;
-    }
-    ul {
-        list-style-type: none;
-        margin: 0;
-    }
-    #header {
-        color: #9A1000;
-        max-width: 720px;
-        margin: 0 auto;
-    }
-    footer {
-        color: #9A1000;
-        font-size: 12px;
-        max-width: 720px;
-        margin: 0 auto;
-        text-align: right;
-    }
-    #graphs, #stats{
-        background-color: #333;
-        border-radius: 8px;
-        max-width: 720px;
-        margin: 0 auto;
-        padding: 0 10px;
-        box-shadow: 3px 3px #9A1000;
-    }
-    #stats {
-        color: #DDD;
-        margin-bottom: 10px;
-    }
-    .chart {
-        min-width: 320px;
-        max-width: 700px;
-        height: 200px;
-        margin: 0 auto;
-    }
-    .alignleft {
-        float: left;
-    }
-    .alignright {
-        float: right;
-    }
-    #statsleft {
-        padding-left: 20px;
-        padding-bottom: 5px;
-    }
-    #statsright {
-        padding-right: 20px;
-        padding-bottom: 5px;
-        text-align: right;
-    }
-    #submitter {
-        color: #2DA800;
-        padding-right: 20px;
-        margin: 0 auto;
-    }
-    #statsfooter {
-        padding-left: 20px;
-        font-size: 12px;
-        min-width: 320px;
-        max-width: 700px;
-        margin: 0 auto;
-    }
-    #statsfooter a {
-        color: #006EC2;
-    }
-    #statsfooter a:hover {
-        color: #F049FF;
-    }
-    </style>
   </head>
     <body>
         <div id="header">
@@ -127,19 +42,6 @@
             <p>ddstats.com</p>
         </footer>
     <script>
-        /*
-        The purpose of this demo is to demonstrate how multiple charts on the same page
-        can be linked through DOM and Highcharts events and API methods. It takes a
-        standard Highcharts config with a small variation for each data set, and a
-        mouse/touch event handler to bind the charts together.
-        */
-
-
-
-        /**
-         * In order to synchronize tooltips and crosshairs, override the
-         * built-in events with handlers defined on the parent element.
-         */
         $('#graphs').bind('mousemove touchmove touchstart', function (e) {
             var chart,
                 point,
@@ -148,9 +50,7 @@
 
             for (i = 0; i < Highcharts.charts.length; i = i + 1) {
                 chart = Highcharts.charts[i];
-                // Find coordinates within the chart
                 event = chart.pointer.normalize(e.originalEvent);
-                // Get the hovered point
                 point = chart.series[0].searchPoint(event, true);
 
                 if (point) {
@@ -158,34 +58,24 @@
                 }
             }
         });
-        /**
-         * Override the reset function, we don't need to hide the tooltips and
-         * crosshairs.
-         */
         Highcharts.Pointer.prototype.reset = function () {
             return undefined;
         };
 
-        /**
-         * Highlight a point by showing tooltip, setting hover state and draw crosshair
-         */
         Highcharts.Point.prototype.highlight = function (event) {
             event = this.series.chart.pointer.normalize(event);
-            this.onMouseOver(); // Show the hover marker
-            this.series.chart.tooltip.refresh(this); // Show the tooltip
-            this.series.chart.xAxis[0].drawCrosshair(event, this); // Show the crosshair
+            this.onMouseOver();
+            this.series.chart.tooltip.refresh(this);
+            this.series.chart.xAxis[0].drawCrosshair(event, this);
         };
 
-        /**
-         * Synchronize zooming through the setExtremes event handler.
-         */
         function syncExtremes(e) {
             var thisChart = this.chart;
 
-            if (e.trigger !== 'syncExtremes') { // Prevent feedback loop
+            if (e.trigger !== 'syncExtremes') {
                 Highcharts.each(Highcharts.charts, function (chart) {
                     if (chart !== thisChart) {
-                        if (chart.xAxis[0].setExtremes) { // It is null while updating
+                        if (chart.xAxis[0].setExtremes) {
                             chart.xAxis[0].setExtremes(
                                 e.min,
                                 e.max,
@@ -199,7 +89,6 @@
             }
         }
 
-        // Get the data. The contents of the data file can be viewed at
         $.getJSON(
             'https://ddstats.com/api/dataset/{{game_number}}',
             function (game) {
@@ -216,7 +105,6 @@
                     else if (dataset.name == 'Enemies Killed')
                         color_ = 4
 
-                    // Add X values
                     dataset.data = Highcharts.map(dataset.data, function (val, j) {
                         return [game.xData[j], val];
                     });
@@ -226,7 +114,7 @@
                         .highcharts({
                             chart: {
                                 backgroundColor: '#333',
-                                marginLeft: 45, // Keep all charts left aligned
+                                marginLeft: 45,
                                 spacingTop: 20,
                                 spacingBottom: 20
                             },
@@ -262,9 +150,8 @@
                             tooltip: {
                                 positioner: function () {
                                     return {
-                                        // right aligned
                                         x: this.chart.chartWidth - this.label.width,
-                                        y: 10 // align to title
+                                        y: 10
                                     };
                                 },
                                 borderWidth: 0,
@@ -294,11 +181,6 @@
             }
         );
         Highcharts.setOptions({
-            chart: {
-                //style: {
-                //    fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif'
-                //}
-            },
             lang: {
                 thousandsSep: ','
             },
