@@ -97,8 +97,14 @@ def game_log(game_number):
     r = requests.get('http://ddstats.com/api/game/{}'.format(game_number))
     game_data = r.json()
     player_id = game_data["player_id"]
+    submitter_id = 0
+    submitter_name = ""
     if game_data["replay"] is not 0:
+        submitter_id = player_id
         player_id = game_data["replay"]
+        r = requests.get('http://ddstats.com/api/get_scores?user={}'.format(submitter_id))
+        submitter_data = r.json()
+        submitter_name = submitter_data["player_name"]
     r = requests.get('http://ddstats.com/api/get_scores?user={}'.format(player_id))
     user_data = r.json()
 
@@ -131,7 +137,9 @@ def game_log(game_number):
                            accuracy_list=accuracy_list,
                            enemies_killed_list=enemies_killed_list,
                            enemies_alive_list=enemies_alive_list,
-                           time_stamp=game_data["time_stamp"])
+                           time_stamp=game_data["time_stamp"],
+                           submitter_id=submitter_id,
+                           submitter_name=submitter_name)
 
 
 @app.route('/api/dataset/<game_number>')

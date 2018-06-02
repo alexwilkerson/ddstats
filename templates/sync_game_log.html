@@ -71,6 +71,13 @@
         padding-bottom: 15px;
         text-align: right;
     }
+    #submitter {
+        color: #2DA800;
+        padding-right: 20px;
+        margin: 0 auto;
+        font-size: 12px;
+        text-align: right;
+    }
     </style>
   </head>
     <body>
@@ -96,6 +103,9 @@
                 <li>{{time_stamp}}</li>
             </ul>
             <div style="clear: both;"></div>
+            {% if submitter_id > 0 %}
+                <p id="submitter">This game was recorded by {{submitter_name}} ({{submitter_id}})</span>
+            {% endif %}
         </div>
         <div id="graphs"></div>
         <footer>
