@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Game {{game_number}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
     <script src="{{ url_for('bower.static', filename='jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ url_for('bower.static', filename='highcharts/highcharts.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/stylesheet.css') }}">
@@ -64,19 +65,30 @@
     }
     #statsleft {
         padding-left: 20px;
-        padding-bottom: 15px;
+        padding-bottom: 5px;
     }
     #statsright {
         padding-right: 20px;
-        padding-bottom: 15px;
+        padding-bottom: 5px;
         text-align: right;
     }
     #submitter {
         color: #2DA800;
         padding-right: 20px;
         margin: 0 auto;
+    }
+    #statsfooter {
+        padding-left: 20px;
         font-size: 12px;
-        text-align: right;
+        min-width: 320px;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    #statsfooter a {
+        color: #006EC2;
+    }
+    #statsfooter a:hover {
+        color: #F049FF;
     }
     </style>
   </head>
@@ -103,13 +115,17 @@
                 <li>{{time_stamp}}</li>
             </ul>
             <div style="clear: both;"></div>
+            <div id="statsfooter">
+                <span class="alignleft"><a href="{{ url_for('get_classic_homing', game_number=game_number) }}">Classic Homing Log</a></p></span>
             {% if submitter_id > 0 %}
-                <p id="submitter">This game was recorded by {{submitter_name}} ({{submitter_id}})</span>
+                <span id="submitter" class="alignright">Replay recorded by {{submitter_name}} ({{submitter_id}})</span>
             {% endif %}
+            <div style="clear: both;"></div>
+            </div>
         </div>
         <div id="graphs"></div>
         <footer>
-            <p>ddstats.com is quite a dish.</p>
+            <p>ddstats.com</p>
         </footer>
     <script>
         /*
