@@ -73,7 +73,13 @@ ul {
 #header {
     color: #9A1000;
     max-width: 720px;
-    margin: 0 auto;
+    margin: 10px auto 0 auto;
+    font-family: "Goethe";
+    letter-spacing: 2px;
+}
+#header img {
+    display:block;
+    margin:auto;
 }
 footer {
     color: #9A1000;
