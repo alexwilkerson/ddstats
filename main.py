@@ -530,8 +530,9 @@ def get_motd():
 
 @app.route('/')
 def index():
-    content = get_file('dagger.txt')
-    return Response(content, mimetype="text/plain")
+    return render_template('index.html')
+    # content = get_file('dagger.txt')
+    # return Response(content, mimetype="text/plain")
 
 
 def root_dir():  # pragma: no cover
