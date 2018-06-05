@@ -73,13 +73,22 @@ ul {
 #header {
     color: #9A1000;
     max-width: 720px;
-    margin: 10px auto 0 auto;
+    margin: 10px auto 10px auto;
     font-family: "Goethe";
     letter-spacing: 2px;
+    text-align: center;
+    font-size: 16px;
 }
 #header img {
     display:block;
     margin:auto;
+}
+#header a:link, a:visited, a:active {
+    color: #F049FF;
+    text-decoration: none;
+}
+#header a:hover {
+    color: #006EC2;
 }
 footer {
     color: #9A1000;
