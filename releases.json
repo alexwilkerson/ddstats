@@ -1,12 +1,10 @@
 {
-    "releases": [
-        {
-            "version": "0.2.1",
-            "change_log": [
-                "Added ability to record replays. To toggle this feature, hit the F12 button and '+r' will show up in the top left of the screen.",
-                "When F12 is pressed, the stats are constantly shown on screen, since you can't cheat during a replay.",
-                "Fixed bug that caused incorrect user id sent to server on instant replays."
-            ]
-        }
+    "version": "0.2.2",
+    "change_log": [
+        "Added ability to record replays. To toggle this feature, hit the F12 button and '+r' will show up in the top left of the screen.",
+        "When F12 is pressed, the stats are constantly shown on screen, since you can't cheat during a replay.",
+        "Fixed bug that caused incorrect user id sent to server on instant replays.",
+        "Refactored code to be less noodly.",
+        "Fixed bug with stat monitoring."
     ]
 }

@@ -12,7 +12,7 @@ from flask_cors import CORS
 from byte_converters import to_int_16, to_int_32, to_uint_64
 
 # latest release
-current_version = "0.2.1"
+current_version = "0.2.2"
 # lowest release number that is valid
 valid_version = "0.1.9"
 
@@ -232,8 +232,9 @@ def highcharts_test():
 
 @app.route('/releases')
 def releases():
-    return render_template('releases.html', version=current_version,
-                           link=url_for('static', filename='releases/ddstats'+current_version+'.zip'))
+    with open('releases.json') as f:
+        data = json.load(f)
+        return render_template('releases.html', releases=data)
 
 
 @app.route('/classic_homing_log/<int:game_number>.txt', methods=['GET'])

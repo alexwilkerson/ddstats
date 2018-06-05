@@ -4,11 +4,12 @@
     <title>ddstats releases</title>
   </head>
   <body>
-      ddstats v{{version}}<br/>
-      download: <a href="{{link}}">v{{version}}</a><br/>
+      ddstats v{{releases.version}}<br/>
+      download: <a href="{{url_for('static', filename='releases/ddstats')}}{{releases.version}}.zip">v{{releases.version}}</a><br/>
       <ul>
-          <li>Added ability to record replays. To toggle this feature, hit the F12 button and '+r' will show up in the top left of the screen.</li>
-          <li>Fixed bug that caused incorrect user id sent to server on instant replays.</li>
+          {% for change in releases.change_log %}
+          <li>{{ change }}</li>
+          {% endfor %}
       </ul>
   </body>
 </html>
