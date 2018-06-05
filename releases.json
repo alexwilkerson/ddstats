@@ -5,6 +5,7 @@
         "When F12 is pressed, the stats are constantly shown on screen, since you can't cheat during a replay.",
         "Fixed bug that caused incorrect user id sent to server on instant replays.",
         "Refactored code to be less noodly.",
-        "Fixed bug with stat monitoring."
+        "Fixed bug with stat monitoring.",
+        "Scores no longer submit when under 4.0000 seconds. This is to prevent recording multiple games while user is tilting and angrily smashing the R key."
     ]
 }
