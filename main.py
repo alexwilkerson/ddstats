@@ -238,9 +238,24 @@ def releases():
 
 @app.route('/classic_homing_log/<int:game_number>.txt', methods=['GET'])
 def get_classic_homing(game_number):
+    r = requests.get('https://ddstats.com/api/game/{}'.format(game_number))
+    data = r.json()
+    text =  "*** CLASSIC HOMING LOG ***\n\n"
+    text += "Time: {}\t\tDeath: {}\n".format(round(data["game_time"], 4), data["death_type"])
+    if data["daggers_fired"] is 0:
+        accuracy = 0.0
+    else:
+        accuracy = round(data["daggers_hit"] / data["daggers_fired"] * 100, 2)
+    text += "Gems: {}\t\tAccuracy: {}%\n".format(data["gems"], accuracy)
+    text += "Homing Daggers: {}\tDaggers Hit: {}\n".format(data["homing_daggers"],
+                                                             data["daggers_hit"])
+    text += "Enemies Alive: {}\tDaggers Fired: {}\n".format(data["enemies_alive"],
+                                                              data["daggers_fired"])
+    text += "Enemies Killed: {}\t{}\n\n".format(data["enemies_killed"],
+                                                  data["time_stamp"])
+
     r = requests.get('https://ddstats.com/api/game/{}/homing_daggers'.format(game_number))
     data = r.json()
-    text = ""
     last = 0
     for row in data["homing_daggers_list"]:
         if int(row["game_time"]) >= 10 and int(row["game_time"]) % 10 is 0:
