@@ -5,7 +5,7 @@
   </head>
   <body>
       ddstats v{{releases.version}}<br/>
-      download: <a href="{{url_for('static', filename='releases/ddstats')}}{{releases.version}}.zip">v{{releases.version}}</a><br/>
+      download: <a href="{{url_for('static', filename='releases/ddstats{}.zip'.format(releases.version))}}">v{{releases.version}}</a><br/>
       <ul>
           {% for change in releases.change_log %}
           <li>{{ change }}</li>

@@ -117,7 +117,7 @@ def game_log(game_number):
     game_time_list = game_time_list[:-1]
     game_time_list.append(round(game_data["game_time"], 4))
 
-    return render_template('sync_game_log.html',
+    return render_template('game_log.html',
                            player_name=user_data["player_name"],
                            player_id=player_id,
                            game_number=game_number,
@@ -779,6 +779,21 @@ def get_scores():
 ########################################################
 #     end of devil dagger's backend api conversion     #
 ########################################################
+
+# these two functions append the timestamp to static files so the flush
+# correctly when updated.
+@app.context_processor
+def override_url_for():
+    return dict(url_for=dated_url_for)
+
+
+def dated_url_for(endpoint, **values):
+    if endpoint == 'static':
+        filename = values.get('filename', None)
+        if filename:
+            file_path = os.path.join(app.root_path, endpoint, filename)
+            values['q'] = int(os.stat(file_path).st_mtime)
+    return url_for(endpoint, **values)
 
 
 if __name__ == '__main__':

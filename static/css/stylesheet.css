@@ -84,11 +84,11 @@ ul {
     margin:auto;
 }
 #header a:link, a:visited, a:active {
-    color: #F049FF;
+    color: #006EC2;
     text-decoration: none;
 }
 #header a:hover {
-    color: #006EC2;
+    color: #F049FF;
 }
 footer {
     color: #9A1000;

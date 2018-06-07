@@ -1,182 +1,183 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>GAME LOG</title>
+{% extends "base.html" %}
+{% block title %}Game {{game_number}}{% endblock %}
+{% block head %}
+    {{ super() }}
     <script src="{{ url_for('bower.static', filename='jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ url_for('bower.static', filename='highcharts/highcharts.js') }}"></script>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/stylesheet.css') }}">
-<style>
-body {
-background-color: #000;
-}
-
-.ascii {
-    text-align: center;
-    width: 800px;
-    margin: auto;
-    font-family: "CMU Typewriter Text";
-        color: #760202;
-white-space: pre;
-}
-</style>
-  </head>
-  <body>
-      <div class="ascii">@@@@@@@   @@@@@@@    @@@@@@   @@@@@@@   @@@@@@   @@@@@@@   @@@@@@   
-@@@@@@@@  @@@@@@@@  @@@@@@@   @@@@@@@  @@@@@@@@  @@@@@@@  @@@@@@@   
-@@!  @@@  @@!  @@@  !@@         @@!    @@!  @@@    @@!    !@@       
-!@!  @!@  !@!  @!@  !@!         !@!    !@!  @!@    !@!    !@!       
-@!@  !@!  @!@  !@!  !!@@!!      @!!    @!@!@!@!    @!!    !!@@!!    
-!@!  !!!  !@!  !!!   !!@!!!     !!!    !!!@!!!!    !!!     !!@!!!   
-!!:  !!!  !!:  !!!       !:!    !!:    !!:  !!!    !!:         !:!  
-:!:  !:!  :!:  !:!      !:!     :!:    :!:  !:!    :!:        !:!   
- :::: ::   :::: ::  :::: ::      ::    ::   :::     ::    :::: ::   
-:: :  :   :: :  :   :: : :       :      :   : :     :     :: : :    
-      </div>
-    <div id="game" style="width:66%; height:350px; margin: auto;"></div>
-      user: {{player_name}} ({{player_id}})<br/>
-      time: {{game_time}}<br/>
-      death: {{death_type}}<br/>
-      gems: {{gems}}<br/>
-      homing daggers: {{homing_daggers}}<br/>
-      accuracy: {{accuracy}}%<br/>
-      enemies alive: {{enemies_alive}}<br/>
-      enemies killed: {{enemies_killed}}<br/>
-
+{% endblock %}
+{% block body %}
+        <div id="stats">
+            <h2 class="alignleft">Game {{game_number}}</h1>
+            <h2 class="alignright">{{player_name}} ({{player_id}})</h1>
+            <div style="clear: both;"></div>
+            <ul class="alignleft" id="statsleft">
+                <li>Time: {{game_time}}</li>
+                <li>Gems: {{gems}}</li>
+                <li>Homing Daggers: {{homing_daggers}}</li>
+                <li>Enemies Alive: {{enemies_alive}}</li>
+                <li>Enemies Killed: {{enemies_killed}}</li>
+            </ul>
+            <ul class="alignright" id="statsright">
+                <li>Death: {{death_type}}</li>
+                <li>Accuracy: {{accuracy}}%</li>
+                <li>Daggers Hit: {{daggers_hit}}</li>
+                <li>Daggers Fired: {{daggers_fired}}</li>
+                <li>{{time_stamp}}</li>
+            </ul>
+            <div style="clear: both;"></div>
+            <div id="statsfooter">
+                <span class="alignleft"><a href="{{ url_for('get_classic_homing', game_number=game_number) }}">Classic Homing Log</a></p></span>
+            {% if submitter_id > 0 %}
+                <span id="submitter" class="alignright">Replay recorded by {{submitter_name}} ({{submitter_id}})</span>
+            {% endif %}
+            <div style="clear: both;"></div>
+            </div>
+        </div>
+        <div id="graphs"></div>
     <script>
-    $(function () {
-        var game_time_list = {{game_time_list}}
+        $('#graphs').bind('mousemove touchmove touchstart', function (e) {
+            var chart,
+                point,
+                i,
+                event;
 
-        $('#game').highcharts({
-            chart: {
-                backgroundColor: '#282828',
-                borderRadius: 10,
-                type: 'line'
-            },
-            title: {
-                text: '{{player_name}} | {{game_time}}s',
-                align: 'left',
-                style: {
-                    fontSize: "16px",
-                    fontWeight: "bold",
-                    color: "#CCC"
-                }
-            },
-            subtitle: {
-                text: "Game: {{game_number}}",
-                align: 'left',
-                style: {
-                    fontSize: "14px",
-                    color: "#CCC"
-                }
-            },
-            xAxis: {
-                title: {
-                    text: 'SECONDS'
-                },
-                categories: game_time_list,
-                labels: {
-                    //formatter: function () {
-                    //    return this.value + "s"
-                    //},
-                },
-                tickInterval: Math.round({{game_time}} / 10)
-            },
-            legend: {
-                itemStyle: {
-                    color: "#CCC"
-                },
-                itemHiddenStyle: {
-                    color: "#828282"
-                }
-            },
-            tooltip: {
-                formatter: function () {
-                    var s = '<b>' + this.x + ' seconds</b>';
-                    $.each(this.points, function () {
-                        if (this.series.name == 'Accuracy')
-                            s += '<br/>' + this.series.name + ': ' + this.y + '%';
-                        else
-                            s += '<br/>' + this.series.name + ': ' + this.y;
-                    });
-                    return s;
-                },
-                shared: true
-            },
-            yAxis: {
-                title: {
-                    enabled: false
-                },
-                maxPadding: 0.0
-            },
-            plotOptions: {
-                series: {
-                    marker: {
-                        enabled: false
-                    },
-                    fillOpacity: 0.2,
-                    //events: {
-                    //    legendItemClick: function (e) {
-                    //        var seriesArr=$('#game').highcharts().series;
-                    //        var visible = this.visible;
-                    //        var index = this.index;
-                    //        for(var i=0; i<seriesArr.length;i++)
-                    //        {
-                    //            if(i!=index)
-                    //            {
-                    //                seriesArr[i].setVisible(false, false);
-                    //            }
-                    //        }
-                    //
-                    //        this.visible=false;  
-                    //    }
-                    //}
-                }
-            },
-            colors: ['red', 'blue', 'yellow', 'green', 'orange'],
-            series: [
-                {
-                    name: 'Gems',
-                    data: {{gems_list}},
-                },
-                {
-                    name: 'Homing',
-                    data: {{homing_daggers_list}},
-                },
-                {
-                    name: 'Accuracy',
-                    data: {{accuracy_list}},
-                },
-                {
-                    name: 'Enemies Alive',
-                    data: {{enemies_alive_list}},
-                },
-                {
-                    name: 'Enemies Killed',
-                    data: {{enemies_killed_list}},
-                },
-            ],
-            credits: {
-                enabled: false
-            },
-            exporting: {
-                chartOptions: {
-                    chart: {
-                        style: {
-                            fontFamily: 'Helvetica Neue'
-                        }
-                    }
+            for (i = 0; i < Highcharts.charts.length; i = i + 1) {
+                chart = Highcharts.charts[i];
+                event = chart.pointer.normalize(e.originalEvent);
+                point = chart.series[0].searchPoint(event, true);
+
+                if (point) {
+                    point.highlight(e);
                 }
             }
         });
-    });
+        Highcharts.Pointer.prototype.reset = function () {
+            return undefined;
+        };
 
-    Highcharts.setOptions({
-        chart: {
-            style: {
-                fontFamily: 'Helvetica Neue'
+        Highcharts.Point.prototype.highlight = function (event) {
+            event = this.series.chart.pointer.normalize(event);
+            this.onMouseOver();
+            this.series.chart.tooltip.refresh(this);
+            this.series.chart.xAxis[0].drawCrosshair(event, this);
+        };
+
+        function syncExtremes(e) {
+            var thisChart = this.chart;
+
+            if (e.trigger !== 'syncExtremes') {
+                Highcharts.each(Highcharts.charts, function (chart) {
+                    if (chart !== thisChart) {
+                        if (chart.xAxis[0].setExtremes) {
+                            chart.xAxis[0].setExtremes(
+                                e.min,
+                                e.max,
+                                undefined,
+                                false,
+                                { trigger: 'syncExtremes' }
+                            );
+                        }
+                    }
+                });
             }
         }
-    });
+
+        $.getJSON(
+            'https://ddstats.com/api/dataset/{{game_number}}',
+            function (game) {
+                $.each(game.datasets, function (i, dataset) {
+                    var color_ = 0
+                    if (dataset.name == 'Gems')
+                        color_ = 0
+                    else if (dataset.name == 'Homing Daggers')
+                        color_ = 1
+                    else if (dataset.name == 'Accuracy')
+                        color_ = 2
+                    else if (dataset.name == 'Enemies Alive')
+                        color_ = 3
+                    else if (dataset.name == 'Enemies Killed')
+                        color_ = 4
+
+                    dataset.data = Highcharts.map(dataset.data, function (val, j) {
+                        return [game.xData[j], val];
+                    });
+
+                    $('<div class="chart">')
+                        .appendTo('#graphs')
+                        .highcharts({
+                            chart: {
+                                backgroundColor: '#333',
+                                marginLeft: 45,
+                                spacingTop: 20,
+                                spacingBottom: 20
+                            },
+                            title: {
+                                text: dataset.name,
+                                style: {
+                                    color: '#DDD'
+                                },
+                                align: 'left',
+                                margin: 0,
+                                x: 30
+                            },
+                            credits: {
+                                enabled: false
+                            },
+                            legend: {
+                                enabled: false
+                            },
+                            xAxis: {
+                                crosshair: true,
+                                events: {
+                                    setExtremes: syncExtremes
+                                },
+                                labels: {
+                                    format: '{value} sec'
+                                }
+                            },
+                            yAxis: {
+                                title: {
+                                    text: null
+                                }
+                            },
+                            tooltip: {
+                                positioner: function () {
+                                    return {
+                                        x: this.chart.chartWidth - this.label.width,
+                                        y: 10
+                                    };
+                                },
+                                borderWidth: 0,
+                                backgroundColor: 'none',
+                                pointFormat: '{point.y} at {point.x}s',
+                                headerFormat: '',
+                                shadow: false,
+                                style: {
+                                    color: '#DDD',
+                                    fontSize: '18px'
+                                },
+                                valueDecimals: dataset.valueDecimals
+                            },
+                            series: [{
+                                data: dataset.data,
+                                name: dataset.name,
+                                type: dataset.type,
+                                lineWidth: 1,
+                                color: Highcharts.getOptions().colors[color_],
+                                fillOpacity: 0.7,
+                                tooltip: {
+                                    valueSuffix: ' ' + dataset.unit
+                                }
+                            }]
+                        });
+                });
+            }
+        );
+        Highcharts.setOptions({
+            lang: {
+                thousandsSep: ','
+            },
+            colors: ['#9A1000', '#D39C00', '#2DA800', '#006EC2', '#F049FF']
+        });
     </script>
-  </body>
-</html>
+{% endblock %}
