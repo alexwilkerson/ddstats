@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Users{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block body %}
+
+        <h1 id="usertitle">Users</h1>
+    <div style="text-align: center">
+    {% for user in users %}
+    <a style="color: #DDD;" href="{{ url_for('user_page', user_id=user.player_id, page_num=1) }}">{{ user.player_id }}</a><br />
+    {% endfor %}
+    </div>
+{% endblock %}

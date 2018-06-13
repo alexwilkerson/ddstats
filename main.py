@@ -73,6 +73,19 @@ class State(db.Model):
                }
 
 
+@app.route('/users')
+def users_page():
+    users = db.session.query(Game.player_id).distinct().all()
+    # users_list = []
+    # for user in users:
+    #     r = requests.get('http://ddstats.com/api/get_scores?user={}'.format(user.player_id))
+    #     user_data = r.json()
+    #     users_list.append(user_data["player_name"])
+
+    # print(users_list)
+    return render_template('users.html', users=users)
+
+
 @app.route('/user/<int:user_id>/', defaults={'page_num': 1})
 @app.route('/user/<int:user_id>/<int:page_num>')
 def user_page(user_id, page_num):
