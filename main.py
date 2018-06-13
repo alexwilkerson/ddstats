@@ -73,6 +73,17 @@ class State(db.Model):
                }
 
 
+@app.route('/user/<int:user_id>/<int:page_num>', defaults={'page_num': 1})
+def user_page(user_id, page_num):
+    games = Game.query.filter((Game.player_id==user_id) & ((Game.replay_player_id==0) | (Game.replay_player_id==user_id))).order_by(Game.id.desc()).paginate(per_page=10, page=page_num, error_out=True)
+    if games is None:
+        return('No user found with that ID')
+    r = requests.get('http://ddstats.com/api/get_scores?user={}'.format(user_id))
+    user_data = r.json()
+
+    return render_template('user.html', player_name=user_data["player_name"], user_id=user_id, games=games, death_types=death_types)
+
+
 @app.route('/game_log/<game_number>')
 def game_log(game_number):
     r = requests.get('http://ddstats.com/api/game/{}/all'.format(game_number))

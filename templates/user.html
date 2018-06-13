@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}{{player_name}} ({{user_id}}){% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block body %}
+
+    {% for game in games.items %}
+        <div id="stats">
+            <h2 class="alignleft"><a href="{{ url_for('game_log', game_number=game.id) }}">Game {{game.id}}</a></h1>
+            <!-- <h2 class="alignright">{{player_name}} ({{player_id}})</h1> -->
+            <div style="clear: both;"></div>
+            <ul class="alignleft" id="statsleft">
+                <li>Time: {{game.game_time|round(4)}}</li>
+                <li>Gems: {{game.gems}}</li>
+                <li>Homing Daggers: {{game.homing_daggers}}</li>
+                <li>Enemies Alive: {{game.enemies_alive}}</li>
+                <li>Enemies Killed: {{game.enemies_killed}}</li>
+            </ul>
+            <ul class="alignright" id="statsright">
+                {% if game.death_type == -1 %}
+                    <li>Death: RESTART</li>
+                {% else %}
+                    <li>Death: {{death_types[game.death_type]}}</li>
+                {% endif %}
+                <!-- <li>Accuracy: {{game.accuracy}}%</li> -->
+                <li>Daggers Hit: {{game.daggers_hit}}</li>
+                <li>Daggers Fired: {{game.daggers_fired}}</li>
+                <li>{{game.time_stamp}}</li>
+            </ul>
+            <div style="clear: both;"></div>
+        </div>
+    {% endfor %}
+{% endblock %}
