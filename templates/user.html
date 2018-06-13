@@ -5,6 +5,7 @@
 {% endblock %}
 {% block body %}
 
+        <h1 id="usertitle">{{player_name}} ({{user_id}})</h1>
     {% for game in games.items %}
         <div id="stats">
             <h2 class="alignleft"><a href="{{ url_for('game_log', game_number=game.id) }}">Game {{game.id}}</a></h1>
@@ -31,4 +32,12 @@
             <div style="clear: both;"></div>
         </div>
     {% endfor %}
+        <div id="pagination">
+        {% if games.has_next %}
+            <a href="{{ url_for('user_page', user_id=user_id, page_num=games.next_num) }}">Prev</a>    
+        {% endif %}
+        {% if games.has_prev %}
+            <a href="{{ url_for('user_page', user_id=user_id, page_num=games.prev_num) }}">Next</a>    
+        {% endif %}
+        </div>
 {% endblock %}

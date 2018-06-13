@@ -73,7 +73,8 @@ class State(db.Model):
                }
 
 
-@app.route('/user/<int:user_id>/<int:page_num>', defaults={'page_num': 1})
+@app.route('/user/<int:user_id>/', defaults={'page_num': 1})
+@app.route('/user/<int:user_id>/<int:page_num>')
 def user_page(user_id, page_num):
     games = Game.query.filter((Game.player_id==user_id) & ((Game.replay_player_id==0) | (Game.replay_player_id==user_id))).order_by(Game.id.desc()).paginate(per_page=10, page=page_num, error_out=True)
     if games is None:

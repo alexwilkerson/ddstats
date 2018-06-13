@@ -70,6 +70,10 @@ ul {
     list-style-type: none;
     margin: 0;
 }
+#usertitle {
+    color: #D39C00;
+    margin-bottom: 10px;
+}
 #header {
     color: #9A1000;
     max-width: 720px;
@@ -97,13 +101,33 @@ footer {
     margin: 0 auto;
     text-align: right;
 }
-#graphs, #stats{
+#graphs, #stats {
     background-color: #333;
     border-radius: 8px;
     max-width: 720px;
     margin: 0 auto;
     padding: 0 10px;
     box-shadow: 3px 3px #9A1000;
+}
+#pagination {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+}
+#pagination a {
+    display: inline-block;
+    color: #D39C00;
+    text-decoration: none;
+    background-color: #333;
+    border-radius: 8px;
+    width: 75px;
+    margin: 0 5px 0 5px;
+    padding: 10px;
+    box-shadow: 3px 3px #006EC2;
+}
+#pagination a:hover {
+    color: #F049FF;
+    background-color: #444;
 }
 #stats {
     color: #DDD;
