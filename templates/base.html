@@ -23,6 +23,7 @@
         <div id="header">
             <img src="{{ url_for('static', filename='img/logo_smaller_transparent_white.png') }}"/>
             <h1>ddstats</h1>
+            <a href="{{url_for('users_page')}}">users</a> |
             <a href="{{url_for('releases')}}">download</a>
         </div>
         {% endblock %}

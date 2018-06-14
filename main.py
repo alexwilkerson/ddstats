@@ -10,6 +10,7 @@ from sqlalchemy import and_
 from flask_bower import Bower
 from flask_cors import CORS
 from byte_converters import to_int_16, to_int_32, to_uint_64
+from time_ago import time_ago
 
 # latest release
 current_version = "0.2.2"
@@ -29,6 +30,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI'
     or 'sqlite:////Users/alex/code/ddstats/app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JSON_SORT_KEYS'] = False
+
+# jinja filters
+app.jinja_env.filters['time_ago'] = time_ago
 
 db = SQLAlchemy(app)
 
@@ -169,7 +173,7 @@ def game_log(game_number):
                            accuracy_list=accuracy_list,
                            enemies_killed_list=enemies_killed_list,
                            enemies_alive_list=enemies_alive_list,
-                           time_stamp=game_data["time_stamp"],
+                           time_stamp=time_ago(game_data["time_stamp"]),
                            submitter_id=submitter_id,
                            submitter_name=submitter_name)
 

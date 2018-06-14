@@ -7,8 +7,9 @@
 
         <h1 id="usertitle">{{player_name}} ({{user_id}})</h1>
     {% for game in games.items %}
-        <div id="stats">
-            <h2 class="alignleft"><a href="{{ url_for('game_log', game_number=game.id) }}">Game {{game.id}}</a></h1>
+        <a href="{{ url_for('game_log', game_number=game.id) }}">
+        <div id="stats-card">
+            <h2 class="alignleft">Game {{game.id}}</h1>
             <!-- <h2 class="alignright">{{player_name}} ({{player_id}})</h1> -->
             <div style="clear: both;"></div>
             <ul class="alignleft" id="statsleft">
@@ -27,10 +28,11 @@
                 <!-- <li>Accuracy: {{game.accuracy}}%</li> -->
                 <li>Daggers Hit: {{game.daggers_hit}}</li>
                 <li>Daggers Fired: {{game.daggers_fired}}</li>
-                <li>{{game.time_stamp}}</li>
+                <li>{{game.time_stamp|time_ago}}</li>
             </ul>
             <div style="clear: both;"></div>
         </div>
+        </a>
     {% endfor %}
         <div id="pagination">
         {% if games.has_next %}

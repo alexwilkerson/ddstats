@@ -8,7 +8,7 @@
 {% block body %}
         <div id="stats">
             <h2 class="alignleft">Game {{game_number}}</h1>
-            <h2 class="alignright">{{player_name}} ({{player_id}})</h1>
+            <h2 class="alignright"><a href="{{url_for('user_page', user_id=player_id, page_num=1) }}">{{player_name}} ({{player_id}})</a></h1>
             <div style="clear: both;"></div>
             <ul class="alignleft" id="statsleft">
                 <li>Time: {{game_time}}</li>
