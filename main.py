@@ -495,7 +495,7 @@ def get_game_enemies_alive(game_number):
 def create_game():
     data = request.get_json()
 
-    if data['playerName'] is not None:
+    if 'playerName' in data:
         existing_player = User.query.filter_by(id=data['playerID']).first()
         if existing_player is None:
             new_player = User(id=data['playerID'], username=data['playerName'])
