@@ -1,6 +1,12 @@
 {
-    "version": "0.2.2",
+    "version": "0.2.3",
     "change_log": [
+        "v0.2.3 -- minor update",
+        "Game submissions now submit player name since Sorath servers take too long to ping. If you update your name in Steam, all you need to do for it to update on ddstats.com is to play a game.",
+        "Game submissions now submit replay player name as well.",
+        "Attempted to fix issue with drops in Enemy Alive count, still haven't figured out the issue. Seems to be fixed for live games, but replays are still an issue.",
+        "Added user name underneath title.",
+        "v0.2.2",
         "Added ability to record replays. To toggle this feature, hit the F12 button and '+r' will show up in the top left of the screen.",
         "When F12 is pressed, the stats are constantly shown on screen, since you can't cheat during a replay.",
         "Fixed bug that caused incorrect user id sent to server on instant replays.",

@@ -13,7 +13,7 @@ from byte_converters import to_int_16, to_int_32, to_uint_64
 from time_ago import time_ago
 
 # latest release
-current_version = "0.2.2"
+current_version = "0.2.3"
 # lowest release number that is valid
 valid_version = "0.1.9"
 
