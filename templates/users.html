@@ -8,7 +8,9 @@
         <h1 id="usertitle">Users</h1>
     <div style="text-align: center">
     {% for user in users %}
-    <a style="color: #DDD;" href="{{ url_for('user_page', user_id=user.player_id, page_num=1) }}">{{ user.player_id }}</a><br />
+    {% if user.id != -1 %}
+    <a style="color: #DDD;" href="{{ url_for('user_page', user_id=user.id, page_num=1) }}">{{ user.username }}</a><br />
+    {% endif %}
     {% endfor %}
     </div>
 {% endblock %}

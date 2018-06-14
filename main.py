@@ -80,7 +80,8 @@ class User(db.Model):
 
 @app.route('/users')
 def users_page():
-    users = db.session.query(Game.player_id).distinct().all()
+    users = User.query.all()
+    # users = db.session.query(Game.player_id).distinct().all()
     # users_list = []
     # for user in users:
     #     r = requests.get('http://ddstats.com/api/get_scores?user={}'.format(user.player_id))
