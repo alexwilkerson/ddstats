@@ -73,6 +73,11 @@ class State(db.Model):
                }
 
 
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    username = db.Column(db.String(128), index=True, nullable=False)
+
+
 @app.route('/users')
 def users_page():
     users = db.session.query(Game.player_id).distinct().all()
@@ -489,6 +494,15 @@ def get_game_enemies_alive(game_number):
 @app.route('/api/submit_game', methods=['POST'])
 def create_game():
     data = request.get_json()
+
+    if data['playerName'] is not None:
+        existing_player = User.query.filter_by(id=data['playerID']).first()
+        if existing_player is None:
+            new_player = User(id=data['playerID'], username=data['playerName'])
+            db.session.add(new_player)
+        else:
+            existing_player.username = data['playerName']
+        db.session.commit()
 
     if data["replayPlayerID"] > 0:
         existing = db.session.query(Game.id).filter(and_(
