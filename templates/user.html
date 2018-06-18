@@ -35,6 +35,12 @@
                 <li>{{game.time_stamp|time_ago}}</li>
             </ul>
             <div style="clear: both;"></div>
+            <div id="statsfooter">
+            {% if game.replay_player_id > 0 %}
+                <span id="submitter" class="alignright">Replay recorded by {{game.player_id|get_username}} ({{game.player_id}})</span>
+            {% endif %}
+            <div style="clear: both;"></div>
+            </div>
         </div>
         </a>
     {% endfor %}

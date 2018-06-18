@@ -10,7 +10,11 @@
         <a href="{{ url_for('game_log', game_number=game.id) }}">
         <div id="stats-card">
             <h2 class="alignleft">Game {{game.id}}</h1>
-            <h2 class="alignright">{{game.username}} ({{game.player_id}})</h1>
+            {% if (game.replay_player_id == 0) or (game.player_id == game.replay_player_id) %}
+                <h2 class="alignright">{{game.username}} ({{game.player_id}})</h1>
+            {% else %}
+                <h2 class="alignright">{{game.replay_player_id|get_username}} ({{game.replay_player_id}})</h1>
+            {% endif %}
             <div style="clear: both;"></div>
             <ul class="alignleft" id="statsleft">
                 <li>Time: {{game.game_time|round(4)}}</li>
@@ -35,6 +39,12 @@
                 <li>{{game.time_stamp|time_ago}}</li>
             </ul>
             <div style="clear: both;"></div>
+            <div id="statsfooter">
+            {% if game.replay_player_id > 0 %}
+                <span id="submitter" class="alignright">Replay recorded by {{game.username}} ({{game.player_id}})</span>
+            {% endif %}
+            <div style="clear: both;"></div>
+            </div>
         </div>
         </a>
     {% endfor %}

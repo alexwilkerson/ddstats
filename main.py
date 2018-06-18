@@ -109,6 +109,7 @@ def games_page(page_num):
                         Game.daggers_fired,
                         Game.daggers_hit,
                         Game.time_stamp,
+                        Game.replay_player_id,
                         User.username).paginate(per_page=10,
                                                 page=page_num,
                                                 error_out=True)
@@ -166,6 +167,8 @@ def game_log(game_number):
         submitter_name = submitter_data["player_name"]
     r = requests.get('http://ddstats.com/api/get_scores?user={}'.format(player_id))
     user_data = r.json()
+    if "player_name" not in user_data:
+        user_data["player_name"] = "UNKNOWN"
 
     if game_data["daggers_fired"] is 0:
         accuracy = 0.0
@@ -523,6 +526,9 @@ def get_game_enemies_alive(game_number):
 def create_game():
     data = request.get_json()
 
+    if data["player_id"] == -1:
+        return jsonify({'message': 'Some kind of error occurred.'})
+
     if 'playerName' in data:
         existing_player = User.query.filter_by(id=data['playerID']).first()
         if existing_player is None:
@@ -633,6 +639,18 @@ def get_file(filename):  # pragma: no cover
         return open(src).read()
     except IOError as exc:
         return str(exc)
+
+
+@app.template_filter('get_username')
+def get_username(user_id):
+    q = User.query.filter_by(id=user_id).first()
+    if q:
+        return q.username
+    r = requests.get('http://ddstats.com/api/get_scores?user={}'.format(user_id))
+    user_data = r.json()
+    if "player_name" not in user_data:
+        return "UNKNOWN"
+    return user_data["player_name"]
 
 
 ########################################################
