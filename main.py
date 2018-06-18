@@ -99,7 +99,19 @@ def users_page():
 @app.route('/games/', defaults={'page_num': 1})
 @app.route('/games/<int:page_num>')
 def games_page(page_num):
-    games = Game.query.order_by(Game.id.desc()).paginate(per_page=10, page=page_num, error_out=True)
+    games = Game.query.join(User, Game.player_id == User.id).\
+            order_by(Game.id.desc()).\
+            add_columns(Game.id, Game.player_id,
+                        Game.game_time, Game.homing_daggers,
+                        Game.enemies_alive,
+                        Game.enemies_killed,
+                        Game.death_type,
+                        Game.daggers_fired,
+                        Game.daggers_hit,
+                        Game.time_stamp,
+                        User.username).paginate(per_page=10,
+                                                page=page_num,
+                                                error_out=True)
     # this is probably not needed
     if games is None:
         return('No games found.')

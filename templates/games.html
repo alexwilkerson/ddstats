@@ -10,7 +10,7 @@
         <a href="{{ url_for('game_log', game_number=game.id) }}">
         <div id="stats-card">
             <h2 class="alignleft">Game {{game.id}}</h1>
-            <h2 class="alignright">{{game.player_name}} ({{game.player_id}})</h1>
+            <h2 class="alignright">{{game.username}} ({{game.player_id}})</h1>
             <div style="clear: both;"></div>
             <ul class="alignleft" id="statsleft">
                 <li>Time: {{game.game_time|round(4)}}</li>
