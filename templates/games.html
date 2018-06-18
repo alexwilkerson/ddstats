@@ -1,16 +1,16 @@
 {% extends "base.html" %}
-{% block title %}{{player_name}} ({{user_id}}){% endblock %}
+{% block title %}{% endblock %}
 {% block head %}
     {{ super() }}
 {% endblock %}
 {% block body %}
 
-        <h1 id="usertitle">{{player_name}} ({{user_id}})</h1>
+        <h1 id="usertitle">Recent Games</h1>
     {% for game in games.items %}
         <a href="{{ url_for('game_log', game_number=game.id) }}">
         <div id="stats-card">
             <h2 class="alignleft">Game {{game.id}}</h1>
-            <!-- <h2 class="alignright">{{player_name}} ({{player_id}})</h1> -->
+            <h2 class="alignright">{{game.player_name}} ({{game.player_id}})</h1>
             <div style="clear: both;"></div>
             <ul class="alignleft" id="statsleft">
                 <li>Time: {{game.game_time|round(4)}}</li>
@@ -40,10 +40,10 @@
     {% endfor %}
         <div id="pagination">
         {% if games.has_next %}
-            <a href="{{ url_for('user_page', user_id=user_id, page_num=games.next_num) }}">Prev</a>    
+            <a href="{{ url_for('games_page', page_num=games.next_num) }}">Prev</a>    
         {% endif %}
         {% if games.has_prev %}
-            <a href="{{ url_for('user_page', user_id=user_id, page_num=games.prev_num) }}">Next</a>    
+            <a href="{{ url_for('games_page', page_num=games.prev_num) }}">Next</a>    
         {% endif %}
         </div>
 {% endblock %}

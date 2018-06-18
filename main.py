@@ -96,6 +96,17 @@ def users_page():
     return render_template('users.html', users=users)
 
 
+@app.route('/games/', defaults={'page_num': 1})
+@app.route('/games/<int:page_num>')
+def games_page(page_num):
+    games = Game.query.order_by(Game.id.desc()).paginate(per_page=10, page=page_num, error_out=True)
+    # this is probably not needed
+    if games is None:
+        return('No games found.')
+
+    return render_template('games.html', games=games, death_types=death_types)
+
+
 @app.route('/user/<int:user_id>/', defaults={'page_num': 1})
 @app.route('/user/<int:user_id>/<int:page_num>')
 def user_page(user_id, page_num):
