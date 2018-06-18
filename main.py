@@ -526,7 +526,7 @@ def get_game_enemies_alive(game_number):
 def create_game():
     data = request.get_json()
 
-    if data["player_id"] == -1:
+    if "player_id" not in data:
         return jsonify({'message': 'Some kind of error occurred.'})
 
     if 'playerName' in data:
