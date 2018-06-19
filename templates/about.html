@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}About ddstats{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block body %}
+<div id="about">
+    <p style="text-align: center;">*** DDSTATS IS CURRENTLY IN BETA ***</p>
+    <h1>--> HOW TO USE <--</h1>
+    <p>To use, simply download the file from this website by clicking the "download" link above. Extract the zip folder, then open ddstats.exe. Since the program needs to access the memory space of another process, it must be run as administrator. This option is set in the program by default, but if for whatever reason you cannot connect to Devil Daggers, then this might be the issue.</p>
+    <p>If Devil Daggers is already running, then the screen should say "Connected to Devil Daggers". If Devil Daggers is not running, open it and you should see the connection message. Once you are connected, you just leave it running in the background while you play Devil Daggers. The games will automatically be submitted to ddstats.com. You will be given a link in ddstats.exe to the most recent game submitted to the website.</p>
+    <p>Recording replays is turned off by default. This might change in the future. For now, you must toggle this option by pressing F12 while ddstats.exe is running. The program must be connected to Devil Daggers when you toggle this option. Once you have pressed F12, you will see a +r in the top left-hand side of the screen. This tells you that replay recording is toggled on. Once the option is toggled on, you may view a game from the leaderboard or watch a replay of your most recent game and ddstats will record it and submit it to the website just as it would for a normal game.</p>
+    <p>Aside from that, the program works automatically. Many more features are planned to be added in the near future.</p>
+    <h1>--> ABOUT <--</h1>
+    <p>Currently, ddstats is in beta. This means there are a few bugs that need to be ironed out and new features are being added regularly. If you've found yourself here during beta, feel free to download the program and use it, but just be mindful that some things may not work as expected. If you find any bugs please let me know.<p>
+    <p>ddstats is a program that monitors and records statistical information for the game Devil Daggers. Information about Devil Daggers can be found at <a href="https://devildaggers.info/">devildaggers.info</a> or at the official site <a href="http://devildaggers.com/">devildaggers.com</a>.
+    <p>This website was started as a passion project by me, Alex Wilkerson (aka VHS). If you have any questions, bug reports, or feature requests please email me at <a href="mailto:ddstats.com@gmail.com?subject=ddstats">ddstats.com@gmail.com</a>. You can also find me haunting various Devil Daggers related chat rooms around the internet.</p>
+    <h1>--> THANKS <--</h1>
+    Special thanks to the following beta testers:
+    <ul>
+        <li>* Bintr</li>
+        <li>* LukeNukem</li>
+        <li>* Chupacabra</li>
+        <li>* Cookle</li>
+        <li>* xvlv</li>
+    </ul>
+</div>
+{% endblock %}
