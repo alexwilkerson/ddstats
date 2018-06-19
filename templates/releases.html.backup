@@ -1,16 +1,15 @@
-{% extends "base.html" %}
-{% block title %}About ddstats{% endblock %}
-{% block head %}
-    {{ super() }}
-{% endblock %}
-{% block body %}
-<div id="download">
-    <h1>ddstats v{{releases.version}}<br/></h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ddstats releases</title>
+  </head>
+  <body>
+      ddstats v{{releases.version}}<br/>
       download: <a href="{{url_for('static', filename='releases/ddstats{}.zip'.format(releases.version))}}">v{{releases.version}}</a><br/>
       <ul>
           {% for change in releases.change_log %}
           <li>{{ change }}</li>
           {% endfor %}
       </ul>
-</div>
-{% endblock %}
+  </body>
+</html>

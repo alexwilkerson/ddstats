@@ -82,6 +82,11 @@ class User(db.Model):
     username = db.Column(db.String(128), index=True, nullable=False)
 
 
+@app.route('/about')
+def about_page():
+    return render_template('about.html')
+
+
 @app.route('/users')
 def users_page():
     users = User.query.all()
@@ -882,4 +887,4 @@ def dated_url_for(endpoint, **values):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5666)
+    app.run(host='0.0.0.0', port=5666, debug=True)

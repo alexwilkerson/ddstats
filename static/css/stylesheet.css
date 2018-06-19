@@ -10,6 +10,46 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'CMU Typewriter Text';
+    src: url('../font/CMUTypewriter-Italic.woff2') format('woff2'),
+        url('../font/CMUTypewriter-Italic.woff') format('woff'),
+        url('../font/CMUTypewriter-Italic.ttf') format('truetype'),
+        url('../font/CMUTypewriter-Italic.svg#CMUTypewriter-Italic') format('svg');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'CMU Typewriter Text';
+    src: url('../font/CMUTypewriter-Regular.woff2') format('woff2'),
+        url('../font/CMUTypewriter-Regular.woff') format('woff'),
+        url('../font/CMUTypewriter-Regular.ttf') format('truetype'),
+        url('../font/CMUTypewriter-Regular.svg#CMUTypewriter-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CMU Typewriter Text';
+    src: url('../font/CMUTypewriter-Bold.woff2') format('woff2'),
+        url('../font/CMUTypewriter-Bold.woff') format('woff'),
+        url('../font/CMUTypewriter-Bold.ttf') format('truetype'),
+        url('../font/CMUTypewriter-Bold.svg#CMUTypewriter-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CMU Typewriter Text';
+    src: url('../font/CMUTypewriter-BoldItalic.woff2') format('woff2'),
+        url('../font/CMUTypewriter-BoldItalic.woff') format('woff'),
+        url('../font/CMUTypewriter-BoldItalic.ttf') format('truetype'),
+        url('../font/CMUTypewriter-BoldItalic.svg#CMUTypewriter-BoldItalic') format('svg');
+    font-weight: bold;
+    font-style: italic;
+}
+
 body {
     font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
     font-size: 14px;
@@ -152,4 +192,31 @@ footer {
 }
 #statsfooter a:hover {
     color: #F049FF;
+}
+#about, #download {
+    background-color: #DDD;
+    font-family: "CMU Typewriter Text";
+    font-size: 14px;
+    border-radius: 8px;
+    max-width: 690px;
+    margin: 0 auto;
+    padding: 0 10px;
+    box-shadow: 3px 3px #9A1000;
+    padding: 15px;
+}
+#about h1, #download h1{
+    font-family: "CMU Typewriter Text";
+    font-size: 14px;
+    text-align: center;
+}
+#about ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+#about a, #download a {
+    color: #000;
+}
+#download ul {
+    list-style-type: circle;
 }
