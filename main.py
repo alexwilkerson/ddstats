@@ -51,6 +51,8 @@ class Game(db.Model):
     enemies_killed = db.Column(db.Integer, nullable=False)
     time_stamp = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     replay_player_id = db.Column(db.Integer, default=0, nullable=False)
+    survival_hash = db.Column(db.String(32))
+    version = db.Column(db.String(16))
 
 
 class State(db.Model):
@@ -561,12 +563,26 @@ def create_game():
         if existing is not None:
             return jsonify({'message': 'Replay already recorded.', 'game_id': existing.id})
 
+    # version and data added in same release, so this replaces the default if they
+    # are using an older version
+    if 'version' not in data:
+        # v3 survival hash
+        submit_version = ""
+    else:
+        submit_version = data["version"]
+
+    if 'survivalHash' not in data:
+        survival_hash = '5ff43e37d0f85e068caab5457305754e'
+    else:
+        survival_hash = data["survival_hash"]
+
     new_game = Game(player_id=data['playerID'], granularity=data['granularity'],
                     game_time=data['inGameTimer'], death_type=data['deathType'],
                     gems=data['gems'], homing_daggers=data['homingDaggers'],
                     daggers_fired=data['daggersFired'], daggers_hit=data['daggersHit'],
                     enemies_alive=data['enemiesAlive'], enemies_killed=data['enemiesKilled'],
-                    replay_player_id=data["replayPlayerID"])
+                    replay_player_id=data["replayPlayerID"], version=submit_version,
+                    survival_hash=survival_hash)
     db.session.add(new_game)
     db.session.commit()
     db.session.refresh(new_game)
