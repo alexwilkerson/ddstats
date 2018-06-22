@@ -40,23 +40,6 @@
         <div id="graphs"></div>
          <span id="test" style="color: #fff;">this</span>
     <script>
-        x = {
-              aInternal: 0,
-              aListener: function(val) {},
-              set a(val) {
-                this.aInternal = val;
-                this.aListener(val);
-              },
-              get a() {
-                return this.aInternal;
-              },
-              registerListener: function(listener) {
-                this.aListener = listener;
-              }
-            }
-x.registerListener(function(val) {
-    $("#test").text(val);
-});
         var chart,
             point,
             i,
