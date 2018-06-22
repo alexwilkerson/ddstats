@@ -575,7 +575,7 @@ def create_game():
     if 'survivalHash' not in data:
         survival_hash = '5ff43e37d0f85e068caab5457305754e'
     else:
-        survival_hash = data["survival_hash"]
+        survival_hash = data["survivalHash"]
 
     new_game = Game(player_id=data['playerID'], granularity=data['granularity'],
                     game_time=data['inGameTimer'], death_type=data['deathType'],
