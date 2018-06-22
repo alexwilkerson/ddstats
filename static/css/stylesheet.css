@@ -220,3 +220,15 @@ footer {
 #download ul {
     list-style-type: circle;
 }
+#logo:hover {
+    -webkit-animation: action 1s infinite alternate;
+    animation: action .6s infinite alternate;
+}
+@-webkit-keyframes action {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-3px); }
+}
+@keyframes action {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-3px); }
+}
