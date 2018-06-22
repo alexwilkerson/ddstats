@@ -187,6 +187,7 @@ def game_log(game_number):
 
     return render_template('game_log.html',
                            player_name=user_data["player_name"],
+                           dd_high_score=user_data["game_time"],
                            player_id=player_id,
                            game_number=game_number,
                            game_time=round(game_data["game_time"], 4),
