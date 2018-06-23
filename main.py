@@ -5,6 +5,7 @@ import json
 from datetime import datetime
 from flask import Flask, request, jsonify, Response, url_for
 from flask import render_template
+from flask_socketio import SocketIO, emit
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import and_
 from flask_bower import Bower
@@ -35,6 +36,8 @@ app.config['JSON_SORT_KEYS'] = False
 app.jinja_env.filters['time_ago'] = time_ago
 
 db = SQLAlchemy(app)
+
+socketio = SocketIO(app)
 
 
 class Game(db.Model):
@@ -887,6 +890,24 @@ def get_scores():
 #     end of devil dagger's backend api conversion     #
 ########################################################
 
+########################################################
+#                    socketio stuff                    #
+########################################################
+
+@app.route('/socketio_test')
+def show_socketio_test():
+    return render_template('socketio_test.html')
+
+
+@socketio.on('connect', namespace='/test')
+def test_connect():
+    emit('my response', {'data': 'Connected'}, broadcast=True)
+
+########################################################
+#                  end socketio stuff                  #
+########################################################
+
+
 # these two functions append the timestamp to static files so the flush
 # correctly when updated.
 @app.context_processor
@@ -904,4 +925,4 @@ def dated_url_for(endpoint, **values):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5666, debug=True)
+    socketio.run(app, host='0.0.0.0', port=5666, debug=True)
