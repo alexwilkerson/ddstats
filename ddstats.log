@@ -21251,3 +21251,229 @@ spawned uWSGI http 1 (pid: 27935)
 [pid: 27930|app: 0|req: 10/28] 68.11.117.27 () {44 vars in 741 bytes} [Sun Jun 24 17:08:10 2018] GET /api/dataset/2742 => generated 19735 bytes in 481 msecs (HTTP/1.1 200) 4 headers in 142 bytes (3 switches on core 999)
 [pid: 27934|app: 0|req: 7/28] 23.239.31.125 () {34 vars in 459 bytes} [Sun Jun 24 17:08:10 2018] GET /api/get_scores?user=88424 => generated 330 bytes in 336 msecs (HTTP/1.1 200) 3 headers in 104 bytes (3 switches on core 999)
 [pid: 27932|app: 0|req: 8/29] 186.36.120.5 () {24 vars in 260 bytes} [Sun Jun 24 17:09:44 2018] GET / => generated 446 bytes in 3 msecs (HTTP/1.0 200) 3 headers in 112 bytes (3 switches on core 999)
+SIGINT/SIGQUIT received...killing workers...
+Brutally killing worker 1 (pid: 27930)...
+Sun Jun 24 17:11:32 2018 - stopping gevent signals watchers for worker 1 (pid: 27930)...
+Sun Jun 24 17:11:32 2018 - stopping gevent sockets watchers for worker 1 (pid: 27930)...
+Sun Jun 24 17:11:32 2018 - main gevent watchers stopped for worker 1 (pid: 27930)...
+goodbye to the gevent Hub on worker 1 (pid: 27930)
+Brutally killing worker 2 (pid: 27931)...
+Sun Jun 24 17:11:32 2018 - stopping gevent signals watchers for worker 2 (pid: 27931)...
+Sun Jun 24 17:11:32 2018 - stopping gevent sockets watchers for worker 2 (pid: 27931)...
+Sun Jun 24 17:11:32 2018 - main gevent watchers stopped for worker 2 (pid: 27931)...
+goodbye to the gevent Hub on worker 2 (pid: 27931)
+Brutally killing worker 3 (pid: 27932)...
+Sun Jun 24 17:11:32 2018 - stopping gevent signals watchers for worker 3 (pid: 27932)...
+Sun Jun 24 17:11:32 2018 - stopping gevent sockets watchers for worker 3 (pid: 27932)...
+Sun Jun 24 17:11:32 2018 - main gevent watchers stopped for worker 3 (pid: 27932)...
+goodbye to the gevent Hub on worker 3 (pid: 27932)
+Brutally killing worker 4 (pid: 27933)...
+Sun Jun 24 17:11:32 2018 - stopping gevent signals watchers for worker 4 (pid: 27933)...
+Sun Jun 24 17:11:32 2018 - stopping gevent sockets watchers for worker 4 (pid: 27933)...
+Sun Jun 24 17:11:32 2018 - main gevent watchers stopped for worker 4 (pid: 27933)...
+goodbye to the gevent Hub on worker 4 (pid: 27933)
+Brutally killing worker 5 (pid: 27934)...
+Sun Jun 24 17:11:32 2018 - stopping gevent signals watchers for worker 5 (pid: 27934)...
+Sun Jun 24 17:11:32 2018 - stopping gevent sockets watchers for worker 5 (pid: 27934)...
+Sun Jun 24 17:11:32 2018 - main gevent watchers stopped for worker 5 (pid: 27934)...
+goodbye to the gevent Hub on worker 5 (pid: 27934)
+gateway "uWSGI http 1" has been buried (pid: 27935)
+worker 2 buried after 0 seconds
+worker 4 buried after 0 seconds
+worker 1 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Sun Jun 24 17:11:33 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+- async cores set to 1000 - fd table size: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on 127.0.0.1:6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+Python main interpreter initialized at 0x5632e1236a90
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 63110784 bytes (61631 KB) for 5000 cores
+*** Operational MODE: preforking+async ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x5632e1236a90 pid: 28039 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 28039)
+spawned uWSGI worker 1 (pid: 28044, cores: 1000)
+spawned uWSGI worker 2 (pid: 28045, cores: 1000)
+spawned uWSGI worker 3 (pid: 28046, cores: 1000)
+spawned uWSGI worker 4 (pid: 28047, cores: 1000)
+spawned uWSGI worker 5 (pid: 28048, cores: 1000)
+spawned uWSGI http 1 (pid: 28049)
+*** running gevent loop engine [addr:0x5632df61eb10] ***
+[pid: 28046|app: 0|req: 1/1] 23.239.31.125 () {34 vars in 444 bytes} [Sun Jun 24 17:11:34 2018] GET /api/game/2742/all => generated 114814 bytes in 125 msecs (HTTP/1.1 200) 3 headers in 107 bytes (3 switches on core 999)
+[pid: 28046|app: 0|req: 2/2] 23.239.31.125 () {34 vars in 436 bytes} [Sun Jun 24 17:11:35 2018] GET /api/game/2742 => generated 270 bytes in 5 msecs (HTTP/1.1 200) 3 headers in 104 bytes (3 switches on core 999)
+[pid: 28044|app: 0|req: 1/3] 23.239.31.125 () {34 vars in 459 bytes} [Sun Jun 24 17:11:35 2018] GET /api/get_scores?user=88424 => generated 330 bytes in 354 msecs (HTTP/1.1 200) 3 headers in 104 bytes (3 switches on core 999)
+[pid: 28046|app: 0|req: 3/4] 23.239.31.125 () {34 vars in 459 bytes} [Sun Jun 24 17:11:35 2018] GET /api/get_scores?user=88424 => generated 330 bytes in 394 msecs (HTTP/1.1 200) 3 headers in 104 bytes (3 switches on core 999)
+[pid: 28045|app: 0|req: 1/5] 68.11.117.27 () {46 vars in 799 bytes} [Sun Jun 24 17:11:34 2018] GET /game_log/2742 => generated 8948 bytes in 1003 msecs (HTTP/1.1 200) 3 headers in 113 bytes (3 switches on core 999)
+[pid: 28046|app: 0|req: 4/6] 68.11.117.27 () {46 vars in 806 bytes} [Sun Jun 24 17:11:36 2018] GET /static/icons/favicon-32x32.png?q=1529555301 => generated 333 bytes in 2 msecs via sendfile() (HTTP/1.1 200) 9 headers in 322 bytes (1 switches on core 999)
+[pid: 28047|app: 0|req: 1/7] 23.239.31.125 () {34 vars in 444 bytes} [Sun Jun 24 17:11:36 2018] GET /api/game/2742/all => generated 114814 bytes in 124 msecs (HTTP/1.1 200) 3 headers in 107 bytes (3 switches on core 999)
+[pid: 28046|app: 0|req: 5/8] 23.239.31.125 () {34 vars in 436 bytes} [Sun Jun 24 17:11:36 2018] GET /api/game/2742 => generated 270 bytes in 4 msecs (HTTP/1.1 200) 3 headers in 104 bytes (3 switches on core 999)
+[pid: 28044|app: 0|req: 2/10] 68.11.117.27 () {44 vars in 741 bytes} [Sun Jun 24 17:11:36 2018] GET /api/dataset/2742 => generated 19735 bytes in 508 msecs (HTTP/1.1 200) 4 headers in 142 bytes (3 switches on core 999)
+[pid: 28047|app: 0|req: 2/10] 23.239.31.125 () {34 vars in 459 bytes} [Sun Jun 24 17:11:36 2018] GET /api/get_scores?user=88424 => generated 330 bytes in 361 msecs (HTTP/1.1 200) 3 headers in 104 bytes (3 switches on core 999)
+[pid: 28046|app: 0|req: 6/11] 68.11.117.27 () {44 vars in 759 bytes} [Sun Jun 24 17:13:58 2018] GET /users => generated 3625 bytes in 33 msecs (HTTP/1.1 200) 3 headers in 113 bytes (3 switches on core 999)
+[pid: 28044|app: 0|req: 3/12] 68.11.117.27 () {44 vars in 753 bytes} [Sun Jun 24 17:13:59 2018] GET /games/ => generated 12683 bytes in 83 msecs (HTTP/1.1 200) 3 headers in 114 bytes (3 switches on core 999)
+SIGINT/SIGQUIT received...killing workers...
+Brutally killing worker 1 (pid: 28044)...
+Sun Jun 24 17:14:54 2018 - stopping gevent signals watchers for worker 1 (pid: 28044)...
+Sun Jun 24 17:14:54 2018 - stopping gevent sockets watchers for worker 1 (pid: 28044)...
+Sun Jun 24 17:14:54 2018 - main gevent watchers stopped for worker 1 (pid: 28044)...
+goodbye to the gevent Hub on worker 1 (pid: 28044)
+Brutally killing worker 2 (pid: 28045)...
+Sun Jun 24 17:14:54 2018 - stopping gevent signals watchers for worker 2 (pid: 28045)...
+Sun Jun 24 17:14:54 2018 - stopping gevent sockets watchers for worker 2 (pid: 28045)...
+Sun Jun 24 17:14:54 2018 - main gevent watchers stopped for worker 2 (pid: 28045)...
+goodbye to the gevent Hub on worker 2 (pid: 28045)
+Brutally killing worker 3 (pid: 28046)...
+Sun Jun 24 17:14:54 2018 - stopping gevent signals watchers for worker 3 (pid: 28046)...
+Sun Jun 24 17:14:54 2018 - stopping gevent sockets watchers for worker 3 (pid: 28046)...
+Sun Jun 24 17:14:54 2018 - main gevent watchers stopped for worker 3 (pid: 28046)...
+goodbye to the gevent Hub on worker 3 (pid: 28046)
+Brutally killing worker 4 (pid: 28047)...
+Sun Jun 24 17:14:54 2018 - stopping gevent signals watchers for worker 4 (pid: 28047)...
+Sun Jun 24 17:14:54 2018 - stopping gevent sockets watchers for worker 4 (pid: 28047)...
+Sun Jun 24 17:14:54 2018 - main gevent watchers stopped for worker 4 (pid: 28047)...
+goodbye to the gevent Hub on worker 4 (pid: 28047)
+Brutally killing worker 5 (pid: 28048)...
+Sun Jun 24 17:14:54 2018 - stopping gevent signals watchers for worker 5 (pid: 28048)...
+Sun Jun 24 17:14:54 2018 - stopping gevent sockets watchers for worker 5 (pid: 28048)...
+Sun Jun 24 17:14:54 2018 - main gevent watchers stopped for worker 5 (pid: 28048)...
+goodbye to the gevent Hub on worker 5 (pid: 28048)
+gateway "uWSGI http 1" has been buried (pid: 28049)
+worker 5 buried after 0 seconds
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Sun Jun 24 17:14:55 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+- async cores set to 1000 - fd table size: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on 127.0.0.1:6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+Python main interpreter initialized at 0x55dd091faa70
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 21036928 bytes (20543 KB) for 1000 cores
+*** Operational MODE: async ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x55dd091faa70 pid: 28082 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 28082)
+spawned uWSGI worker 1 (pid: 28086, cores: 1000)
+spawned uWSGI http 1 (pid: 28087)
+*** running gevent loop engine [addr:0x55dd0864cb10] ***
+[pid: 28086|app: 0|req: 1/1] 68.11.117.27 () {46 vars in 784 bytes} [Sun Jun 24 17:14:57 2018] GET /games/ => generated 12684 bytes in 82 msecs (HTTP/1.1 200) 3 headers in 114 bytes (3 switches on core 999)
+[pid: 28086|app: 0|req: 2/2] 68.11.117.27 () {46 vars in 799 bytes} [Sun Jun 24 17:14:57 2018] GET /static/icons/favicon-32x32.png?q=1529555301 => generated 333 bytes in 2 msecs via sendfile() (HTTP/1.1 200) 9 headers in 322 bytes (1 switches on core 999)
+SIGINT/SIGQUIT received...killing workers...
+Brutally killing worker 1 (pid: 28086)...
+Sun Jun 24 17:15:52 2018 - stopping gevent signals watchers for worker 1 (pid: 28086)...
+Sun Jun 24 17:15:52 2018 - stopping gevent sockets watchers for worker 1 (pid: 28086)...
+Sun Jun 24 17:15:52 2018 - main gevent watchers stopped for worker 1 (pid: 28086)...
+goodbye to the gevent Hub on worker 1 (pid: 28086)
+gateway "uWSGI http 1" has been buried (pid: 28087)
+worker 1 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Sun Jun 24 17:15:53 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+- async cores set to 1000 - fd table size: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on 127.0.0.1:6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+Python main interpreter initialized at 0x560d13167a70
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 63110784 bytes (61631 KB) for 5000 cores
+*** Operational MODE: preforking+async ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x560d13167a70 pid: 28096 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 28096)
+spawned uWSGI worker 1 (pid: 28100, cores: 1000)
+spawned uWSGI worker 2 (pid: 28101, cores: 1000)
+spawned uWSGI worker 3 (pid: 28102, cores: 1000)
+spawned uWSGI worker 4 (pid: 28103, cores: 1000)
+spawned uWSGI worker 5 (pid: 28104, cores: 1000)
+spawned uWSGI http 1 (pid: 28105)
+*** running gevent loop engine [addr:0x560d12b4db10] ***
+[pid: 28103|app: 0|req: 1/1] 68.11.117.27 () {46 vars in 784 bytes} [Sun Jun 24 17:15:56 2018] GET /games/ => generated 12682 bytes in 83 msecs (HTTP/1.1 200) 3 headers in 114 bytes (3 switches on core 999)
+[pid: 28101|app: 0|req: 1/2] 68.11.117.27 () {46 vars in 799 bytes} [Sun Jun 24 17:15:56 2018] GET /static/icons/favicon-32x32.png?q=1529555301 => generated 333 bytes in 4 msecs via sendfile() (HTTP/1.1 200) 9 headers in 322 bytes (1 switches on core 999)
+[pid: 28102|app: 0|req: 1/3] 68.11.117.27 () {44 vars in 752 bytes} [Sun Jun 24 17:15:58 2018] GET /users => generated 3625 bytes in 56 msecs (HTTP/1.1 200) 3 headers in 113 bytes (3 switches on core 999)
+[pid: 28101|app: 0|req: 2/4] 68.11.117.27 () {44 vars in 757 bytes} [Sun Jun 24 17:15:59 2018] GET /releases => generated 3364 bytes in 28 msecs (HTTP/1.1 200) 3 headers in 113 bytes (3 switches on core 999)
+[pid: 28102|app: 0|req: 2/5] 68.11.117.27 () {48 vars in 881 bytes} [Sun Jun 24 17:15:59 2018] GET /static/font/CMUTypewriter-Bold.woff2 => generated 0 bytes in 2 msecs (HTTP/1.1 304) 7 headers in 279 bytes (2 switches on core 999)
+[pid: 28100|app: 0|req: 1/6] 68.11.117.27 () {48 vars in 887 bytes} [Sun Jun 24 17:15:59 2018] GET /static/font/CMUTypewriter-Regular.woff2 => generated 0 bytes in 5 msecs (HTTP/1.1 304) 7 headers in 279 bytes (2 switches on core 999)
+[pid: 28104|app: 0|req: 1/7] 68.11.117.27 () {44 vars in 754 bytes} [Sun Jun 24 17:16:00 2018] GET /about => generated 4723 bytes in 28 msecs (HTTP/1.1 200) 3 headers in 113 bytes (3 switches on core 999)
+[pid: 28101|app: 0|req: 3/8] 68.11.117.27 () {44 vars in 753 bytes} [Sun Jun 24 17:16:01 2018] GET /games/ => generated 12683 bytes in 61 msecs (HTTP/1.1 200) 3 headers in 114 bytes (3 switches on core 999)
+[pid: 28101|app: 0|req: 4/9] 193.106.30.99 () {38 vars in 588 bytes} [Sun Jun 24 17:26:42 2018] POST /wp-sbb.php => generated 233 bytes in 1 msecs (HTTP/1.1 404) 3 headers in 104 bytes (3 switches on core 999)
+[pid: 28101|app: 0|req: 5/10] 75.108.136.132 () {40 vars in 625 bytes} [Sun Jun 24 17:27:42 2018] GET /users => generated 3625 bytes in 14 msecs (HTTP/1.1 200) 3 headers in 113 bytes (3 switches on core 999)
+[pid: 28102|app: 0|req: 3/11] 75.108.136.132 () {44 vars in 763 bytes} [Sun Jun 24 17:27:42 2018] GET /static/css/stylesheet.css?q=1529634508 => generated 0 bytes in 1 msecs (HTTP/1.1 304) 6 headers in 241 bytes (2 switches on core 999)
+[pid: 28104|app: 0|req: 2/12] 75.108.136.132 () {44 vars in 789 bytes} [Sun Jun 24 17:27:42 2018] GET /static/img/logo_smaller_transparent_white.png?q=1528009180 => generated 0 bytes in 2 msecs (HTTP/1.1 304) 6 headers in 242 bytes (2 switches on core 999)
+[pid: 28100|app: 0|req: 2/13] 75.108.136.132 () {44 vars in 818 bytes} [Sun Jun 24 17:27:42 2018] GET /static/font/GoetheBold.woff2 => generated 0 bytes in 1 msecs (HTTP/1.1 304) 6 headers in 243 bytes (2 switches on core 999)
+[pid: 28102|app: 0|req: 4/14] 75.108.136.132 () {42 vars in 672 bytes} [Sun Jun 24 17:27:48 2018] GET /releases => generated 3364 bytes in 9 msecs (HTTP/1.1 200) 3 headers in 113 bytes (3 switches on core 999)
+[pid: 28101|app: 0|req: 6/15] 75.108.136.132 () {44 vars in 840 bytes} [Sun Jun 24 17:27:48 2018] GET /static/font/CMUTypewriter-Regular.woff2 => generated 0 bytes in 1 msecs (HTTP/1.1 304) 6 headers in 243 bytes (2 switches on core 999)
+[pid: 28100|app: 0|req: 3/16] 75.108.136.132 () {44 vars in 834 bytes} [Sun Jun 24 17:27:48 2018] GET /static/font/CMUTypewriter-Bold.woff2 => generated 0 bytes in 1 msecs (HTTP/1.1 304) 6 headers in 243 bytes (2 switches on core 999)
+[pid: 28101|app: 0|req: 7/17] 75.108.136.132 () {42 vars in 669 bytes} [Sun Jun 24 17:27:58 2018] GET /about => generated 4723 bytes in 7 msecs (HTTP/1.1 200) 3 headers in 113 bytes (3 switches on core 999)
+[pid: 28101|app: 0|req: 8/18] 75.108.136.132 () {34 vars in 443 bytes} [Sun Jun 24 17:28:26 2018] POST /api/get_motd => generated 91 bytes in 2 msecs (HTTP/1.1 200) 3 headers in 103 bytes (3 switches on core 999)
+[pid: 28101|app: 0|req: 9/19] 75.108.136.132 () {34 vars in 443 bytes} [Sun Jun 24 17:28:32 2018] POST /api/get_motd => generated 91 bytes in 1 msecs (HTTP/1.1 200) 3 headers in 103 bytes (3 switches on core 999)
+[pid: 28101|app: 0|req: 10/20] 75.108.136.132 () {34 vars in 443 bytes} [Sun Jun 24 17:34:41 2018] POST /api/get_motd => generated 91 bytes in 1 msecs (HTTP/1.1 200) 3 headers in 103 bytes (3 switches on core 999)
+[pid: 28101|app: 0|req: 11/21] 187.189.83.149 () {24 vars in 262 bytes} [Sun Jun 24 17:57:54 2018] GET / => generated 446 bytes in 3 msecs (HTTP/1.0 200) 3 headers in 112 bytes (3 switches on core 999)
+[pid: 28101|app: 0|req: 12/22] 86.179.176.28 () {40 vars in 695 bytes} [Sun Jun 24 17:59:40 2018] GET /games => generated 12684 bytes in 18 msecs (HTTP/1.1 200) 3 headers in 114 bytes (3 switches on core 999)
+[pid: 28101|app: 0|req: 13/23] 178.73.215.171 () {26 vars in 280 bytes} [Sun Jun 24 18:00:29 2018] GET / => generated 446 bytes in 1 msecs (HTTP/1.0 200) 3 headers in 112 bytes (3 switches on core 999)
+[pid: 28101|app: 0|req: 14/24] 66.249.75.144 () {42 vars in 760 bytes} [Sun Jun 24 18:15:54 2018] GET /assets/css/styles.css?v=2f4b307a90 => generated 233 bytes in 1 msecs (HTTP/1.1 404) 3 headers in 104 bytes (3 switches on core 999)
+[pid: 28101|app: 0|req: 15/25] 66.249.75.146 () {42 vars in 756 bytes} [Sun Jun 24 18:15:55 2018] GET /assets/css/hack.css?v=2f4b307a90 => generated 233 bytes in 1 msecs (HTTP/1.1 404) 3 headers in 104 bytes (3 switches on core 999)
+[pid: 28101|app: 0|req: 16/26] 116.96.246.253 () {24 vars in 263 bytes} [Sun Jun 24 18:19:17 2018] HEAD / => generated 0 bytes in 1 msecs (HTTP/1.0 200) 3 headers in 112 bytes (2 switches on core 999)
+Sun Jun 24 18:19:35 2018 - uwsgi_response_write_headers_do(): Broken pipe [core/writer.c line 248] during HEAD / (116.96.246.253)
+[pid: 28101|app: 0|req: 17/27] 116.96.246.253 () {24 vars in 263 bytes} [Sun Jun 24 18:19:35 2018] HEAD / => generated 0 bytes in 1 msecs (HTTP/1.0 200) 3 headers in 0 bytes (2 switches on core 999)
+[pid: 28101|app: 0|req: 18/28] 41.213.149.15 () {24 vars in 262 bytes} [Sun Jun 24 18:19:39 2018] HEAD / => generated 0 bytes in 1 msecs (HTTP/1.0 200) 3 headers in 112 bytes (2 switches on core 999)
+[pid: 28101|app: 0|req: 19/29] 71.6.158.166 () {34 vars in 532 bytes} [Sun Jun 24 18:28:17 2018] GET / => generated 446 bytes in 1 msecs (HTTP/1.1 200) 3 headers in 112 bytes (3 switches on core 999)
+[pid: 28101|app: 0|req: 20/30] 71.6.158.166 () {30 vars in 350 bytes} [Sun Jun 24 18:28:24 2018] GET /robots.txt => generated 233 bytes in 1 msecs (HTTP/1.1 404) 3 headers in 104 bytes (3 switches on core 999)
+[pid: 28101|app: 0|req: 21/31] 71.6.158.166 () {30 vars in 352 bytes} [Sun Jun 24 18:28:24 2018] GET /sitemap.xml => generated 233 bytes in 1 msecs (HTTP/1.1 404) 3 headers in 104 bytes (3 switches on core 999)
+[pid: 28101|app: 0|req: 22/32] 71.6.158.166 () {36 vars in 445 bytes} [Sun Jun 24 18:28:24 2018] GET /favicon.ico => generated 233 bytes in 1 msecs (HTTP/1.1 404) 3 headers in 104 bytes (3 switches on core 999)
