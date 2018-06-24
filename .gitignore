@@ -3,4 +3,5 @@
 app.db
 db.db
 ddstats.sock
+ddstats.log
 motd.json
