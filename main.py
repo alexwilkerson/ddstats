@@ -1,9 +1,9 @@
+from gevent import monkey
+monkey.patch_all()
 import os
 import math
 import requests
 import json
-from gevent import monkey
-monkey.patch_all()
 from datetime import datetime
 from flask import Flask, request, jsonify, Response, url_for
 from flask import render_template
@@ -39,7 +39,7 @@ app.jinja_env.filters['time_ago'] = time_ago
 
 db = SQLAlchemy(app)
 
-socketio = SocketIO(app, engine_logger=True)
+socketio = SocketIO(app)
 
 
 class Game(db.Model):
@@ -927,4 +927,4 @@ def dated_url_for(endpoint, **values):
 
 
 if __name__ == '__main__':
-    socketio.run(app, host='0.0.0.0', port=5666)
+    socketio.run(app, host='0.0.0.0', port=5666, debug=True)
