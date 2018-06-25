@@ -141,8 +141,7 @@ def user_page(user_id, page_num):
 
 @app.route('/game_log/<game_number>')
 def game_log(game_number):
-    # r = requests.get('http://ddstats.com/api/game/{}/all'.format(game_number))
-    r = get_all_game_states(game_number)
+    r = requests.get('http://ddstats.com/api/game/{}/all'.format(game_number))
     data = r.json()
     if "message" in data:
         return data["message"]

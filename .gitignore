@@ -3,5 +3,6 @@
 app.db
 db.db
 ddstats.sock
+ddstats-socketio.sock
 ddstats.log
 motd.json
