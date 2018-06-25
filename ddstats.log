@@ -23093,3 +23093,1452 @@ spawned uWSGI http 1 (pid: 31700)
 [pid: 31695|app: 0|req: 4/7] 23.239.31.125 () {34 vars in 434 bytes} [Mon Jun 25 06:54:18 2018] GET /api/game/227 => generated 270 bytes in 3 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
 [pid: 31696|app: 0|req: 2/8] 23.239.31.125 () {34 vars in 459 bytes} [Mon Jun 25 06:54:18 2018] GET /api/get_scores?user=93991 => generated 335 bytes in 885 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
 [pid: 31699|app: 0|req: 2/9] 68.11.117.27 () {44 vars in 738 bytes} [Mon Jun 25 06:54:17 2018] GET /api/dataset/227 => generated 25744 bytes in 1050 msecs (HTTP/1.1 200) 4 headers in 142 bytes (2 switches on core 0)
+[pid: 31699|app: 0|req: 3/10] 23.239.31.125 () {34 vars in 442 bytes} [Mon Jun 25 06:56:47 2018] GET /api/game/227/all => generated 148178 bytes in 133 msecs (HTTP/1.1 200) 3 headers in 107 bytes (1 switches on core 0)
+[pid: 31699|app: 0|req: 4/11] 23.239.31.125 () {34 vars in 434 bytes} [Mon Jun 25 06:56:48 2018] GET /api/game/227 => generated 270 bytes in 5 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 31696|app: 0|req: 3/12] 23.239.31.125 () {34 vars in 459 bytes} [Mon Jun 25 06:56:48 2018] GET /api/get_scores?user=93991 => generated 335 bytes in 870 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 31695|app: 0|req: 5/13] 68.11.117.27 () {44 vars in 751 bytes} [Mon Jun 25 06:56:47 2018] GET /game_log/227 => generated 8844 bytes in 1122 msecs (HTTP/1.1 200) 3 headers in 113 bytes (2 switches on core 0)
+[pid: 31699|app: 0|req: 5/14] 68.11.117.27 () {46 vars in 805 bytes} [Mon Jun 25 06:56:49 2018] GET /static/icons/favicon-32x32.png?q=1529555301 => generated 333 bytes in 7 msecs via sendfile() (HTTP/1.1 200) 9 headers in 322 bytes (0 switches on core 0)
+[pid: 31698|app: 0|req: 2/15] 23.239.31.125 () {34 vars in 442 bytes} [Mon Jun 25 06:56:49 2018] GET /api/game/227/all => generated 148178 bytes in 133 msecs (HTTP/1.1 200) 3 headers in 107 bytes (2 switches on core 0)
+[pid: 31695|app: 0|req: 6/16] 23.239.31.125 () {34 vars in 434 bytes} [Mon Jun 25 06:56:49 2018] GET /api/game/227 => generated 270 bytes in 4 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 31699|app: 0|req: 6/17] 23.239.31.125 () {34 vars in 459 bytes} [Mon Jun 25 06:56:49 2018] GET /api/get_scores?user=93991 => generated 335 bytes in 925 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 31696|app: 0|req: 4/18] 68.11.117.27 () {44 vars in 738 bytes} [Mon Jun 25 06:56:49 2018] GET /api/dataset/227 => generated 25744 bytes in 1081 msecs (HTTP/1.1 200) 4 headers in 142 bytes (2 switches on core 0)
+[pid: 31695|app: 0|req: 7/19] 68.11.117.27 () {42 vars in 722 bytes} [Mon Jun 25 06:56:53 2018] GET /socketio_test => generated 657 bytes in 2 msecs (HTTP/1.1 200) 3 headers in 112 bytes (1 switches on core 0)
+--- no python application found, check your startup logs for errors ---
+[pid: 31691|app: -1|req: -1/1] 127.0.0.1 () {46 vars in 822 bytes} [Mon Jun 25 06:56:53 2018] GET /socket.io/?EIO=3&transport=polling&t=MGrk9MT => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (1 switches on core 999)
+--- no python application found, check your startup logs for errors ---
+[pid: 31691|app: -1|req: -1/2] 127.0.0.1 () {46 vars in 822 bytes} [Mon Jun 25 06:56:54 2018] GET /socket.io/?EIO=3&transport=polling&t=MGrk9ZK => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (1 switches on core 999)
+--- no python application found, check your startup logs for errors ---
+[pid: 31691|app: -1|req: -1/3] 127.0.0.1 () {46 vars in 822 bytes} [Mon Jun 25 06:56:56 2018] GET /socket.io/?EIO=3&transport=polling&t=MGrk9yO => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (1 switches on core 999)
+--- no python application found, check your startup logs for errors ---
+[pid: 31691|app: -1|req: -1/4] 127.0.0.1 () {46 vars in 822 bytes} [Mon Jun 25 06:56:59 2018] GET /socket.io/?EIO=3&transport=polling&t=MGrkAop => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (1 switches on core 999)
+--- no python application found, check your startup logs for errors ---
+[pid: 31691|app: -1|req: -1/5] 127.0.0.1 () {46 vars in 822 bytes} [Mon Jun 25 06:57:04 2018] GET /socket.io/?EIO=3&transport=polling&t=MGrkC1a => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (1 switches on core 999)
+--- no python application found, check your startup logs for errors ---
+[pid: 31691|app: -1|req: -1/6] 127.0.0.1 () {46 vars in 822 bytes} [Mon Jun 25 06:57:09 2018] GET /socket.io/?EIO=3&transport=polling&t=MGrkDJJ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (1 switches on core 999)
+--- no python application found, check your startup logs for errors ---
+[pid: 31691|app: -1|req: -1/7] 127.0.0.1 () {46 vars in 822 bytes} [Mon Jun 25 06:57:15 2018] GET /socket.io/?EIO=3&transport=polling&t=MGrkEY2 => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (1 switches on core 999)
+--- no python application found, check your startup logs for errors ---
+[pid: 31691|app: -1|req: -1/8] 127.0.0.1 () {46 vars in 822 bytes} [Mon Jun 25 06:57:20 2018] GET /socket.io/?EIO=3&transport=polling&t=MGrkFoq => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (1 switches on core 999)
+--- no python application found, check your startup logs for errors ---
+[pid: 31691|app: -1|req: -1/9] 127.0.0.1 () {46 vars in 822 bytes} [Mon Jun 25 06:57:25 2018] GET /socket.io/?EIO=3&transport=polling&t=MGrkH1V => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (1 switches on core 999)
+--- no python application found, check your startup logs for errors ---
+[pid: 31691|app: -1|req: -1/10] 127.0.0.1 () {46 vars in 822 bytes} [Mon Jun 25 06:57:30 2018] GET /socket.io/?EIO=3&transport=polling&t=MGrkIGA => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (1 switches on core 999)
+--- no python application found, check your startup logs for errors ---
+[pid: 31691|app: -1|req: -1/11] 127.0.0.1 () {46 vars in 822 bytes} [Mon Jun 25 06:57:35 2018] GET /socket.io/?EIO=3&transport=polling&t=MGrkJVq => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (1 switches on core 999)
+--- no python application found, check your startup logs for errors ---
+[pid: 31691|app: -1|req: -1/12] 127.0.0.1 () {46 vars in 822 bytes} [Mon Jun 25 06:57:40 2018] GET /socket.io/?EIO=3&transport=polling&t=MGrkKkZ => generated 21 bytes in 0 msecs (HTTP/1.1 500) 2 headers in 83 bytes (1 switches on core 999)
+[pid: 31695|app: 0|req: 8/20] 31.135.243.35 () {24 vars in 262 bytes} [Mon Jun 25 06:59:04 2018] HEAD / => generated 0 bytes in 3 msecs (HTTP/1.0 200) 3 headers in 112 bytes (0 switches on core 0)
+[pid: 31699|app: 0|req: 7/21] 23.239.31.125 () {34 vars in 442 bytes} [Mon Jun 25 07:02:34 2018] GET /api/game/227/all => generated 148178 bytes in 110 msecs (HTTP/1.1 200) 3 headers in 107 bytes (2 switches on core 0)
+[pid: 31699|app: 0|req: 8/22] 23.239.31.125 () {34 vars in 434 bytes} [Mon Jun 25 07:02:34 2018] GET /api/game/227 => generated 270 bytes in 4 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 31696|app: 0|req: 5/23] 23.239.31.125 () {34 vars in 459 bytes} [Mon Jun 25 07:02:34 2018] GET /api/get_scores?user=93991 => generated 335 bytes in 981 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 31695|app: 0|req: 9/24] 68.11.117.27 () {44 vars in 751 bytes} [Mon Jun 25 07:02:34 2018] GET /game_log/227 => generated 8844 bytes in 1121 msecs (HTTP/1.1 200) 3 headers in 113 bytes (2 switches on core 0)
+[pid: 31699|app: 0|req: 9/25] 68.11.117.27 () {46 vars in 805 bytes} [Mon Jun 25 07:02:35 2018] GET /static/icons/favicon-32x32.png?q=1529555301 => generated 333 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 9 headers in 322 bytes (1 switches on core 0)
+[pid: 31698|app: 0|req: 3/26] 23.239.31.125 () {34 vars in 442 bytes} [Mon Jun 25 07:02:35 2018] GET /api/game/227/all => generated 148178 bytes in 109 msecs (HTTP/1.1 200) 3 headers in 107 bytes (2 switches on core 0)
+[pid: 31695|app: 0|req: 10/27] 23.239.31.125 () {34 vars in 434 bytes} [Mon Jun 25 07:02:35 2018] GET /api/game/227 => generated 270 bytes in 4 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 31698|app: 0|req: 4/28] 68.11.117.27 () {44 vars in 760 bytes} [Mon Jun 25 07:02:36 2018] GET /games/ => generated 12556 bytes in 41 msecs (HTTP/1.1 200) 3 headers in 114 bytes (1 switches on core 0)
+Mon Jun 25 07:02:36 2018 - SIGPIPE: writing to a closed pipe/socket/fd (probably the client disconnected) on request /api/dataset/227 (ip 68.11.117.27) !!!
+Mon Jun 25 07:02:36 2018 - uwsgi_response_writev_headers_and_body_do(): Broken pipe [core/writer.c line 306] during GET /api/dataset/227 (68.11.117.27)
+OSError: write error
+[pid: 31696|app: 0|req: 6/30] 68.11.117.27 () {44 vars in 738 bytes} [Mon Jun 25 07:02:35 2018] GET /api/dataset/227 => generated 0 bytes in 1006 msecs (HTTP/1.1 200) 4 headers in 0 bytes (1 switches on core 0)
+[pid: 31699|app: 0|req: 10/30] 23.239.31.125 () {34 vars in 459 bytes} [Mon Jun 25 07:02:35 2018] GET /api/get_scores?user=93991 => generated 335 bytes in 874 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 31695|app: 0|req: 11/31] 68.11.117.27 () {42 vars in 722 bytes} [Mon Jun 25 07:02:48 2018] GET /socketio_test => generated 657 bytes in 1 msecs (HTTP/1.1 200) 3 headers in 112 bytes (1 switches on core 0)
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+SIGINT/SIGQUIT received...killing workers...
+Brutally killing worker 1 (pid: 31691)...
+Mon Jun 25 07:03:54 2018 - stopping gevent signals watchers for worker 1 (pid: 31691)...
+Mon Jun 25 07:03:54 2018 - stopping gevent sockets watchers for worker 1 (pid: 31691)...
+Mon Jun 25 07:03:54 2018 - main gevent watchers stopped for worker 1 (pid: 31691)...
+goodbye to the gevent Hub on worker 1 (pid: 31691)
+gateway "uWSGI http 1" has been buried (pid: 31692)
+worker 1 buried after 0 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats-socketio.sock removed.
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 31700)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Jun 25 07:03:56 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x561e4f774450
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 437520 bytes (427 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x561e4f774450 pid: 31949 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 31949)
+spawned uWSGI worker 1 (pid: 31956, cores: 1)
+spawned uWSGI worker 2 (pid: 31957, cores: 1)
+spawned uWSGI worker 3 (pid: 31958, cores: 1)
+spawned uWSGI worker 4 (pid: 31959, cores: 1)
+spawned uWSGI worker 5 (pid: 31960, cores: 1)
+spawned uWSGI http 1 (pid: 31961)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 31961)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Jun 25 07:04:46 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x562090fab450
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 437520 bytes (427 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x562090fab450 pid: 31982 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 31982)
+spawned uWSGI worker 1 (pid: 31989, cores: 1)
+spawned uWSGI worker 2 (pid: 31990, cores: 1)
+spawned uWSGI worker 3 (pid: 31991, cores: 1)
+spawned uWSGI worker 4 (pid: 31992, cores: 1)
+spawned uWSGI worker 5 (pid: 31993, cores: 1)
+spawned uWSGI http 1 (pid: 31994)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 31994)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Jun 25 07:09:38 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x55b4f861f450
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 437520 bytes (427 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x55b4f861f450 pid: 32169 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 32169)
+spawned uWSGI worker 1 (pid: 32175, cores: 1)
+spawned uWSGI worker 2 (pid: 32176, cores: 1)
+spawned uWSGI worker 3 (pid: 32177, cores: 1)
+spawned uWSGI worker 4 (pid: 32178, cores: 1)
+spawned uWSGI worker 5 (pid: 32179, cores: 1)
+spawned uWSGI http 1 (pid: 32180)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 32180)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Jun 25 07:10:36 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x55920af6f450
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 437520 bytes (427 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x55920af6f450 pid: 32212 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 32212)
+spawned uWSGI worker 1 (pid: 32219, cores: 1)
+spawned uWSGI worker 2 (pid: 32220, cores: 1)
+spawned uWSGI worker 3 (pid: 32221, cores: 1)
+spawned uWSGI worker 4 (pid: 32222, cores: 1)
+spawned uWSGI worker 5 (pid: 32223, cores: 1)
+spawned uWSGI http 1 (pid: 32224)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 32224)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Jun 25 07:12:46 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x55907fae0450
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 437520 bytes (427 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x55907fae0450 pid: 32266 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 32266)
+spawned uWSGI worker 1 (pid: 32274, cores: 1)
+spawned uWSGI worker 2 (pid: 32275, cores: 1)
+spawned uWSGI worker 3 (pid: 32276, cores: 1)
+spawned uWSGI worker 4 (pid: 32277, cores: 1)
+spawned uWSGI worker 5 (pid: 32278, cores: 1)
+spawned uWSGI http 1 (pid: 32279)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 32279)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Jun 25 07:15:51 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x5606c9e25450
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 437520 bytes (427 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x5606c9e25450 pid: 32337 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 32337)
+spawned uWSGI worker 1 (pid: 32343, cores: 1)
+spawned uWSGI worker 2 (pid: 32344, cores: 1)
+spawned uWSGI worker 3 (pid: 32345, cores: 1)
+spawned uWSGI worker 4 (pid: 32346, cores: 1)
+spawned uWSGI worker 5 (pid: 32347, cores: 1)
+spawned uWSGI http 1 (pid: 32348)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 32348)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Jun 25 07:21:19 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x557bc3474450
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 437520 bytes (427 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x557bc3474450 pid: 32482 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 32482)
+spawned uWSGI worker 1 (pid: 32489, cores: 1)
+spawned uWSGI worker 2 (pid: 32490, cores: 1)
+spawned uWSGI worker 3 (pid: 32491, cores: 1)
+spawned uWSGI worker 4 (pid: 32492, cores: 1)
+spawned uWSGI worker 5 (pid: 32493, cores: 1)
+spawned uWSGI http 1 (pid: 32494)
+[pid: 32492|app: 0|req: 1/1] 68.11.117.27 () {44 vars in 753 bytes} [Mon Jun 25 07:21:22 2018] GET /socketio_test => generated 657 bytes in 11 msecs (HTTP/1.1 200) 3 headers in 112 bytes (1 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 32494)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Jun 25 07:24:51 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x55cf599fa450
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 437520 bytes (427 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x55cf599fa450 pid: 32591 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 32591)
+spawned uWSGI worker 1 (pid: 32598, cores: 1)
+spawned uWSGI worker 2 (pid: 32599, cores: 1)
+spawned uWSGI worker 3 (pid: 32600, cores: 1)
+spawned uWSGI worker 4 (pid: 32601, cores: 1)
+spawned uWSGI worker 5 (pid: 32602, cores: 1)
+spawned uWSGI http 1 (pid: 32603)
+[pid: 32598|app: 0|req: 1/1] 74.72.56.42 () {24 vars in 260 bytes} [Mon Jun 25 07:29:48 2018] HEAD / => generated 0 bytes in 13 msecs (HTTP/1.0 200) 3 headers in 112 bytes (0 switches on core 0)
+[pid: 32602|app: 0|req: 1/2] 74.72.56.42 () {24 vars in 260 bytes} [Mon Jun 25 07:29:48 2018] HEAD / => generated 0 bytes in 13 msecs (HTTP/1.0 200) 3 headers in 112 bytes (0 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 32603)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Jun 25 07:30:56 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x55b7db05f450
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 437520 bytes (427 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x55b7db05f450 pid: 32721 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 32721)
+spawned uWSGI worker 1 (pid: 32728, cores: 1)
+spawned uWSGI worker 2 (pid: 32729, cores: 1)
+spawned uWSGI worker 3 (pid: 32730, cores: 1)
+spawned uWSGI worker 4 (pid: 32731, cores: 1)
+spawned uWSGI worker 5 (pid: 32732, cores: 1)
+spawned uWSGI http 1 (pid: 32733)
+[pid: 32728|app: 0|req: 1/1] 68.11.117.27 () {44 vars in 753 bytes} [Mon Jun 25 07:31:10 2018] GET /socketio_test => generated 657 bytes in 11 msecs (HTTP/1.1 200) 3 headers in 112 bytes (1 switches on core 0)
+[pid: 32728|app: 0|req: 2/2] 68.11.117.27 () {42 vars in 696 bytes} [Mon Jun 25 07:31:47 2018] GET / => generated 446 bytes in 5 msecs (HTTP/1.1 200) 3 headers in 112 bytes (1 switches on core 0)
+[pid: 32732|app: 0|req: 1/3] 68.11.117.27 () {46 vars in 849 bytes} [Mon Jun 25 07:31:47 2018] GET /static/img/logo_animated.gif?q=1528010731 => generated 0 bytes in 9 msecs (HTTP/1.1 304) 6 headers in 242 bytes (0 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 32733)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Jun 25 07:32:50 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x56271087e450
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 437520 bytes (427 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x56271087e450 pid: 348 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 348)
+spawned uWSGI worker 1 (pid: 355, cores: 1)
+spawned uWSGI worker 2 (pid: 356, cores: 1)
+spawned uWSGI worker 3 (pid: 357, cores: 1)
+spawned uWSGI worker 4 (pid: 358, cores: 1)
+spawned uWSGI worker 5 (pid: 359, cores: 1)
+spawned uWSGI http 1 (pid: 360)
+[pid: 355|app: 0|req: 1/1] 138.219.94.73 () {24 vars in 262 bytes} [Mon Jun 25 07:33:05 2018] HEAD / => generated 0 bytes in 13 msecs (HTTP/1.0 200) 3 headers in 112 bytes (0 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 360)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Jun 25 07:33:07 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x55b26419b450
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 437520 bytes (427 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x55b26419b450 pid: 379 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 379)
+spawned uWSGI worker 1 (pid: 385, cores: 1)
+spawned uWSGI worker 2 (pid: 386, cores: 1)
+spawned uWSGI worker 3 (pid: 387, cores: 1)
+spawned uWSGI worker 4 (pid: 388, cores: 1)
+spawned uWSGI worker 5 (pid: 389, cores: 1)
+spawned uWSGI http 1 (pid: 390)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 390)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Jun 25 07:35:49 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x55c2697cc450
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 437520 bytes (427 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x55c2697cc450 pid: 429 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 429)
+spawned uWSGI worker 1 (pid: 436, cores: 1)
+spawned uWSGI worker 2 (pid: 437, cores: 1)
+spawned uWSGI worker 3 (pid: 438, cores: 1)
+spawned uWSGI worker 4 (pid: 439, cores: 1)
+spawned uWSGI worker 5 (pid: 440, cores: 1)
+spawned uWSGI http 1 (pid: 441)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 441)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Jun 25 07:38:03 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x5622a7f9f450
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 437520 bytes (427 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x5622a7f9f450 pid: 508 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 508)
+spawned uWSGI worker 1 (pid: 513, cores: 1)
+spawned uWSGI worker 2 (pid: 514, cores: 1)
+spawned uWSGI worker 3 (pid: 515, cores: 1)
+spawned uWSGI worker 4 (pid: 516, cores: 1)
+spawned uWSGI worker 5 (pid: 517, cores: 1)
+spawned uWSGI http 1 (pid: 518)
+[pid: 516|app: 0|req: 1/1] 66.249.69.221 () {36 vars in 691 bytes} [Mon Jun 25 07:38:06 2018] GET / => generated 446 bytes in 16 msecs (HTTP/1.1 200) 3 headers in 112 bytes (1 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 518)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Jun 25 07:40:28 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x55db9edca450
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 437520 bytes (427 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x55db9edca450 pid: 597 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 597)
+spawned uWSGI worker 1 (pid: 601, cores: 1)
+spawned uWSGI worker 2 (pid: 602, cores: 1)
+spawned uWSGI worker 3 (pid: 603, cores: 1)
+spawned uWSGI worker 4 (pid: 604, cores: 1)
+spawned uWSGI worker 5 (pid: 605, cores: 1)
+spawned uWSGI http 1 (pid: 606)
+[pid: 604|app: 0|req: 1/1] 23.239.31.125 () {34 vars in 444 bytes} [Mon Jun 25 07:41:25 2018] GET /api/game/2776/all => generated 129359 bytes in 142 msecs (HTTP/1.1 200) 3 headers in 107 bytes (1 switches on core 0)
+[pid: 604|app: 0|req: 2/2] 23.239.31.125 () {34 vars in 436 bytes} [Mon Jun 25 07:41:25 2018] GET /api/game/2776 => generated 270 bytes in 5 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 605|app: 0|req: 1/3] 23.239.31.125 () {34 vars in 459 bytes} [Mon Jun 25 07:41:25 2018] GET /api/get_scores?user=58491 => generated 332 bytes in 375 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 601|app: 0|req: 1/4] 104.173.9.60 () {38 vars in 614 bytes} [Mon Jun 25 07:41:25 2018] GET /game_log/2776 => generated 8845 bytes in 670 msecs (HTTP/1.1 200) 3 headers in 113 bytes (1 switches on core 0)
+[pid: 604|app: 0|req: 3/5] 104.173.9.60 () {38 vars in 631 bytes} [Mon Jun 25 07:41:26 2018] GET /static/css/stylesheet.css?q=1529634508 => generated 5390 bytes in 9 msecs via sendfile() (HTTP/1.1 200) 9 headers in 338 bytes (0 switches on core 0)
+[pid: 601|app: 0|req: 2/6] 104.173.9.60 () {38 vars in 656 bytes} [Mon Jun 25 07:41:26 2018] GET /bower/jquery/dist/jquery.min.js?version=1527397772.4245381 => generated 86927 bytes in 18 msecs via sendfile() (HTTP/1.1 200) 9 headers in 340 bytes (0 switches on core 0)
+[pid: 605|app: 0|req: 2/7] 104.173.9.60 () {38 vars in 628 bytes} [Mon Jun 25 07:41:26 2018] GET /bower/highcharts/highcharts.js?version=6.1.0 => generated 204111 bytes in 15 msecs via sendfile() (HTTP/1.1 200) 9 headers in 341 bytes (0 switches on core 0)
+[pid: 604|app: 0|req: 4/8] 104.173.9.60 () {38 vars in 656 bytes} [Mon Jun 25 07:41:26 2018] GET /static/img/logo_smaller_transparent_white.png?q=1528009180 => generated 20968 bytes in 2 msecs via sendfile() (HTTP/1.1 200) 9 headers in 326 bytes (1 switches on core 0)
+[pid: 602|app: 0|req: 1/9] 104.173.9.60 () {38 vars in 680 bytes} [Mon Jun 25 07:41:26 2018] GET /static/font/GoetheBold.woff2 => generated 16856 bytes in 14 msecs via sendfile() (HTTP/1.1 200) 9 headers in 342 bytes (1 switches on core 0)
+[pid: 601|app: 0|req: 3/10] 104.173.9.60 () {36 vars in 644 bytes} [Mon Jun 25 07:41:26 2018] GET /static/icons/apple-touch-icon.png?q=1529555301 => generated 501 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 9 headers in 321 bytes (1 switches on core 0)
+[pid: 604|app: 0|req: 5/11] 104.173.9.60 () {36 vars in 638 bytes} [Mon Jun 25 07:41:26 2018] GET /static/icons/favicon-16x16.png?q=1529555301 => generated 267 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 9 headers in 322 bytes (1 switches on core 0)
+[pid: 605|app: 0|req: 3/12] 104.173.9.60 () {36 vars in 578 bytes} [Mon Jun 25 07:41:26 2018] GET /static/icons/favicon-16x16.png?q=1529555301 => generated 267 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 9 headers in 322 bytes (1 switches on core 0)
+[pid: 603|app: 0|req: 1/13] 23.239.31.125 () {34 vars in 444 bytes} [Mon Jun 25 07:41:26 2018] GET /api/game/2776/all => generated 129359 bytes in 135 msecs (HTTP/1.1 200) 3 headers in 107 bytes (2 switches on core 0)
+[pid: 604|app: 0|req: 6/14] 23.239.31.125 () {34 vars in 436 bytes} [Mon Jun 25 07:41:27 2018] GET /api/game/2776 => generated 270 bytes in 4 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 605|app: 0|req: 4/15] 23.239.31.125 () {34 vars in 459 bytes} [Mon Jun 25 07:41:27 2018] GET /api/get_scores?user=58491 => generated 332 bytes in 377 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 601|app: 0|req: 4/16] 104.173.9.60 () {42 vars in 665 bytes} [Mon Jun 25 07:41:26 2018] GET /api/dataset/2776 => generated 22322 bytes in 534 msecs (HTTP/1.1 200) 4 headers in 137 bytes (2 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 606)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Jun 25 07:41:47 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x562243fcf450
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 437520 bytes (427 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x562243fcf450 pid: 658 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 658)
+spawned uWSGI worker 1 (pid: 662, cores: 1)
+spawned uWSGI worker 2 (pid: 663, cores: 1)
+spawned uWSGI worker 3 (pid: 664, cores: 1)
+spawned uWSGI worker 4 (pid: 665, cores: 1)
+spawned uWSGI worker 5 (pid: 666, cores: 1)
+spawned uWSGI http 1 (pid: 667)
+[pid: 662|app: 0|req: 1/1] 104.173.9.60 () {40 vars in 646 bytes} [Mon Jun 25 07:42:01 2018] GET /users => generated 3709 bytes in 60 msecs (HTTP/1.1 200) 3 headers in 113 bytes (1 switches on core 0)
+[pid: 666|app: 0|req: 1/2] 104.173.9.60 () {36 vars in 575 bytes} [Mon Jun 25 07:42:02 2018] GET /favicon.ico => generated 233 bytes in 7 msecs (HTTP/1.1 404) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 662|app: 0|req: 2/3] 104.173.9.60 () {36 vars in 515 bytes} [Mon Jun 25 07:42:02 2018] GET /favicon.ico => generated 233 bytes in 3 msecs (HTTP/1.1 404) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 663|app: 0|req: 1/4] 104.173.9.60 () {40 vars in 644 bytes} [Mon Jun 25 07:42:03 2018] GET /releases => generated 3364 bytes in 36 msecs (HTTP/1.1 200) 3 headers in 113 bytes (1 switches on core 0)
+[pid: 662|app: 0|req: 3/5] 104.173.9.60 () {38 vars in 702 bytes} [Mon Jun 25 07:42:04 2018] GET /static/font/CMUTypewriter-Regular.woff2 => generated 82692 bytes in 5 msecs via sendfile() (HTTP/1.1 200) 9 headers in 342 bytes (0 switches on core 0)
+[pid: 666|app: 0|req: 2/6] 104.173.9.60 () {38 vars in 696 bytes} [Mon Jun 25 07:42:04 2018] GET /static/font/CMUTypewriter-Bold.woff2 => generated 87424 bytes in 6 msecs via sendfile() (HTTP/1.1 200) 9 headers in 342 bytes (0 switches on core 0)
+[pid: 662|app: 0|req: 4/7] 68.11.117.27 () {44 vars in 753 bytes} [Mon Jun 25 07:42:06 2018] GET /socketio_test => generated 657 bytes in 2 msecs (HTTP/1.1 200) 3 headers in 112 bytes (1 switches on core 0)
+[pid: 662|app: 0|req: 5/8] 23.239.31.125 () {34 vars in 461 bytes} [Mon Jun 25 07:42:06 2018] GET /api/get_scores?user=105641 => generated 335 bytes in 449 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 663|app: 0|req: 2/9] 104.173.9.60 () {40 vars in 652 bytes} [Mon Jun 25 07:42:06 2018] GET /user/105641/ => generated 12601 bytes in 520 msecs (HTTP/1.1 200) 3 headers in 114 bytes (2 switches on core 0)
+[pid: 664|app: 0|req: 1/10] 23.239.31.125 () {34 vars in 444 bytes} [Mon Jun 25 07:42:10 2018] GET /api/game/2608/all => generated 142651 bytes in 138 msecs (HTTP/1.1 200) 3 headers in 107 bytes (1 switches on core 0)
+[pid: 666|app: 0|req: 3/11] 23.239.31.125 () {34 vars in 436 bytes} [Mon Jun 25 07:42:11 2018] GET /api/game/2608 => generated 275 bytes in 26 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 663|app: 0|req: 3/12] 23.239.31.125 () {34 vars in 461 bytes} [Mon Jun 25 07:42:11 2018] GET /api/get_scores?user=105641 => generated 335 bytes in 444 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 665|app: 0|req: 1/13] 23.239.31.125 () {34 vars in 461 bytes} [Mon Jun 25 07:42:11 2018] GET /api/get_scores?user=105641 => generated 335 bytes in 454 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 662|app: 0|req: 6/14] 104.173.9.60 () {40 vars in 661 bytes} [Mon Jun 25 07:42:10 2018] GET /game_log/2608 => generated 8946 bytes in 1157 msecs (HTTP/1.1 200) 3 headers in 113 bytes (1 switches on core 0)
+[pid: 662|app: 0|req: 7/15] 23.239.31.125 () {34 vars in 444 bytes} [Mon Jun 25 07:42:12 2018] GET /api/game/2608/all => generated 142651 bytes in 113 msecs (HTTP/1.1 200) 3 headers in 107 bytes (1 switches on core 0)
+[pid: 662|app: 0|req: 8/16] 23.239.31.125 () {34 vars in 436 bytes} [Mon Jun 25 07:42:12 2018] GET /api/game/2608 => generated 275 bytes in 5 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 663|app: 0|req: 4/17] 23.239.31.125 () {34 vars in 461 bytes} [Mon Jun 25 07:42:12 2018] GET /api/get_scores?user=105641 => generated 335 bytes in 436 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 666|app: 0|req: 4/18] 104.173.9.60 () {42 vars in 665 bytes} [Mon Jun 25 07:42:12 2018] GET /api/dataset/2608 => generated 24725 bytes in 577 msecs (HTTP/1.1 200) 4 headers in 137 bytes (1 switches on core 0)
+[pid: 664|app: 0|req: 2/19] 23.239.31.125 () {34 vars in 444 bytes} [Mon Jun 25 07:42:15 2018] GET /api/game/2608/all => generated 142651 bytes in 123 msecs (HTTP/1.1 200) 3 headers in 107 bytes (1 switches on core 0)
+[pid: 666|app: 0|req: 5/20] 23.239.31.125 () {34 vars in 436 bytes} [Mon Jun 25 07:42:15 2018] GET /api/game/2608 => generated 275 bytes in 5 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 663|app: 0|req: 5/21] 23.239.31.125 () {34 vars in 461 bytes} [Mon Jun 25 07:42:15 2018] GET /api/get_scores?user=105641 => generated 335 bytes in 442 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 665|app: 0|req: 2/22] 23.239.31.125 () {34 vars in 461 bytes} [Mon Jun 25 07:42:16 2018] GET /api/get_scores?user=105641 => generated 335 bytes in 456 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 662|app: 0|req: 9/23] 104.173.9.60 () {42 vars in 692 bytes} [Mon Jun 25 07:42:15 2018] GET /game_log/2608 => generated 8946 bytes in 1056 msecs (HTTP/1.1 200) 3 headers in 113 bytes (1 switches on core 0)
+[pid: 666|app: 0|req: 6/24] 104.173.9.60 () {44 vars in 774 bytes} [Mon Jun 25 07:42:16 2018] GET /static/css/stylesheet.css?q=1529634508 => generated 0 bytes in 1 msecs (HTTP/1.1 304) 6 headers in 241 bytes (0 switches on core 0)
+[pid: 663|app: 0|req: 6/25] 104.173.9.60 () {44 vars in 801 bytes} [Mon Jun 25 07:42:16 2018] GET /bower/jquery/dist/jquery.min.js?version=1527397772.4245381 => generated 0 bytes in 5 msecs (HTTP/1.1 304) 6 headers in 243 bytes (0 switches on core 0)
+[pid: 666|app: 0|req: 7/26] 104.173.9.60 () {44 vars in 773 bytes} [Mon Jun 25 07:42:16 2018] GET /bower/highcharts/highcharts.js?version=6.1.0 => generated 0 bytes in 1 msecs (HTTP/1.1 304) 6 headers in 243 bytes (0 switches on core 0)
+[pid: 664|app: 0|req: 3/27] 104.173.9.60 () {44 vars in 800 bytes} [Mon Jun 25 07:42:16 2018] GET /static/img/logo_smaller_transparent_white.png?q=1528009180 => generated 0 bytes in 16 msecs (HTTP/1.1 304) 6 headers in 242 bytes (0 switches on core 0)
+[pid: 662|app: 0|req: 10/28] 23.239.31.125 () {34 vars in 444 bytes} [Mon Jun 25 07:42:16 2018] GET /api/game/2608/all => generated 142651 bytes in 121 msecs (HTTP/1.1 200) 3 headers in 107 bytes (1 switches on core 0)
+[pid: 662|app: 0|req: 11/29] 23.239.31.125 () {34 vars in 436 bytes} [Mon Jun 25 07:42:17 2018] GET /api/game/2608 => generated 275 bytes in 3 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 666|app: 0|req: 8/30] 23.239.31.125 () {34 vars in 461 bytes} [Mon Jun 25 07:42:17 2018] GET /api/get_scores?user=105641 => generated 335 bytes in 449 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 665|app: 0|req: 3/31] 104.173.9.60 () {44 vars in 696 bytes} [Mon Jun 25 07:42:16 2018] GET /api/dataset/2608 => generated 24725 bytes in 597 msecs (HTTP/1.1 200) 4 headers in 137 bytes (1 switches on core 0)
+[pid: 662|app: 0|req: 12/32] 68.11.117.27 () {42 vars in 722 bytes} [Mon Jun 25 07:42:32 2018] GET /socketio_test => generated 657 bytes in 1 msecs (HTTP/1.1 200) 3 headers in 112 bytes (1 switches on core 0)
+[pid: 663|app: 0|req: 7/33] 23.239.31.125 () {34 vars in 442 bytes} [Mon Jun 25 07:44:23 2018] GET /api/game/227/all => generated 148178 bytes in 114 msecs (HTTP/1.1 200) 3 headers in 107 bytes (1 switches on core 0)
+[pid: 666|app: 0|req: 9/34] 23.239.31.125 () {34 vars in 434 bytes} [Mon Jun 25 07:44:23 2018] GET /api/game/227 => generated 270 bytes in 3 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 663|app: 0|req: 8/35] 23.239.31.125 () {34 vars in 459 bytes} [Mon Jun 25 07:44:23 2018] GET /api/get_scores?user=93991 => generated 335 bytes in 876 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 662|app: 0|req: 13/36] 68.11.117.27 () {42 vars in 720 bytes} [Mon Jun 25 07:44:23 2018] GET /game_log/227 => generated 8844 bytes in 1018 msecs (HTTP/1.1 200) 3 headers in 113 bytes (1 switches on core 0)
+[pid: 663|app: 0|req: 9/37] 23.239.31.125 () {34 vars in 442 bytes} [Mon Jun 25 07:44:25 2018] GET /api/game/227/all => generated 148178 bytes in 111 msecs (HTTP/1.1 200) 3 headers in 107 bytes (2 switches on core 0)
+[pid: 662|app: 0|req: 14/38] 23.239.31.125 () {34 vars in 434 bytes} [Mon Jun 25 07:44:25 2018] GET /api/game/227 => generated 270 bytes in 4 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 663|app: 0|req: 10/39] 23.239.31.125 () {34 vars in 459 bytes} [Mon Jun 25 07:44:25 2018] GET /api/get_scores?user=93991 => generated 335 bytes in 872 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 666|app: 0|req: 10/40] 68.11.117.27 () {44 vars in 738 bytes} [Mon Jun 25 07:44:25 2018] GET /api/dataset/227 => generated 25744 bytes in 1006 msecs (HTTP/1.1 200) 4 headers in 142 bytes (2 switches on core 0)
+[pid: 662|app: 0|req: 15/41] 68.11.117.27 () {44 vars in 753 bytes} [Mon Jun 25 07:44:28 2018] GET /socketio_test => generated 657 bytes in 1 msecs (HTTP/1.1 200) 3 headers in 112 bytes (2 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 667)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Jun 25 07:45:40 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x55e3d8fd9450
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 437520 bytes (427 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x55e3d8fd9450 pid: 796 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 796)
+spawned uWSGI worker 1 (pid: 801, cores: 1)
+spawned uWSGI worker 2 (pid: 803, cores: 1)
+spawned uWSGI worker 3 (pid: 805, cores: 1)
+spawned uWSGI worker 4 (pid: 806, cores: 1)
+spawned uWSGI worker 5 (pid: 807, cores: 1)
+spawned uWSGI http 1 (pid: 808)
+[pid: 807|app: 0|req: 1/1] 68.11.117.27 () {42 vars in 722 bytes} [Mon Jun 25 07:45:52 2018] GET /socketio_test => generated 657 bytes in 11 msecs (HTTP/1.1 200) 3 headers in 112 bytes (1 switches on core 0)
+[pid: 807|app: 0|req: 2/2] 68.11.117.27 () {42 vars in 722 bytes} [Mon Jun 25 07:46:27 2018] GET /socketio_test => generated 657 bytes in 0 msecs (HTTP/1.1 200) 3 headers in 112 bytes (1 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 808)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Jun 25 07:49:05 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x56225ef18450
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 437520 bytes (427 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 2 seconds on interpreter 0x56225ef18450 pid: 887 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 887)
+spawned uWSGI worker 1 (pid: 892, cores: 1)
+spawned uWSGI worker 2 (pid: 893, cores: 1)
+spawned uWSGI worker 3 (pid: 894, cores: 1)
+spawned uWSGI worker 4 (pid: 895, cores: 1)
+spawned uWSGI worker 5 (pid: 896, cores: 1)
+spawned uWSGI http 1 (pid: 897)
+[pid: 892|app: 0|req: 1/1] 68.11.117.27 () {42 vars in 722 bytes} [Mon Jun 25 07:49:19 2018] GET /socketio_test => generated 647 bytes in 17 msecs (HTTP/1.1 200) 3 headers in 112 bytes (2 switches on core 0)
+[pid: 892|app: 0|req: 2/2] 68.11.117.27 () {40 vars in 702 bytes} [Mon Jun 25 07:50:27 2018] GET /socketio_test => generated 647 bytes in 0 msecs (HTTP/1.1 200) 3 headers in 112 bytes (1 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 897)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Jun 25 07:52:39 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x55a38e285450
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 437520 bytes (427 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 2 seconds on interpreter 0x55a38e285450 pid: 912 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 912)
+spawned uWSGI worker 1 (pid: 917, cores: 1)
+spawned uWSGI worker 2 (pid: 918, cores: 1)
+spawned uWSGI worker 3 (pid: 919, cores: 1)
+spawned uWSGI worker 4 (pid: 920, cores: 1)
+spawned uWSGI worker 5 (pid: 921, cores: 1)
+spawned uWSGI http 1 (pid: 922)
+[pid: 920|app: 0|req: 1/1] 68.11.117.27 () {42 vars in 733 bytes} [Mon Jun 25 07:52:42 2018] GET /socketio_test => generated 714 bytes in 11 msecs (HTTP/1.1 200) 3 headers in 112 bytes (1 switches on core 0)
+[pid: 917|app: 0|req: 1/2] 184.72.115.35 () {34 vars in 500 bytes} [Mon Jun 25 07:54:04 2018] GET /users => generated 3709 bytes in 60 msecs (HTTP/1.1 200) 3 headers in 113 bytes (1 switches on core 0)
+[pid: 921|app: 0|req: 1/3] 23.239.31.125 () {34 vars in 461 bytes} [Mon Jun 25 07:54:04 2018] GET /api/get_scores?user=105641 => generated 335 bytes in 452 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 920|app: 0|req: 2/4] 54.209.60.63 () {34 vars in 513 bytes} [Mon Jun 25 07:54:04 2018] GET /user/105641/ => generated 12601 bytes in 538 msecs (HTTP/1.1 200) 3 headers in 114 bytes (1 switches on core 0)
+[pid: 921|app: 0|req: 2/5] 54.209.60.63 () {34 vars in 505 bytes} [Mon Jun 25 07:54:07 2018] GET /releases => generated 3364 bytes in 28 msecs (HTTP/1.1 200) 3 headers in 113 bytes (1 switches on core 0)
+[pid: 918|app: 0|req: 1/6] 23.239.31.125 () {34 vars in 444 bytes} [Mon Jun 25 07:54:07 2018] GET /api/game/2608/all => generated 142651 bytes in 139 msecs (HTTP/1.1 200) 3 headers in 107 bytes (1 switches on core 0)
+[pid: 921|app: 0|req: 3/7] 23.239.31.125 () {34 vars in 436 bytes} [Mon Jun 25 07:54:08 2018] GET /api/game/2608 => generated 275 bytes in 25 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 917|app: 0|req: 2/8] 23.239.31.125 () {34 vars in 461 bytes} [Mon Jun 25 07:54:08 2018] GET /api/get_scores?user=105641 => generated 335 bytes in 445 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 921|app: 0|req: 4/9] 23.239.31.125 () {34 vars in 461 bytes} [Mon Jun 25 07:54:08 2018] GET /api/get_scores?user=105641 => generated 335 bytes in 447 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 920|app: 0|req: 3/10] 54.175.74.27 () {34 vars in 515 bytes} [Mon Jun 25 07:54:07 2018] GET /game_log/2608 => generated 8946 bytes in 1153 msecs (HTTP/1.1 200) 3 headers in 113 bytes (1 switches on core 0)
+[pid: 919|app: 0|req: 1/11] 23.239.31.125 () {34 vars in 444 bytes} [Mon Jun 25 07:54:10 2018] GET /api/game/2776/all => generated 129359 bytes in 135 msecs (HTTP/1.1 200) 3 headers in 107 bytes (1 switches on core 0)
+[pid: 920|app: 0|req: 4/12] 23.239.31.125 () {34 vars in 436 bytes} [Mon Jun 25 07:54:10 2018] GET /api/game/2776 => generated 270 bytes in 4 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 917|app: 0|req: 3/13] 23.239.31.125 () {34 vars in 459 bytes} [Mon Jun 25 07:54:10 2018] GET /api/get_scores?user=58491 => generated 332 bytes in 360 msecs (HTTP/1.1 200) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 921|app: 0|req: 5/14] 54.209.60.63 () {34 vars in 515 bytes} [Mon Jun 25 07:54:10 2018] GET /game_log/2776 => generated 8846 bytes in 591 msecs (HTTP/1.1 200) 3 headers in 113 bytes (1 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 922)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Jun 25 07:54:25 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x5638982a0450
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 437520 bytes (427 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 2 seconds on interpreter 0x5638982a0450 pid: 960 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 960)
+spawned uWSGI worker 1 (pid: 965, cores: 1)
+spawned uWSGI worker 2 (pid: 966, cores: 1)
+spawned uWSGI worker 3 (pid: 967, cores: 1)
+spawned uWSGI worker 4 (pid: 968, cores: 1)
+spawned uWSGI worker 5 (pid: 969, cores: 1)
+spawned uWSGI http 1 (pid: 970)
+[pid: 965|app: 0|req: 1/1] 68.11.117.27 () {42 vars in 722 bytes} [Mon Jun 25 07:54:39 2018] GET /socketio_test => generated 714 bytes in 11 msecs (HTTP/1.1 200) 3 headers in 112 bytes (2 switches on core 0)
+[pid: 965|app: 0|req: 2/2] 185.27.138.120 () {24 vars in 263 bytes} [Mon Jun 25 07:57:52 2018] HEAD / => generated 0 bytes in 5 msecs (HTTP/1.0 200) 3 headers in 112 bytes (0 switches on core 0)
+[pid: 965|app: 0|req: 3/3] 185.27.138.120 () {24 vars in 263 bytes} [Mon Jun 25 07:57:58 2018] HEAD / => generated 0 bytes in 1 msecs (HTTP/1.0 200) 3 headers in 112 bytes (0 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 970)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Jun 25 07:59:09 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x561679a95450
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 437520 bytes (427 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x561679a95450 pid: 1094 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1094)
+spawned uWSGI worker 1 (pid: 1099, cores: 1)
+spawned uWSGI worker 2 (pid: 1100, cores: 1)
+spawned uWSGI worker 3 (pid: 1101, cores: 1)
+spawned uWSGI worker 4 (pid: 1102, cores: 1)
+spawned uWSGI worker 5 (pid: 1103, cores: 1)
+spawned uWSGI http 1 (pid: 1104)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 1104)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Jun 25 08:00:03 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x55f77a632450
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 437520 bytes (427 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x55f77a632450 pid: 1193 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1193)
+spawned uWSGI worker 1 (pid: 1200, cores: 1)
+spawned uWSGI worker 2 (pid: 1201, cores: 1)
+spawned uWSGI worker 3 (pid: 1202, cores: 1)
+spawned uWSGI worker 4 (pid: 1203, cores: 1)
+spawned uWSGI worker 5 (pid: 1204, cores: 1)
+spawned uWSGI http 1 (pid: 1205)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 1205)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Jun 25 08:00:37 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x5561be811450
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 437520 bytes (427 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x5561be811450 pid: 1232 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1232)
+spawned uWSGI worker 1 (pid: 1237, cores: 1)
+spawned uWSGI worker 2 (pid: 1238, cores: 1)
+spawned uWSGI worker 3 (pid: 1239, cores: 1)
+spawned uWSGI worker 4 (pid: 1240, cores: 1)
+spawned uWSGI worker 5 (pid: 1241, cores: 1)
+spawned uWSGI http 1 (pid: 1242)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 1242)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Jun 25 08:02:00 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x55bed1c32450
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 437520 bytes (427 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 2 seconds on interpreter 0x55bed1c32450 pid: 1293 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1293)
+spawned uWSGI worker 1 (pid: 1298, cores: 1)
+spawned uWSGI worker 2 (pid: 1299, cores: 1)
+spawned uWSGI worker 3 (pid: 1300, cores: 1)
+spawned uWSGI worker 4 (pid: 1301, cores: 1)
+spawned uWSGI worker 5 (pid: 1302, cores: 1)
+spawned uWSGI http 1 (pid: 1303)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 1303)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Jun 25 08:02:32 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x55825101f450
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 437520 bytes (427 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x55825101f450 pid: 1330 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1330)
+spawned uWSGI worker 1 (pid: 1334, cores: 1)
+spawned uWSGI worker 2 (pid: 1335, cores: 1)
+spawned uWSGI worker 3 (pid: 1336, cores: 1)
+spawned uWSGI worker 4 (pid: 1337, cores: 1)
+spawned uWSGI worker 5 (pid: 1338, cores: 1)
+spawned uWSGI http 1 (pid: 1339)
+[pid: 1334|app: 0|req: 1/1] 68.11.117.27 () {42 vars in 722 bytes} [Mon Jun 25 08:02:51 2018] GET /socketio_test => generated 714 bytes in 11 msecs (HTTP/1.1 200) 3 headers in 112 bytes (2 switches on core 0)
+[pid: 1334|app: 0|req: 2/2] 191.181.3.144 () {24 vars in 262 bytes} [Mon Jun 25 08:03:46 2018] HEAD / => generated 0 bytes in 4 msecs (HTTP/1.0 200) 3 headers in 112 bytes (0 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 1339)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Jun 25 08:04:12 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x55abfecbb450
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 437520 bytes (427 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x55abfecbb450 pid: 1346 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1346)
+spawned uWSGI worker 1 (pid: 1350, cores: 1)
+spawned uWSGI worker 2 (pid: 1351, cores: 1)
+spawned uWSGI worker 3 (pid: 1352, cores: 1)
+spawned uWSGI worker 4 (pid: 1353, cores: 1)
+spawned uWSGI worker 5 (pid: 1354, cores: 1)
+spawned uWSGI http 1 (pid: 1355)
+[pid: 1350|app: 0|req: 1/1] 68.11.117.27 () {44 vars in 753 bytes} [Mon Jun 25 08:04:24 2018] GET /socketio_test => generated 714 bytes in 11 msecs (HTTP/1.1 200) 3 headers in 112 bytes (1 switches on core 0)
+[pid: 1350|app: 0|req: 2/2] 68.11.117.27 () {42 vars in 722 bytes} [Mon Jun 25 08:05:27 2018] GET /socketio_test => generated 714 bytes in 0 msecs (HTTP/1.1 200) 3 headers in 112 bytes (1 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 1355)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Jun 25 08:06:43 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x5561b7e3e450
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 437520 bytes (427 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x5561b7e3e450 pid: 1381 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1381)
+spawned uWSGI worker 1 (pid: 1385, cores: 1)
+spawned uWSGI worker 2 (pid: 1386, cores: 1)
+spawned uWSGI worker 3 (pid: 1387, cores: 1)
+spawned uWSGI worker 4 (pid: 1388, cores: 1)
+spawned uWSGI worker 5 (pid: 1389, cores: 1)
+spawned uWSGI http 1 (pid: 1390)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 1390)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Jun 25 08:08:17 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x5618adb53450
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 437520 bytes (427 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x5618adb53450 pid: 1436 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1436)
+spawned uWSGI worker 1 (pid: 1441, cores: 1)
+spawned uWSGI worker 2 (pid: 1442, cores: 1)
+spawned uWSGI worker 3 (pid: 1443, cores: 1)
+spawned uWSGI worker 4 (pid: 1444, cores: 1)
+spawned uWSGI worker 5 (pid: 1445, cores: 1)
+spawned uWSGI http 1 (pid: 1446)
+[pid: 1445|app: 0|req: 1/1] 68.11.117.27 () {42 vars in 722 bytes} [Mon Jun 25 08:08:26 2018] GET /socketio_test => generated 714 bytes in 11 msecs (HTTP/1.1 200) 3 headers in 112 bytes (2 switches on core 0)
+[pid: 1445|app: 0|req: 2/2] 68.11.117.27 () {42 vars in 722 bytes} [Mon Jun 25 08:08:48 2018] GET /socketio_test => generated 714 bytes in 1 msecs (HTTP/1.1 200) 3 headers in 112 bytes (1 switches on core 0)
+[pid: 1445|app: 0|req: 3/3] 193.106.30.99 () {36 vars in 497 bytes} [Mon Jun 25 08:10:00 2018] GET / => generated 446 bytes in 5 msecs (HTTP/1.1 200) 3 headers in 112 bytes (1 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 1446)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Jun 25 08:11:17 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x55d31f950450
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 437520 bytes (427 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x55d31f950450 pid: 1601 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1601)
+spawned uWSGI worker 1 (pid: 1605, cores: 1)
+spawned uWSGI worker 2 (pid: 1606, cores: 1)
+spawned uWSGI worker 3 (pid: 1607, cores: 1)
+spawned uWSGI worker 4 (pid: 1608, cores: 1)
+spawned uWSGI worker 5 (pid: 1609, cores: 1)
+spawned uWSGI http 1 (pid: 1610)
+[pid: 1608|app: 0|req: 1/1] 68.11.117.27 () {44 vars in 753 bytes} [Mon Jun 25 08:11:19 2018] GET /socketio_test => generated 656 bytes in 11 msecs (HTTP/1.1 200) 3 headers in 112 bytes (1 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 1610)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Jun 25 08:12:11 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x55e58ef6b450
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 437520 bytes (427 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x55e58ef6b450 pid: 1619 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1619)
+spawned uWSGI worker 1 (pid: 1623, cores: 1)
+spawned uWSGI worker 2 (pid: 1626, cores: 1)
+spawned uWSGI worker 3 (pid: 1627, cores: 1)
+spawned uWSGI worker 4 (pid: 1628, cores: 1)
+spawned uWSGI worker 5 (pid: 1629, cores: 1)
+spawned uWSGI http 1 (pid: 1630)
+[pid: 1628|app: 0|req: 1/1] 68.11.117.27 () {44 vars in 753 bytes} [Mon Jun 25 08:12:12 2018] GET /socketio_test => generated 657 bytes in 12 msecs (HTTP/1.1 200) 3 headers in 112 bytes (1 switches on core 0)
+[pid: 1623|app: 0|req: 1/2] 68.11.117.27 () {42 vars in 722 bytes} [Mon Jun 25 08:16:30 2018] GET /socketio_test => generated 657 bytes in 11 msecs (HTTP/1.1 200) 3 headers in 112 bytes (2 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 1630)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket ddstats.sock removed.
+*** Starting uWSGI 2.0.17 (64bit) on [Mon Jun 25 08:17:27 2018] ***
+compiled with version: 7.3.0 on 24 May 2018 04:18:52
+os: Linux-4.15.13-x86_64-linode106 #1 SMP Tue Mar 27 14:42:14 UTC 2018
+nodename: cheetah
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/alex/ddstats
+detected binary path: /home/alex/ddstats/venv/bin/uwsgi
+your processes number limit is 7928
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :6666 fd 3
+uwsgi socket 0 bound to UNIX address ddstats.sock fd 6
+Python version: 3.6.5 (default, Apr  1 2018, 05:46:30)  [GCC 7.3.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x555c54122450
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 437520 bytes (427 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x555c54122450 pid: 1706 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1706)
+spawned uWSGI worker 1 (pid: 1709, cores: 1)
+spawned uWSGI worker 2 (pid: 1710, cores: 1)
+spawned uWSGI worker 3 (pid: 1711, cores: 1)
+spawned uWSGI worker 4 (pid: 1712, cores: 1)
+spawned uWSGI worker 5 (pid: 1713, cores: 1)
+spawned uWSGI http 1 (pid: 1714)
+[pid: 1709|app: 0|req: 1/1] 68.11.117.27 () {42 vars in 722 bytes} [Mon Jun 25 08:18:47 2018] GET /socketio_test => generated 657 bytes in 12 msecs (HTTP/1.1 200) 3 headers in 112 bytes (1 switches on core 0)
+[pid: 1709|app: 0|req: 2/2] 68.11.117.27 () {44 vars in 753 bytes} [Mon Jun 25 08:18:53 2018] GET /socketio_test => generated 657 bytes in 0 msecs (HTTP/1.1 200) 3 headers in 112 bytes (1 switches on core 0)
+[pid: 1709|app: 0|req: 3/3] 68.11.117.27 () {44 vars in 753 bytes} [Mon Jun 25 08:18:56 2018] GET /socketio_test => generated 657 bytes in 1 msecs (HTTP/1.1 200) 3 headers in 112 bytes (1 switches on core 0)
+[pid: 1709|app: 0|req: 4/4] 68.11.117.27 () {38 vars in 624 bytes} [Mon Jun 25 08:20:17 2018] GET /socketio_test => generated 657 bytes in 0 msecs (HTTP/1.1 200) 3 headers in 112 bytes (1 switches on core 0)
+[pid: 1713|app: 0|req: 1/5] 68.11.117.27 () {36 vars in 525 bytes} [Mon Jun 25 08:20:18 2018] GET /favicon.ico => generated 233 bytes in 7 msecs (HTTP/1.1 404) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 1709|app: 0|req: 5/6] 68.11.117.27 () {36 vars in 585 bytes} [Mon Jun 25 08:20:18 2018] GET /favicon.ico => generated 233 bytes in 4 msecs (HTTP/1.1 404) 3 headers in 104 bytes (1 switches on core 0)
+[pid: 1709|app: 0|req: 6/7] 68.11.117.27 () {40 vars in 640 bytes} [Mon Jun 25 08:20:27 2018] GET /socketio_test => generated 657 bytes in 0 msecs (HTTP/1.1 200) 3 headers in 112 bytes (1 switches on core 0)
+[pid: 1709|app: 0|req: 7/8] 190.94.135.23 () {32 vars in 472 bytes} [Mon Jun 25 08:25:02 2018] GET / => generated 446 bytes in 4 msecs (HTTP/1.1 200) 3 headers in 112 bytes (1 switches on core 0)
+[pid: 1713|app: 0|req: 2/9] 190.94.135.23 () {32 vars in 472 bytes} [Mon Jun 25 08:25:03 2018] GET / => generated 446 bytes in 9 msecs (HTTP/1.1 200) 3 headers in 112 bytes (1 switches on core 0)
+[pid: 1709|app: 0|req: 8/10] 52.197.178.87 () {34 vars in 491 bytes} [Mon Jun 25 08:25:30 2018] GET / => generated 446 bytes in 1 msecs (HTTP/1.1 200) 3 headers in 112 bytes (1 switches on core 0)
+[pid: 1709|app: 0|req: 9/11] 68.11.117.27 () {44 vars in 753 bytes} [Mon Jun 25 08:28:47 2018] GET /socketio_test => generated 657 bytes in 1 msecs (HTTP/1.1 200) 3 headers in 112 bytes (2 switches on core 0)
+[pid: 1709|app: 0|req: 10/12] 68.11.117.27 () {34 vars in 441 bytes} [Mon Jun 25 08:29:10 2018] POST /api/get_motd => generated 91 bytes in 1 msecs (HTTP/1.1 200) 3 headers in 103 bytes (1 switches on core 0)
+[pid: 1709|app: 0|req: 11/13] 68.11.117.27 () {44 vars in 753 bytes} [Mon Jun 25 08:29:27 2018] GET /socketio_test => generated 657 bytes in 0 msecs (HTTP/1.1 200) 3 headers in 112 bytes (1 switches on core 0)
+[pid: 1709|app: 0|req: 12/14] 68.11.117.27 () {34 vars in 441 bytes} [Mon Jun 25 08:29:37 2018] POST /api/get_motd => generated 91 bytes in 1 msecs (HTTP/1.1 200) 3 headers in 103 bytes (1 switches on core 0)
+[pid: 1709|app: 0|req: 13/15] 68.11.117.27 () {34 vars in 441 bytes} [Mon Jun 25 08:30:02 2018] POST /api/get_motd => generated 91 bytes in 1 msecs (HTTP/1.1 200) 3 headers in 103 bytes (1 switches on core 0)
+[pid: 1709|app: 0|req: 14/16] 68.11.117.27 () {34 vars in 441 bytes} [Mon Jun 25 08:30:31 2018] POST /api/get_motd => generated 91 bytes in 1 msecs (HTTP/1.1 200) 3 headers in 103 bytes (1 switches on core 0)
+[pid: 1709|app: 0|req: 15/17] 68.11.117.27 () {34 vars in 441 bytes} [Mon Jun 25 08:30:59 2018] POST /api/get_motd => generated 91 bytes in 1 msecs (HTTP/1.1 200) 3 headers in 103 bytes (1 switches on core 0)
+[pid: 1709|app: 0|req: 16/18] 68.11.117.27 () {34 vars in 441 bytes} [Mon Jun 25 08:31:11 2018] POST /api/get_motd => generated 91 bytes in 1 msecs (HTTP/1.1 200) 3 headers in 103 bytes (1 switches on core 0)
+[pid: 1709|app: 0|req: 17/19] 68.11.117.27 () {34 vars in 441 bytes} [Mon Jun 25 08:31:15 2018] POST /api/get_motd => generated 91 bytes in 1 msecs (HTTP/1.1 200) 3 headers in 103 bytes (1 switches on core 0)
