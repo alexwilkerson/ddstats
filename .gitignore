@@ -5,4 +5,5 @@ db.db
 ddstats.sock
 ddstats-socketio.sock
 ddstats.log
+ddstats-socketio.log
 motd.json
