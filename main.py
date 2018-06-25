@@ -884,6 +884,14 @@ def get_scores():
     return jsonify(leaderboard_json)
 
 
+# socketio stuff
+
+
+@app.route('/socketio_test')
+def show_socketio_test():
+    return render_template('socketio_test.html')
+
+
 ########################################################
 #     end of devil dagger's backend api conversion     #
 ########################################################

@@ -78,11 +78,6 @@ class User(db.Model):
 #                    socketio stuff                    #
 ########################################################
 
-@app.route('/socketio_test')
-def show_socketio_test():
-    return render_template('socketio_test.html')
-
-
 @socketio.on('connect', namespace='/test')
 def test_connect():
     emit('my response', {'data': 'Connected'}, broadcast=True)
