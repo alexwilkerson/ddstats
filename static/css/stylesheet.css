@@ -217,6 +217,14 @@ footer {
 #about a, #download a {
     color: #000;
 }
+#about img {
+    display: block;
+    margin: 0 auto;
+}
+#download img {
+    display: block;
+    margin: 0 auto;
+}
 #download ul {
     list-style-type: circle;
 }
