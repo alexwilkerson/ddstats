@@ -136,7 +136,7 @@ def user_page(user_id, page_num):
     r = requests.get('http://ddstats.com/api/get_user_by_id/{}'.format(user_id))
     user_data = r.json()
 
-    return render_template('user.html', player_name=user_data["player_name"], user_id=user_id, games=games, death_types=death_types)
+    return render_template('user.html', user_data=user_data, user_id=user_id, games=games, death_types=death_types)
 
 
 @app.route('/game_log/<game_number>')
@@ -673,6 +673,14 @@ def get_username(user_id):
     if "player_name" not in user_data:
         return "UNKNOWN"
     return user_data["player_name"]
+
+
+@app.template_filter()
+def numberFormat(value, digits=0):
+    if isinstance(value, int):
+        return format(int(value), ',d')
+    elif isinstance(value, float):
+        return format(float(value), ',.' + str(digits) + 'f')
 
 
 ########################################################

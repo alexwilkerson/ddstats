@@ -72,8 +72,18 @@ ul {
     margin: 0;
 }
 #usertitle {
+    font-family: "Goethe";
+    text-align: center;
     color: #D39C00;
-    margin-bottom: 10px;
+}
+#gamestitle {
+    color: #D39C00;
+    font-family: "Goethe";
+    text-align: center;
+    font-size: 1.8em;
+    font-weight: normal;
+    padding: 0;
+    margin: 20px 0 10px 0;
 }
 #header {
     color: #9A1000;
@@ -123,6 +133,33 @@ footer {
 #stats-card:hover {
     background-color: #3A3A3A;
     transform: scale(1.02);
+}
+#user-card {
+    font-size: 12px;
+    background-color: #222;
+    border-radius: 8px;
+    max-width: 720px;
+    margin: 0 auto 10px auto;
+    padding: 8px 10px 10px 10px;
+    box-shadow: 3px 3px #9A1000;
+    color: #DDD;
+    transition:0.3s;
+}
+#user-card h1 {
+    border-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #DDD;
+    margin: 0 20px 10px 20px;
+    padding-bottom: 8px;
+}
+#userleft {
+    padding-left: 20px;
+    padding-bottom: 5px;
+}
+#userright {
+    padding-right: 20px;
+    padding-bottom: 5px;
+    text-align: right;
 }
 #pagination {
     max-width: 720px;

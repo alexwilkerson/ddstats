@@ -1,12 +1,30 @@
 {% extends "base.html" %}
-{% block title %}{{player_name}} ({{user_id}}){% endblock %}
+{% block title %}{{user_data.player_name}}{% endblock %}
 {% block head %}
     {{ super() }}
 {% endblock %}
 {% block body %}
 
-        <h1 id="usertitle">{{player_name}} ({{user_id}})</h1>
+        <div id="user-card">
+            <h1 id="usertitle">{{user_data.player_name}} ({{user_id}})</h1>
+            <ul class="alignleft" id="userleft">
+                <li>Rank: {{user_data.rank|numberFormat}}</li>
+                <li>Time: {{user_data.time|numberFormat(4)}}s</li>
+                <li>Gems: {{user_data.gems|numberFormat}}</li>
+                <li>Kills: {{user_data.kills|numberFormat}}</li>
+                <li>Accuracy: {{user_data.accuracy}}%</li>
+            </ul>
+            <ul class="alignright" id="userright">
+                <li>Total Deaths: {{user_data.deaths_total|numberFormat}}</li>
+                <li>Total Time: {{user_data.time_total|numberFormat(4)}}s</li>
+                <li>Total Gems: {{user_data.gems_total|numberFormat}}</li>
+                <li>Total Kills: {{user_data.kills_total|numberFormat}}</li>
+                <li>Total Accuracy: {{user_data.accuracy_total}}%</li>
+            </ul>
+            <div style="clear: both;"></div>
+        </div>
     {% for game in games.items %}
+        </div>
         <a href="{{ url_for('game_log', game_number=game.id) }}">
         <div id="stats-card">
             <h2 class="alignleft">Game {{game.id}}</h1>
