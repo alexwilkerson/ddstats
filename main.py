@@ -19,7 +19,7 @@ valid_version = "0.1.9"
 
 death_types = ["FALLEN", "SWARMED", "IMPALED", "GORED", "INFESTED", "OPENED", "PURGED",
                "DESECRATED", "SACRIFICED", "EVISCERATED", "ANNIHILATED", "INTOXICATED",
-               "ENVENOMATED", "INCARNATED", "DISCARNATED", "BARBED"]
+               "ENVENMONATED", "INCARNATED", "DISCARNATED", "BARBED"]
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
