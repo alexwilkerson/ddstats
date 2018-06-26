@@ -827,6 +827,67 @@ class Entry(object):
             return NotImplemented
 
 
+@app.route('/api/get_user_by_id/<int:uid>')
+def get_user_by_id(uid):
+        post_values = dict(uid=uid)
+
+        req = requests.post("http://dd.hasmodai.com/backend16/get_user_by_id_public.php", post_values)
+        data = req.content
+        if (uid < 1) or (uid is None):
+            return jsonify({'message': 'Invalid user ID.'})
+
+        byte_pos = 19
+
+        username_length = to_int_16(data, byte_pos)
+        username_bytes = bytearray(username_length)
+        byte_pos += 2
+        for i in range(byte_pos, byte_pos + username_length):
+            username_bytes[i-byte_pos] = data[i]
+
+        byte_pos += username_length
+
+        username = username_bytes.decode("utf-8")
+        rank = to_int_32(data, byte_pos)
+        userid = to_uint_64(data, byte_pos + 4)
+        time = to_int_32(data, byte_pos + 12) / 10000
+        kills = to_int_32(data, byte_pos + 16)
+        gems = to_int_32(data, byte_pos + 28)
+        shots_hit = to_int_32(data, byte_pos + 24)
+        shots_fired = to_int_32(data, byte_pos + 20)
+        if shots_fired > 0:
+            accuracy = float("{0:.2f}".format((shots_hit/shots_fired)*100))
+        else:
+            accuracy = "0.00"
+        death_type = death_types[to_int_16(data, byte_pos + 32)]
+        time_total = to_uint_64(data, byte_pos + 60) / 10000
+        kills_total = to_uint_64(data, byte_pos + 44)
+        gems_total = to_uint_64(data, byte_pos + 68)
+        deaths_total = to_uint_64(data, byte_pos + 36)
+        shots_hit_total = to_uint_64(data, byte_pos + 76)
+        shots_fired_total = to_uint_64(data, byte_pos + 52)
+        if shots_fired_total > 0:
+            accuracy_total = float("{0:.2f}".format((shots_hit_total/shots_fired_total)*100))
+        else:
+            accuracy_total = "0.00"
+        return jsonify({'username': username,
+                        'rank': rank,
+                        'userid': userid,
+                        'time': time,
+                        'kills': kills,
+                        'gems': gems,
+                        'shots_hit': shots_hit,
+                        'shots_fired': shots_fired,
+                        'accuracy': accuracy,
+                        'death_type': death_type,
+                        'time_total': time_total,
+                        'kills_total': kills_total,
+                        'gems_total': gems_total,
+                        'deaths_total': deaths_total,
+                        'shots_hit_total': shots_hit_total,
+                        'shots_fired_total': shots_fired_total,
+                        'accuracy_total': accuracy_total})
+
+
 @app.route('/api/get_scores', methods=['GET'])
 def get_scores():
     offset = request.args.get('offset', default='0', type=int)
@@ -882,18 +943,17 @@ def get_scores():
 
     return jsonify(leaderboard_json)
 
+########################################################
+#     end of devil dagger's backend api conversion     #
+########################################################
+
 
 # socketio stuff
-
 
 @app.route('/socketio_test')
 def show_socketio_test():
     return render_template('socketio_test.html')
 
-
-########################################################
-#     end of devil dagger's backend api conversion     #
-########################################################
 
 # these two functions append the timestamp to static files so the flush
 # correctly when updated.
