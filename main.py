@@ -133,7 +133,7 @@ def user_page(user_id, page_num):
     games = Game.query.filter(((Game.player_id==user_id) & (Game.replay_player_id==0)) | (Game.replay_player_id==user_id)).order_by(Game.id.desc()).paginate(per_page=10, page=page_num, error_out=True)
     if games is None:
         return('No user found with that ID')
-    r = requests.get('http://ddstats.com/api/get_scores?user={}'.format(user_id))
+    r = requests.get('http://ddstats.com/api/get_user_by_id/{}'.format(user_id))
     user_data = r.json()
 
     return render_template('user.html', player_name=user_data["player_name"], user_id=user_id, games=games, death_types=death_types)
@@ -668,7 +668,7 @@ def get_username(user_id):
     q = User.query.filter_by(id=user_id).first()
     if q:
         return q.username
-    r = requests.get('http://ddstats.com/api/get_scores?user={}'.format(user_id))
+    r = requests.get('http://ddstats.com/api/get_user_by_id/{}'.format(user_id))
     user_data = r.json()
     if "player_name" not in user_data:
         return "UNKNOWN"
@@ -869,9 +869,9 @@ def get_user_by_id(uid):
             accuracy_total = float("{0:.2f}".format((shots_hit_total/shots_fired_total)*100))
         else:
             accuracy_total = "0.00"
-        return jsonify({'username': username,
+        return jsonify({'player_name': username,
                         'rank': rank,
-                        'userid': userid,
+                        'player_id': userid,
                         'time': time,
                         'kills': kills,
                         'gems': gems,
