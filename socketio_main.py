@@ -1,3 +1,4 @@
+import sys
 import os
 from datetime import datetime
 from flask import Flask, request, jsonify, Response, url_for
@@ -23,8 +24,17 @@ socketio = SocketIO(app, async_mode='gevent_uwsgi')
 
 @socketio.on('connect', namespace='/test')
 def test_connect():
-    app.logger.info("working")
+    print('This standard output', file=sys.stdout)
     emit('my response', {'data': 'Connected'}, broadcast=True)
+
+@socketio.on('my event', namespace='/admin')
+def add_to_live():
+    print("working", file=sys.stdout)
+    # print(player_id, file=sys.stdout)
+
+@socketio.on('message')
+def handle_message(message):
+    print('received message: ' + message, file=sys.stdout)
 
 ########################################################
 #                  end socketio stuff                  #
