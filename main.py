@@ -53,6 +53,13 @@ class Game(db.Model):
     replay_player_id = db.Column(db.Integer, default=0, nullable=False)
     survival_hash = db.Column(db.String(32))
     version = db.Column(db.String(16))
+    level_two_time = db.Column(db.Float, default=0.0, nullable=False)
+    level_three_time = db.Column(db.Float, default=0.0, nullable=False)
+    level_four_time = db.Column(db.Float, default=0.0, nullable=False)
+    homing_daggers_max_time = db.Column(db.Float, default=0.0, nullable=False)
+    enemies_alive_max_time = db.Column(db.Float, default=0.0, nullable=False)
+    homing_daggers_max = db.Column(db.Integer, default=0, nullable=False)
+    enemies_alive_max = db.Column(db.Integer, default=0, nullable=False)
 
 
 class State(db.Model):
@@ -546,6 +553,14 @@ def create_game():
             existing_player.username = data['playerName']
         db.session.commit()
 
+    # version and data added in same release, so this replaces the default if they
+    # are using an older version
+    if 'version' not in data:
+        # v3 survival hash
+        submit_version = ""
+    else:
+        submit_version = data["version"]
+
     if data["replayPlayerID"] > 0:
         existing = db.session.query(Game.id).filter(and_(
                                                  # remove this to disable multiple users rec
@@ -559,18 +574,11 @@ def create_game():
                                                  Game.daggers_fired == data["daggersFired"],
                                                  Game.daggers_hit == data["daggersHit"],
                                                  Game.enemies_alive == data["enemiesAlive"],
-                                                 Game.enemies_killed == data["enemiesKilled"]
+                                                 Game.enemies_killed == data["enemiesKilled"],
+                                                 Game.version == data["version"]
                                                 )).first()
         if existing is not None:
             return jsonify({'message': 'Replay already recorded.', 'game_id': existing.id})
-
-    # version and data added in same release, so this replaces the default if they
-    # are using an older version
-    if 'version' not in data:
-        # v3 survival hash
-        submit_version = ""
-    else:
-        submit_version = data["version"]
 
     if 'survivalHash' not in data:
         survival_hash = '5ff43e37d0f85e068caab5457305754e'
@@ -584,6 +592,17 @@ def create_game():
                     enemies_alive=data['enemiesAlive'], enemies_killed=data['enemiesKilled'],
                     replay_player_id=data["replayPlayerID"], version=submit_version,
                     survival_hash=survival_hash)
+
+    # if levelTwoTime is set, then we know the rest of these var are set also
+    if 'levelTwoTime' in data:
+        new_game.level_two_time = data["levelTwoTime"]
+        new_game.level_three_time = data["levelThreeTime"]
+        new_game.level_four_time = data["levelFourTime"]
+        new_game.homing_daggers_max_time = data["homingDaggersMaxTime"]
+        new_game.enemies_alive_max_time = data["enemiesAliveMaxTime"]
+        new_game.homing_daggers_max = data["homingDaggersMax"]
+        new_game.enemies_alive_max = data["enemiesAliveMax"]
+
     db.session.add(new_game)
     db.session.commit()
     db.session.refresh(new_game)
