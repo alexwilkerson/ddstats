@@ -149,26 +149,26 @@ def user_page(user_id, page_num):
 
 @app.route('/game_log/<game_number>')
 def game_log(game_number):
-    r = requests.get('http://ddstats.com/api/game/{}/all'.format(game_number))
-    data = r.json()
-    if "message" in data:
-        return data["message"]
-    game_time_list = []
-    gems_list = []
-    homing_daggers_list = []
-    accuracy_list = []
-    enemies_killed_list = []
-    enemies_alive_list = []
-    for row in data["state_list"]:
-        game_time_list.append(math.floor(row["game_time"]))
-        gems_list.append(row["gems"])
-        homing_daggers_list.append(row["homing_daggers"])
-        if row["daggers_fired"] is 0:
-            accuracy_list.append(0)
-        else:
-            accuracy_list.append(round((row["daggers_hit"]/row["daggers_fired"])*100, 2))
-        enemies_killed_list.append(row["enemies_killed"])
-        enemies_alive_list.append(row["enemies_alive"])
+    # r = requests.get('http://ddstats.com/api/game/{}/all'.format(game_number))
+    # data = r.json()
+    # if "message" in data:
+    #     return data["message"]
+    # game_time_list = []
+    # gems_list = []
+    # homing_daggers_list = []
+    # accuracy_list = []
+    # enemies_killed_list = []
+    # enemies_alive_list = []
+    # for row in data["state_list"]:
+    #     game_time_list.append(math.floor(row["game_time"]))
+    #     gems_list.append(row["gems"])
+    #     homing_daggers_list.append(row["homing_daggers"])
+    #     if row["daggers_fired"] is 0:
+    #         accuracy_list.append(0)
+    #     else:
+    #         accuracy_list.append(round((row["daggers_hit"]/row["daggers_fired"])*100, 2))
+    #     enemies_killed_list.append(row["enemies_killed"])
+    #     enemies_alive_list.append(row["enemies_alive"])
     r = requests.get('http://ddstats.com/api/game/{}'.format(game_number))
     game_data = r.json()
     player_id = game_data["player_id"]
@@ -177,10 +177,10 @@ def game_log(game_number):
     if game_data["replay_player_id"] is not 0:
         submitter_id = player_id
         player_id = game_data["replay_player_id"]
-        r = requests.get('http://ddstats.com/api/get_scores?user={}'.format(submitter_id))
+        r = requests.get('http://ddstats.com/api/get_user_by_id/{}'.format(submitter_id))
         submitter_data = r.json()
         submitter_name = submitter_data["player_name"]
-    r = requests.get('http://ddstats.com/api/get_scores?user={}'.format(player_id))
+    r = requests.get('http://ddstats.com/api/get_user_by_id/{}'.format(player_id))
     user_data = r.json()
     if "player_name" not in user_data:
         user_data["player_name"] = "UNKNOWN"
@@ -190,8 +190,8 @@ def game_log(game_number):
     else:
         accuracy = round(game_data["daggers_hit"] / game_data["daggers_fired"] * 100, 2)
 
-    game_time_list = game_time_list[:-1]
-    game_time_list.append(round(game_data["game_time"], 4))
+    # game_time_list = game_time_list[:-1]
+    # game_time_list.append(round(game_data["game_time"], 4))
 
     return render_template('game_log.html',
                            player_name=user_data["player_name"],
@@ -202,19 +202,26 @@ def game_log(game_number):
                            death_type=game_data["death_type"],
                            gems="{:,}".format(game_data["gems"]),
                            homing_daggers="{:,}".format(game_data["homing_daggers"]),
+                           homing_daggers_max=game_data["homing_daggers_max"],
+                           homing_daggers_max_time=game_data["homing_daggers_max_time"],
                            accuracy=accuracy,
                            enemies_alive="{:,}".format(game_data["enemies_alive"]),
+                           enemies_alive_max=game_data["enemies_alive_max"],
+                           enemies_alive_max_time=game_data["enemies_alive_max_time"],
                            daggers_hit="{:,}".format(game_data["daggers_hit"]),
                            daggers_fired="{:,}".format(game_data["daggers_fired"]),
                            enemies_killed="{:,}".format(game_data["enemies_killed"]),
-                           game_time_list=game_time_list,
-                           gems_list=gems_list,
-                           homing_daggers_list=homing_daggers_list,
-                           max_homing=max(homing_daggers_list),
-                           max_homing_time=homing_daggers_list.index(max(homing_daggers_list)),
-                           accuracy_list=accuracy_list,
-                           enemies_killed_list=enemies_killed_list,
-                           enemies_alive_list=enemies_alive_list,
+                           # game_time_list=game_time_list,
+                           # gems_list=gems_list,
+                           # homing_daggers_list=homing_daggers_list,
+                           # max_homing=max(homing_daggers_list),
+                           # max_homing_time=homing_daggers_list.index(max(homing_daggers_list)),
+                           # accuracy_list=accuracy_list,
+                           # enemies_killed_list=enemies_killed_list,
+                           # enemies_alive_list=enemies_alive_list,
+                           level_two_time=game_data["level_two_time"],
+                           level_three_time=game_data["level_three_time"],
+                           level_four_time=game_data["level_four_time"],
                            time_stamp=time_ago(game_data["time_stamp"]),
                            submitter_id=submitter_id,
                            submitter_name=submitter_name)
@@ -389,12 +396,20 @@ def get_game_stats(game_id):
                         "game_time": game.game_time,
                         "death_type": death_type,
                         "gems": game.gems, "homing_daggers": game.homing_daggers,
+                        "homing_daggers_max": game.homing_daggers_max,
+                        "homing_daggers_max_time": game.homing_daggers_max_time,
                         "daggers_hit": game.daggers_hit,
                         "daggers_fired": game.daggers_fired,
                         "enemies_alive": game.enemies_alive,
+                        "enemies_alive_max": game.enemies_alive_max,
+                        "enemies_alive_max_time": game.enemies_alive_max_time,
                         "enemies_killed": game.enemies_killed,
+                        "level_two_time": game.level_two_time,
+                        "level_three_time": game.level_three_time,
+                        "level_four_time": game.level_four_time,
                         "time_stamp": game.time_stamp,
-                        "replay_player_id": game.replay_player_id})
+                        "replay_player_id": game.replay_player_id,
+                        "version": game.version})
 
 
 @app.route('/api/game/<game_number>/all', methods=['GET'])

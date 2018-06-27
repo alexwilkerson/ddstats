@@ -4,6 +4,7 @@
     {{ super() }}
     <script src="{{ url_for('bower.static', filename='jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ url_for('bower.static', filename='highcharts/highcharts.js') }}"></script>
+    <script src="{{ url_for('bower.static', filename='highcharts/annotations.js') }}"></script>
 {% endblock %}
 {% block body %}
         <div id="stats">
