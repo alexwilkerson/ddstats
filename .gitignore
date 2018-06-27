@@ -1,6 +1,6 @@
 /venv
 /__pycache__
-app.db
+app.db*
 db.db
 ddstats.sock
 ddstats-socketio.sock
