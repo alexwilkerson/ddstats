@@ -110,6 +110,7 @@ def games_page(page_num):
             order_by(Game.id.desc()).\
             add_columns(Game.id, Game.player_id,
                         Game.game_time, Game.homing_daggers,
+                        Game.gems,
                         Game.enemies_alive,
                         Game.enemies_killed,
                         Game.death_type,
