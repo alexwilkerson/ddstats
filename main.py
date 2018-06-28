@@ -198,7 +198,7 @@ def game_log(game_number):
                            dd_high_score=user_data["time"],
                            player_id=player_id,
                            game_number=game_number,
-                           game_time=round(game_data["game_time"], 4),
+                           game_time=round(game_data["time"], 4),
                            death_type=game_data["death_type"],
                            gems="{:,}".format(game_data["gems"]),
                            homing_daggers="{:,}".format(game_data["homing_daggers"]),
