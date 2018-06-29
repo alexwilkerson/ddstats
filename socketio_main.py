@@ -15,7 +15,72 @@ app.url_map.strict_slashes = False
 Bower(app)
 CORS(app)
 
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI') \
+    or 'sqlite:////Users/alex/code/ddstats/app.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
 socketio = SocketIO(app, async_mode='gevent_uwsgi')
+
+
+class Game(db.Model):
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    player_id = db.Column(db.Integer, nullable=False)
+    granularity = db.Column(db.Integer, nullable=False)
+    game_time = db.Column(db.Float, nullable=False)
+    death_type = db.Column(db.Integer, nullable=False)
+    gems = db.Column(db.Integer, nullable=False)
+    homing_daggers = db.Column(db.Integer, nullable=False)
+    daggers_fired = db.Column(db.Integer, nullable=False)
+    daggers_hit = db.Column(db.Integer, nullable=False)
+    enemies_alive = db.Column(db.Integer, nullable=False)
+    enemies_killed = db.Column(db.Integer, nullable=False)
+    time_stamp = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+    replay_player_id = db.Column(db.Integer, default=0, nullable=False)
+    survival_hash = db.Column(db.String(32))
+    version = db.Column(db.String(16))
+    level_two_time = db.Column(db.Float, default=0.0, nullable=False)
+    level_three_time = db.Column(db.Float, default=0.0, nullable=False)
+    level_four_time = db.Column(db.Float, default=0.0, nullable=False)
+    homing_daggers_max_time = db.Column(db.Float, default=0.0, nullable=False)
+    enemies_alive_max_time = db.Column(db.Float, default=0.0, nullable=False)
+    homing_daggers_max = db.Column(db.Integer, default=0, nullable=False)
+    enemies_alive_max = db.Column(db.Integer, default=0, nullable=False)
+
+
+class State(db.Model):
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    game_id = db.Column(db.Integer, db.ForeignKey('game.id'), nullable=False)
+    game_time = db.Column(db.Float, nullable=False)
+    gems = db.Column(db.Integer, nullable=False)
+    homing_daggers = db.Column(db.Integer, nullable=False)
+    daggers_hit = db.Column(db.Integer, nullable=False)
+    daggers_fired = db.Column(db.Integer, nullable=False)
+    enemies_alive = db.Column(db.Integer, nullable=False)
+    enemies_killed = db.Column(db.Integer, nullable=False)
+
+    @property
+    def serialize(self):
+        return {
+                'game_time': self.game_time,
+                'gems': self.gems,
+                'homing_daggers': self.homing_daggers,
+                'daggers_hit': self.daggers_hit,
+                'daggers_fired': self.daggers_fired,
+                'enemies_alive': self.enemies_alive,
+                'enemies_killed': self.enemies_killed
+               }
+
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    username = db.Column(db.String(128), index=True, nullable=False)
+
+
+class Live(db.Model):
+    player_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True, nullable=False)
+    session_id = db.Column(db.String(32))
 
 
 ########################################################
@@ -27,10 +92,18 @@ def test_connect():
     print('This standard output', file=sys.stdout)
     emit('my response', {'data': 'Connected'}, broadcast=True)
 
+
 @socketio.on('my event', namespace='/admin')
 def add_to_live():
     print("working", file=sys.stdout)
     # print(player_id, file=sys.stdout)
+
+
+@socketio.on('login')
+def login(player_id):
+    print(f"Player ID: {player_id}")
+    print(f"SID: {request.sid}")
+
 
 @socketio.on('message')
 def handle_message(message):

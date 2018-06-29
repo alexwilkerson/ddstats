@@ -91,6 +91,11 @@ class User(db.Model):
     username = db.Column(db.String(128), index=True, nullable=False)
 
 
+class Live(db.Model):
+    player_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True, nullable=False)
+    session_id = db.Column(db.String(32))
+
+
 @app.route('/about')
 def about_page():
     return render_template('about.html')
