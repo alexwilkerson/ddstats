@@ -1,4 +1,5 @@
 import os
+import sys
 import math
 import requests
 import json
@@ -93,7 +94,7 @@ class User(db.Model):
 
 class Live(db.Model):
     player_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True, nullable=False)
-    session_id = db.Column(db.String(32))
+    sid = db.Column(db.String(32))
 
 
 @app.route('/about')
@@ -104,6 +105,7 @@ def about_page():
 @app.route('/users')
 def users_page():
     users = User.query.all()
+    live_users = get_live_users()
     # users = db.session.query(Game.player_id).distinct().all()
     # users_list = []
     # for user in users:
@@ -112,7 +114,7 @@ def users_page():
     #     users_list.append(user_data["player_name"])
 
     # print(users_list)
-    return render_template('users.html', users=users)
+    return render_template('users.html', users=users, live_users=live_users)
 
 
 @app.route('/games/', defaults={'page_num': 1})
@@ -195,6 +197,9 @@ def game_log(game_number):
     else:
         accuracy = round(game_data["daggers_hit"] / game_data["daggers_fired"] * 100, 2)
 
+    # used to fix rounding error on game_time
+    game_time_str = str(game_data["game_time"])
+    game_time = float(game_time_str[:game_time_str.find('.')+5])
     # game_time_list = game_time_list[:-1]
     # game_time_list.append(round(game_data["game_time"], 4))
 
@@ -203,7 +208,8 @@ def game_log(game_number):
                            dd_high_score=user_data["time"],
                            player_id=player_id,
                            game_number=game_number,
-                           game_time=round(game_data["game_time"], 4),
+                           game_time=game_time,
+                           # game_time="{}".format(game_data["game_time"]),
                            death_type=game_data["death_type"],
                            gems="{:,}".format(game_data["gems"]),
                            homing_daggers="{:,}".format(game_data["homing_daggers"]),
@@ -701,6 +707,10 @@ def get_file(filename):  # pragma: no cover
         return open(src).read()
     except IOError as exc:
         return str(exc)
+
+def get_live_users():
+    query = db.session.query(Live.player_id.label("player_id"))
+    return [row.player_id for row in query.all()]
 
 
 @app.template_filter('get_username')

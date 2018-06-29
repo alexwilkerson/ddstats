@@ -80,7 +80,13 @@ class User(db.Model):
 
 class Live(db.Model):
     player_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True, nullable=False)
-    session_id = db.Column(db.String(32))
+    sid = db.Column(db.String(32))
+
+
+@app.before_first_request
+def clear_live_table():
+    db.session.query(Live).delete()
+    db.session.commit()
 
 
 ########################################################
@@ -101,8 +107,18 @@ def add_to_live():
 
 @socketio.on('login')
 def login(player_id):
-    print(f"Player ID: {player_id}")
-    print(f"SID: {request.sid}")
+    player = Live(player_id=int(player_id), sid=request.sid)
+    db.session.add(player)
+    db.session.flush()
+    db.session.commit()
+
+
+@socketio.on('disconnect')
+def handle_disconnect():
+    exists = db.session.query(Live.player_id).filter_by(sid=request.sid).scalar() is not None
+    if exists:
+        Live.query.filter_by(sid=request.sid).delete()
+        db.session.commit()
 
 
 @socketio.on('message')
