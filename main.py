@@ -198,17 +198,21 @@ def game_log(game_number):
         accuracy = round(game_data["daggers_hit"] / game_data["daggers_fired"] * 100, 2)
 
     # used to fix rounding error on game_time
+    dd_high_score_str = str(user_data["time"])
+    dd_high_score = float(dd_high_score_str[:dd_high_score_str.find('.')+4])
     game_time_str = str(game_data["game_time"])
-    game_time = float(game_time_str[:game_time_str.find('.')+5])
+    game_time = float(game_time_str[:game_time_str.find('.')+4])
+    current_high_score = dd_high_score == game_time
     # game_time_list = game_time_list[:-1]
     # game_time_list.append(round(game_data["game_time"], 4))
 
     return render_template('game_log.html',
                            player_name=user_data["player_name"],
+                           current_high_score=current_high_score,
                            dd_high_score=user_data["time"],
                            player_id=player_id,
                            game_number=game_number,
-                           game_time=game_time,
+                           game_time=float("{0:.4f}".format(game_data["game_time"])),
                            # game_time="{}".format(game_data["game_time"]),
                            death_type=game_data["death_type"],
                            gems="{:,}".format(game_data["gems"]),
