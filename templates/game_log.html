@@ -111,7 +111,7 @@
         }
 
         $.getJSON(
-            'http://localhost:5666/api/dataset/{{game_number}}',
+            'https://ddstats.com/api/dataset/{{game_number}}',
             function (game) {
                 $.each(game.datasets, function (i, dataset) {
                     var color_ = 0
