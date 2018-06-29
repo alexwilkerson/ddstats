@@ -12,7 +12,7 @@
             <h2 class="alignright"><a href="{{url_for('user_page', user_id=player_id, page_num=1) }}">{{player_name}} ({{player_id}})</a></h1>
             <div style="clear: both;"></div>
             <ul class="alignleft" id="statsleft">
-                <li>Time: {{game_time}}
+                <li>Time: {{game_time}}s
                     {% if dd_high_score == game_time %}
                     <span style="color: #34A61C;">(Current High Score)</span>
                     {% endif %}
@@ -30,6 +30,26 @@
                 <li>{{time_stamp}}</li>
             </ul>
             <div style="clear: both;"></div>
+            <ul id="extra-stats" class="alignleft">
+            {% if homing_daggers_max > 0 %}
+            <li>Peak Homing Daggers: {{homing_daggers_max}} at {{homing_daggers_max_time|numberFormat(4)}}s</li>
+            {% endif %}
+            {% if enemies_alive_max > 0 %}
+            <li>Peak Enemies Alive: {{enemies_alive_max}} at {{enemies_alive_max_time|numberFormat(4)}}s</li>
+            {% endif %}
+            </ul>
+            <ul id="extra-stats" class="alignright" style="text-align: right;">
+            {% if level_two_time > 0.0 %}
+            <li>L2: {{level_two_time|numberFormat(4)}}s</li>
+            {% endif %}
+            {% if level_three_time > 0.0 %}
+            <li>L3: {{level_three_time|numberFormat(4)}}s</li>
+            {% endif %}
+            {% if level_four_time > 0.0 %}
+            <li>L4: {{level_four_time|numberFormat(4)}}s</li>
+            {% endif %}
+            </ul>
+            <div style="clear: both;"></div>
             <div id="statsfooter">
                 <span class="alignleft"><a href="{{ url_for('get_classic_homing', game_number=game_number) }}">Classic Homing Log</a></p></span>
             {% if submitter_id > 0 %}
@@ -40,6 +60,9 @@
         </div>
         <div id="graphs"></div>
     <script>
+        var level_two_color = '#666666';
+        var level_three_color = '#666666';
+        var level_four_color = '#666666';
         var chart,
             point,
             i,
@@ -88,20 +111,80 @@
         }
 
         $.getJSON(
-            'https://ddstats.com/api/dataset/{{game_number}}',
+            'http://localhost:5666/api/dataset/{{game_number}}',
             function (game) {
                 $.each(game.datasets, function (i, dataset) {
                     var color_ = 0
-                    if (dataset.name == 'Gems')
+                    if (dataset.name == 'Gems') {
                         color_ = 0
-                    else if (dataset.name == 'Homing Daggers')
+                        annotations_ = {}
+                    }
+                    else if (dataset.name == 'Homing Daggers') {
                         color_ = 1
-                    else if (dataset.name == 'Accuracy')
+                        {% if homing_daggers_max > 0.0 %}
+                        annotations_  = {
+                                        labels: [{
+                                            align: 'left',
+                                            verticalAlign: 'bottom',
+                                            point: {
+                                                xAxis: 0,
+                                                yAxis: 0,
+                                                x: {{ homing_daggers_max_time }},
+                                                y: {{ homing_daggers_max }}
+                                            },
+                                            borderColor: '#D39C00',
+                                            x: 10,
+                                            y: -4,
+                                            text: '{{homing_daggers_max}} at {{homing_daggers_max_time|numberFormat}}s',
+                                            color: '#D39C00',
+                                            useHTML: true,
+                                            style: {
+                                                fontSize: '10px',
+                                                color: '#D39C00'
+                                            }
+                                        }]
+                                    }
+                        {% else %}
+                        annotations_ = {} 
+                        {% endif %}
+                    }
+                    else if (dataset.name == 'Accuracy') {
                         color_ = 2
-                    else if (dataset.name == 'Enemies Alive')
+                        annotations_ = {} 
+                    }
+                    else if (dataset.name == 'Enemies Alive') {
                         color_ = 3
-                    else if (dataset.name == 'Enemies Killed')
+                        {% if enemies_alive_max > 0.0 %}
+                        annotations_  = {
+                                        labels: [{
+                                            align: 'right',
+                                            verticalAlign: 'bottom',
+                                            point: {
+                                                xAxis: 0,
+                                                yAxis: 0,
+                                                x: {{ enemies_alive_max_time }},
+                                                y: {{ enemies_alive_max }}
+                                            },
+                                            borderColor: '#006EC2',
+                                            x: -15,
+                                            y: -4,
+                                            text: '{{enemies_alive_max}} at {{enemies_alive_max_time|numberFormat}}s',
+                                            color: '#006EC2',
+                                            useHTML: true,
+                                            style: {
+                                                fontSize: '10px',
+                                                color: '#006EC2'
+                                            }
+                                        }]
+                                    }
+                        {% else %}
+                        annotations_ = {}
+                        {% endif %}
+                    }
+                    else if (dataset.name == 'Enemies Killed') {
                         color_ = 4
+                        annotations_ = []
+                    }
 
                     dataset.data = Highcharts.map(dataset.data, function (val, j) {
                         return [game.xData[j], val];
@@ -125,16 +208,6 @@
                                 margin: 0,
                                 x: 30
                             },
-                            annotations: [{
-                                {% if level_two_time > 0.0 %}
-                                labels: [{
-                                    point: {x: {{level_two_time}}, y: 130},
-                                    text: 'Level 2',
-                                    xAxis: {{level_two_time}},
-                                    yAxis: 0
-                                }]
-                                {% endif %}
-                            }],
                             credits: {
                                 enabled: false
                             },
@@ -148,7 +221,30 @@
                                 },
                                 labels: {
                                     format: '{value} sec'
-                                }
+                                },
+                                plotLines: [
+                                    {% if level_two_time > 0.0 %}
+                                    {
+                                        color: level_two_color,
+                                        width: 1,
+                                        value: {{ level_two_time }}
+                                    },
+                                    {% endif %}
+                                    {% if level_three_time > 0.0 %}
+                                    {
+                                        color: level_three_color,
+                                        width: 1,
+                                        value: {{ level_three_time }}
+                                    },
+                                    {% endif %}
+                                    {% if level_four_time > 0.0 %}
+                                    {
+                                        color: level_four_color,
+                                        width: 1,
+                                        value: {{ level_four_time }}
+                                    },
+                                    {% endif %}
+                                ]
                             },
                             yAxis: {
                                 title: {
@@ -173,6 +269,71 @@
                                 },
                                 valueDecimals: dataset.valueDecimals
                             },
+                            annotations: [annotations_,
+                                {% if level_two_time > 0.0 %}
+                                {labels: [{
+                                    align: 'left',
+                                    verticalAlign: 'bottom',
+                                    point: {
+                                        xAxis: 0,
+                                        x: {{ level_two_time }},
+                                        y: 12
+                                    },
+                                    backgroundColor: 'rgba(0, 0, 0, 0)',
+                                    borderColor: 'rgba(0, 0, 0, 0)',
+                                    text: 'L2: {{level_two_time|numberFormat}}s',
+                                    useHTML: true,
+                                    zIndex: 3,
+                                    style: {
+                                        fontSize: '10px',
+                                        color: level_two_color
+                                    }
+                                    }],
+                                },
+                                {% endif %}
+                                {% if level_three_time > 0.0 %}
+                                {labels: [{
+                                    align: 'left',
+                                    verticalAlign: 'bottom',
+                                    point: {
+                                        xAxis: 0,
+                                        x: {{ level_three_time }},
+                                        y: 12
+                                    },
+                                    backgroundColor: 'rgba(0, 0, 0, 0)',
+                                    borderColor: 'rgba(0, 0, 0, 0)',
+                                    text: 'L3: {{level_three_time|numberFormat}}s',
+                                    useHTML: true,
+                                    zIndex: 3,
+                                    style: {
+                                        fontSize: '10px',
+                                        color: level_three_color
+                                    }
+                                    }],
+                                },
+                                {% endif %}
+                                {% if level_four_time > 0.0 %}
+                                {labels: [{
+                                    align: 'left',
+                                    verticalAlign: 'bottom',
+                                    point: {
+                                        xAxis: 0,
+                                        x: {{ level_four_time }},
+                                        y: 12
+                                    },
+                                    backgroundColor: 'rgba(0, 0, 0, 0)',
+                                    borderColor: 'rgba(0, 0, 0, 0)',
+                                    text: 'L4: {{level_four_time|numberFormat}}s',
+                                    useHTML: true,
+                                    zIndex: 3,
+                                    style: {
+                                        fontSize: '10px',
+                                        color: level_four_color
+                                    }
+                                    }],
+                                },
+                                {% endif %}
+                            ],
                             series: [{
                                 data: dataset.data,
                                 name: dataset.name,
@@ -182,7 +343,7 @@
                                 fillOpacity: 0.7,
                                 tooltip: {
                                     valueSuffix: ' ' + dataset.unit
-                                }
+                                },
                             }]
                         });
                 });

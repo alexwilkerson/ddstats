@@ -198,7 +198,7 @@ def game_log(game_number):
                            dd_high_score=user_data["time"],
                            player_id=player_id,
                            game_number=game_number,
-                           game_time=round(game_data["time"], 4),
+                           game_time=round(game_data["game_time"], 4),
                            death_type=game_data["death_type"],
                            gems="{:,}".format(game_data["gems"]),
                            homing_daggers="{:,}".format(game_data["homing_daggers"]),
@@ -231,6 +231,8 @@ def game_log(game_number):
 def highchart_dataset(game_number):
     r = requests.get('http://ddstats.com/api/game/{}/all'.format(game_number))
     data = r.json()
+    r = requests.get('http://ddstats.com/api/game/{}'.format(game_number))
+    game_data = r.json()
     if "message" in data:
         return data["message"]
     game_time_list = []
@@ -249,9 +251,7 @@ def highchart_dataset(game_number):
             accuracy_list.append(round((row["daggers_hit"]/row["daggers_fired"])*100, 2))
         enemies_killed_list.append(row["enemies_killed"])
         enemies_alive_list.append(row["enemies_alive"])
-    r = requests.get('http://ddstats.com/api/game/{}'.format(game_number))
-    game_data = r.json()
-    r = requests.get('http://ddstats.com/api/get_scores?user={}'.format(game_data["player_id"]))
+    r = requests.get('http://ddstats.com/api/get_user_by_id/{}'.format(game_data["player_id"]))
     user_data = r.json()
 
     if game_data["daggers_fired"] is 0:
