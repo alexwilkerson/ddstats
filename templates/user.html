@@ -2,11 +2,12 @@
 {% block title %}{{user_data.player_name}}{% endblock %}
 {% block head %}
     {{ super() }}
+    <script src="{{ url_for('static', filename='js/socket.io.js') }}"></script>
 {% endblock %}
 {% block body %}
 
         <div id="user-card">
-            <h1 id="usertitle">{{user_data.player_name}} ({{user_id}})</h1>
+            <h1 id="usertitle"><span id="user-online-bullet"></span>{{user_data.player_name}} ({{user_id}})</h1>
             <ul class="alignleft" id="userleft">
                 <li>Rank: {{user_data.rank|numberFormat}}</li>
                 <li>Time: {{user_data.time|numberFormat(4)}}s</li>
@@ -70,4 +71,12 @@
             <a href="{{ url_for('user_page', user_id=user_id, page_num=games.prev_num) }}">Next</a>    
         {% endif %}
         </div>
+        <script>
+            $(document).ready(function(){
+                var socket = io.connect('https://' + document.domain + ':' + location.port + '/{{player_id}}');
+                socket.on('receive'), function(stats) {
+                    $('#user-online-bullet').text("(Live)");
+                });
+            });
+        </script>
 {% endblock %}
