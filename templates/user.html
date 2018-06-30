@@ -13,16 +13,16 @@
               <h2 id="live-stats-title"></h2>
               <h2 id="live-stats-status"></h2>
               <ul class="alignleft" id="live-left">
-                <li>Time: <span id="live-game-time"></span></li>
-                <li>Gems: <span id="live-gems"></span></li>
-                <li>Homing Daggers: <span id="live-homing-daggers"></span></li>
-                <li>Accuracy: <span id="live-accuracy"></span>%</li>
+                <li>TIME: <span id="live-game-time"></span></li>
+                <li>GEMS: <span id="live-gems"></span></li>
+                <li>HOMING DAGGERS: <span id="live-homing-daggers"></span></li>
+                <li>ACCURACY: <span id="live-accuracy"></span></li>
               </ul>
               <ul class="alignright" id="live-right">
-                <li>Enemies Alive: <span id="live-enemies-alive"></span></li>
-                <li>Enemies Killed: <span id="live-enemies-killed"></span></li>
-                <li>Daggers Hit: <span id="live-daggers-hit"></span></li>
-                <li>Daggers Fired: <span id="live-daggers-fired"></span></li>
+                <li>ENEMIES ALIVE: <span id="live-enemies-alive"></span></li>
+                <li>ENEMIES KILLED: <span id="live-enemies-killed"></span></li>
+                <li>DAGGERS HIT: <span id="live-daggers-hit"></span></li>
+                <li>DAGGERS FIRED: <span id="live-daggers-fired"></span></li>
               </ul>
               <div style="clear: both;"></div>
             </div>
@@ -102,8 +102,8 @@
                       enemies_alive, enemies_killed, daggers_hit,
                       daggers_fired, level_two, level_three, level_four,
                       is_replay, death_type) {
-                    $('#live-stats-title').text('Live Stats');
-                    $('#live-stats').show();
+                    $('#live-stats-title').text('LIVE STATS');
+                    $('#live-stats').show(350);
                     $('#live-game-time').text(game_time.toFixed(4));
                     $('#live-gems').text(gems);
                     $('#live-homing-daggers').text(homing_daggers);
@@ -116,12 +116,17 @@
                     } else {
                       accuracy = 0.0;
                     }
-                    $('#live-accuracy').text(accuracy.toFixed(2));
+                    $('#live-accuracy').text(accuracy.toFixed(2) + '%');
+
                     if (death_type === -1) {
-                      $('#live-stats-status').hide();
+                      $('#live-stats-status').css('color', '#1070BF');
+                      $('#live-stats-status').text('ALIVE');
+                    } else if (death_type === -2) {
+                      $('#live-stats-status').css('color', '#1070BF');
+                      $('#live-stats-status').text('IN MENU');
                     } else {
+                      $('#live-stats-status').css('color', '#9A1000');
                       $('#live-stats-status').text(death_types[death_type]);
-                      $('#live-stats-status').show();
                     }
                 });
             });

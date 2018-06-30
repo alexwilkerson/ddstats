@@ -136,6 +136,11 @@ def receive_stats(player_id, game_time, gems, homing_daggers,
          include_self=False, broadcast=True)
 
 
+@socketio.on('game_submitted', namespace='/stats')
+def game_submitted(game_id):
+    print(game_id, file=sys.stdout)
+
+
 ########################################################
 #                  end socketio stuff                  #
 ########################################################

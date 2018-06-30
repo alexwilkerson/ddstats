@@ -163,13 +163,16 @@ footer {
 }
 #live-stats {
     display: none;
-    font-size: 12px;
-    background-color: #100C08;
-    border-radius: 8px;
+    font-family: "Goethe";
+    font-size: 16px;
+    background-color: #1A1A1A;
+    border-radius: 6px;
     max-width: 720px;
     margin: 0 50px 10px 50px;
     padding: 8px 20px 15px 20px;
-    box-shadow: -2px -2px #580900;
+    border-color: #174A0C;
+    border-style: solid;
+    border-width: 2px;
     color: #DDD;
 }
 #live-stats-title, #live-stats-status {
@@ -177,14 +180,18 @@ footer {
     padding: 0;
     text-align: center;
     color: #34A61C;
-    font-size: 14px;
+    font-size: 18px;
 }
 #live-stats-status {
-  color: #9A1000;
+  color: #1070BF;
 }
 #live-stats ul {
   list-style-type: none;
   padding: 0;
+  color: #666;
+}
+#live-stats ul span {
+  color: #DDD;
 }
 #live-right {
   text-align: right;
