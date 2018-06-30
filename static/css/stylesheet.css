@@ -161,6 +161,34 @@ footer {
     padding-bottom: 5px;
     text-align: right;
 }
+#live-stats {
+    display: none;
+    font-size: 12px;
+    background-color: #100C08;
+    border-radius: 8px;
+    max-width: 720px;
+    margin: 0 50px 10px 50px;
+    padding: 8px 20px 15px 20px;
+    box-shadow: -2px -2px #580900;
+    color: #DDD;
+}
+#live-stats-title, #live-stats-status {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    color: #34A61C;
+    font-size: 14px;
+}
+#live-stats-status {
+  color: #9A1000;
+}
+#live-stats ul {
+  list-style-type: none;
+  padding: 0;
+}
+#live-right {
+  text-align: right;
+}
 #pagination {
     max-width: 720px;
     margin: 0 auto;

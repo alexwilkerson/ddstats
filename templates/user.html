@@ -2,12 +2,30 @@
 {% block title %}{{user_data.player_name}}{% endblock %}
 {% block head %}
     {{ super() }}
-    <script src="{{ url_for('static', filename='js/socket.io.js') }}"></script>
+    <script src="{{ url_for('bower.static', filename='jquery/dist/jquery.min.js') }}"></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 {% endblock %}
 {% block body %}
 
         <div id="user-card">
-            <h1 id="usertitle"><span id="user-online-bullet"></span>{{user_data.player_name}} ({{user_id}})</h1>
+            <h1 id="usertitle">{{user_data.player_name}} ({{user_id}})</h1>
+            <div id="live-stats">
+              <h2 id="live-stats-title"></h2>
+              <h2 id="live-stats-status"></h2>
+              <ul class="alignleft" id="live-left">
+                <li>Time: <span id="live-game-time"></span></li>
+                <li>Gems: <span id="live-gems"></span></li>
+                <li>Homing Daggers: <span id="live-homing-daggers"></span></li>
+                <li>Accuracy: <span id="live-accuracy"></span>%</li>
+              </ul>
+              <ul class="alignright" id="live-right">
+                <li>Enemies Alive: <span id="live-enemies-alive"></span></li>
+                <li>Enemies Killed: <span id="live-enemies-killed"></span></li>
+                <li>Daggers Hit: <span id="live-daggers-hit"></span></li>
+                <li>Daggers Fired: <span id="live-daggers-fired"></span></li>
+              </ul>
+              <div style="clear: both;"></div>
+            </div>
             <ul class="alignleft" id="userleft">
                 <li>Rank: {{user_data.rank|numberFormat}}</li>
                 <li>Time: {{user_data.time|numberFormat(4)}}s</li>
@@ -73,9 +91,38 @@
         </div>
         <script>
             $(document).ready(function(){
-                var socket = io.connect('https://' + document.domain + ':' + location.port + '/{{player_id}}');
-                socket.on('receive'), function(stats) {
-                    $('#user-online-bullet').text("(Live)");
+                var death_types = ["FALLEN", "SWARMED", "IMPALED", "GORED",
+                                   "INFESTED", "OPENED", "PURGED", "DESECRATED",
+                                   "SACRIFICED", "EVISCERATED", "ANNIHILATED", "INTOXICATED",
+                                   "ENVENMONATED", "INCARNATED", "DISCARNATED", "BARBED"];
+
+                var socket = io.connect('https://' + document.domain + ':'
+                    + location.port + '/{{user_id}}');
+                socket.on('receive', function(game_time, gems, homing_daggers,
+                      enemies_alive, enemies_killed, daggers_hit,
+                      daggers_fired, level_two, level_three, level_four,
+                      is_replay, death_type) {
+                    $('#live-stats-title').text('Live Stats');
+                    $('#live-stats').show();
+                    $('#live-game-time').text(game_time.toFixed(4));
+                    $('#live-gems').text(gems);
+                    $('#live-homing-daggers').text(homing_daggers);
+                    $('#live-enemies-alive').text(enemies_alive);
+                    $('#live-enemies-killed').text(enemies_killed);
+                    $('#live-daggers-hit').text(daggers_hit);
+                    $('#live-daggers-fired').text(daggers_fired);
+                    if (daggers_fired > 0) {
+                      accuracy = (daggers_hit/daggers_fired) * 100;
+                    } else {
+                      accuracy = 0.0;
+                    }
+                    $('#live-accuracy').text(accuracy.toFixed(2));
+                    if (death_type === -1) {
+                      $('#live-stats-status').hide();
+                    } else {
+                      $('#live-stats-status').text(death_types[death_type]);
+                      $('#live-stats-status').show();
+                    }
                 });
             });
         </script>

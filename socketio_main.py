@@ -99,9 +99,8 @@ def test_connect():
     emit('my response', {'data': 'Connected'}, broadcast=True)
 
 
-@socketio.on('my event', namespace='/admin')
-def add_to_live():
-    print("working", file=sys.stdout)
+# @socketio.on('my event', namespace='/admin')
+# def add_to_live():
     # print(player_id, file=sys.stdout)
 
 
@@ -130,22 +129,11 @@ def handle_message(message):
 def receive_stats(player_id, game_time, gems, homing_daggers,
                   enemies_alive, enemies_killed, daggers_hit,
                   daggers_fired, level_two, level_three, level_four,
-                  is_replay):
-    emit('receieve', (game_time, gems, homing_daggers, enemies_alive,
+                  is_replay, death_type):
+    emit('receive', (game_time, gems, homing_daggers, enemies_alive,
          enemies_killed, daggers_hit, daggers_fired, level_two, level_three,
-         level_four, is_replay), namespace='/'+str(player_id))
-    print(player_id, file=sys.stdout)
-    print(game_time, file=sys.stdout)
-    print(gems, file=sys.stdout)
-    print(homing_daggers, file=sys.stdout)
-    print(enemies_alive, file=sys.stdout)
-    print(enemies_killed, file=sys.stdout)
-    print(daggers_hit, file=sys.stdout)
-    print(daggers_fired, file=sys.stdout)
-    print(level_two, file=sys.stdout)
-    print(level_three, file=sys.stdout)
-    print(level_four, file=sys.stdout)
-    print(is_replay, file=sys.stdout)
+         level_four, is_replay, death_type), namespace='/'+str(player_id),
+         include_self=False, broadcast=True)
 
 
 ########################################################
