@@ -7,7 +7,7 @@ from datetime import datetime
 from flask import Flask, request, jsonify, Response, url_for
 from flask import render_template
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import and_
+from sqlalchemy import and_, or_
 from flask_bower import Bower
 from flask_cors import CORS
 from byte_converters import to_int_16, to_int_32, to_uint_64
@@ -95,6 +95,11 @@ class User(db.Model):
 class Live(db.Model):
     player_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True, nullable=False)
     sid = db.Column(db.String(32))
+
+
+class Spawnset(db.Model):
+    survival_hash = db.Column(db.String(32), primary_key=True, nullable=False)
+    spawnset_name = db.Column(db.String(), nullable=False)
 
 
 @app.route('/about')
@@ -398,6 +403,7 @@ def get_all_games_by_user(user_id):
 def get_game_stats(game_id):
 
     query = db.session.query(Game).filter_by(id=game_id)
+    # query = db.session.query(Game, Spawnset).join(Spawnset).filter_by(id=game_id)
     game = query.first()
 
     if game is None:
@@ -597,7 +603,7 @@ def create_game():
                                                  # remove this to disable multiple users rec
                                                  # same game...for now it is fine.
                                                  Game.player_id == data["playerID"],
-                                                 Game.replay_player_id == data["replayPlayerID"],
+                                                 # Game.replay_player_id == data["replayPlayerID"],
                                                  Game.game_time == data["inGameTimer"],
                                                  Game.death_type == data["deathType"],
                                                  Game.gems == data["gems"],
@@ -607,7 +613,8 @@ def create_game():
                                                  Game.enemies_alive == data["enemiesAlive"],
                                                  Game.enemies_killed == data["enemiesKilled"],
                                                  Game.version == data["version"]
-                                                )).first()
+                                                )).filter(or_(Game.replay_player_id == 0,
+                                                              Game.replay_player_id == data["replayPlayerID"])).first()
         if existing is not None:
             return jsonify({'message': 'Replay already recorded.', 'game_id': existing.id})
 

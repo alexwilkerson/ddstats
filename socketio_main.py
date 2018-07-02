@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 from flask import Flask, request, jsonify, Response, url_for
 from flask import render_template
-from flask_socketio import SocketIO, emit
+from flask_socketio import SocketIO, emit, join_room, leave_room
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import and_
 from flask_bower import Bower
@@ -93,15 +93,49 @@ def clear_live_table():
 #                    socketio stuff                    #
 ########################################################
 
+
+user_list = []
+
+
 @socketio.on('connect', namespace='/test')
 def test_connect():
     print('This standard output', file=sys.stdout)
     emit('my response', {'data': 'Connected'}, broadcast=True)
 
 
+@socketio.on('disconnect', namespace='/user_page')
+def user_page_disconnect():
+    global user_list
+    user = next((u for u in user_list if u['sid'] == request.sid), None) 
+    user_list = [u for u in user_list if u['sid'] != request.sid]
+    if user is not None:
+        player_id = user['player_id']
+        users_in_room = [u for u in user_list if u['player_id'] == player_id]
+        user_count = len(users_in_room)
+
+        # player = db.session.query(Live).filter_by(player_id=player_id).first()
+        # if player is not None:
+            # emit('update_user_count', user_count, name_space='/stats', room=player.sid)
+        # print(str(len(users_in_room)) + ' user(s) in room ' + str(player_id), file=sys.stdout)
+
+
 # @socketio.on('my event', namespace='/admin')
 # def add_to_live():
     # print(player_id, file=sys.stdout)
+
+
+@socketio.on('join', namespace='/user_page')
+def user_page_join(player_id):
+    global user_list
+    join_room(player_id)
+    user_list.append({'sid': request.sid, 'player_id': player_id})
+    # print(player_id + ': someone joined the room.', file=sys.stdout)
+    users_in_room = [u for u in user_list if u['player_id'] == player_id]
+    user_count = len(users_in_room)
+
+    # player = db.session.query(Live).filter_by(player_id=player_id).first()
+    # if player is not None:
+        # emit('update_user_count', user_count, name_space='/stats', room=player.sid)
 
 
 @socketio.on('login')
@@ -110,6 +144,9 @@ def login(player_id):
     db.session.add(player)
     db.session.flush()
     db.session.commit()
+    users_in_room = [u for u in user_list if u['player_id'] == player_id]
+    user_count = len(users_in_room)
+    # emit('update_user_count', user_count, name_space='/stats', room=request.sid)
 
 
 @socketio.on('disconnect')
@@ -132,13 +169,22 @@ def receive_stats(player_id, game_time, gems, homing_daggers,
                   is_replay, death_type):
     emit('receive', (game_time, gems, homing_daggers, enemies_alive,
          enemies_killed, daggers_hit, daggers_fired, level_two, level_three,
-         level_four, is_replay, death_type), namespace='/'+str(player_id),
-         include_self=False, broadcast=True)
+         level_four, is_replay, death_type), room=str(player_id),
+         namespace='/user_page', include_self=False, broadcast=True)
 
 
 @socketio.on('game_submitted', namespace='/stats')
 def game_submitted(game_id):
     print(game_id, file=sys.stdout)
+
+
+@socketio.on('get_status', namespace='/stats')
+def get_status(player_id):
+    sid = db.session.query(Live.sid).filter_by(player_id=player_id).first()
+    if sid is not None:
+        emit('get_status', room=sid)
+    else:
+        emit('status', (-3)) 
 
 
 ########################################################
