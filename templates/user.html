@@ -102,14 +102,14 @@
                 var display_gems_and_homing = true;
                 var display_timeout_handle = window.setTimeout(function() {
                     display_gems_and_homing = false;
-                }, 60000);
+                }, 30000);
 
                 $('#live-stats').on('click', function() {
                     display_gems_and_homing = true;
                     window.clearTimeout(display_time_handle);
                     display_timeout_handle = window.setTimeout(function() {
                         display_gems_and_homing = false;
-                    }, 60000);
+                    }, 30000);
                 });
 
                 socket.on('connect', function() {
