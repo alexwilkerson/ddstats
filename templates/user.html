@@ -98,6 +98,20 @@
 
                 var socket = io.connect('https://' + document.domain + ':'
                     + location.port + '/user_page');
+
+                var display_gems_and_homing = true;
+                var display_timeout_handle = setTimeout(function() {
+                    display_gems_and_homing = false;
+                }, 60000);
+
+                $('#live-stats').on('click', function() {
+                    display_gems_and_homing = true;
+                    clearTimeout(display_time_handle);
+                    display_timeout_handle = setTimeout(function() {
+                        display_gems_and_homing = false;
+                    }, 60000);
+                });
+
                 socket.on('connect', function() {
                     socket.emit('join', '{{user_id}}');
                 });
@@ -108,8 +122,13 @@
                     $('#live-stats-title').text('LIVE STATS');
                     $('#live-stats').show(350);
                     $('#live-game-time').text(game_time.toFixed(4));
-                    $('#live-gems').text(gems);
-                    $('#live-homing-daggers').text(homing_daggers);
+                    if (display_gems_and_homing) {
+                        $('#live-gems').text(gems);
+                        $('#live-homing-daggers').text(homing_daggers);
+                    } else {
+                        $('#live-gems').text('CLICK TO SHOW');
+                        $('#live-homing-daggers').text('CLICK TO SHOW');
+                    }
                     $('#live-enemies-alive').text(enemies_alive);
                     $('#live-enemies-killed').text(enemies_killed);
                     $('#live-daggers-hit').text(daggers_hit);
