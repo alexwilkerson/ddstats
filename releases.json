@@ -1,5 +1,19 @@
-{
-    "version": "0.2.3",
+[
+    {"version": "0.3.1",
+    "date": "July 2, 2018",
+    "change_log": [
+        "v0.3.1 -- major update",
+        "Added live stats! People can now go to your user page (https://ddstats.com/user/<userid>) and watch your game statistics streaming live. This option can be toggled off using the F12 key.",
+        "Replays are now automatically recorded. No more fussing with the F12. That key has a new purpose, as mentioned above.",
+        "New stats are now submitted to the website: level two time, level three time, level four time, peak homing daggers, & peak enemies alive.",
+        "To copy the link for the most recent game, you simply click the ddstats.exe window.",
+        "The currently used spawnset is hashed and submitted.",
+        "Title and icon added to console window.",
+        "Bug (sorta) fixed where Devil Daggers will sometimes report homing daggers as -1. This is now reported as 0.",
+        "The website now displays the updated statistics. The website is still a work in progress."
+    ]},
+    {"version": "0.2.3",
+    "date": "June 14, 2018",
     "change_log": [
         "v0.2.3 -- minor update",
         "Game submissions now submit player name since Sorath servers take too long to ping. If you update your name in Steam, all you need to do for it to update on ddstats.com is to play a game.",
@@ -13,5 +27,5 @@
         "Refactored code to be less noodly.",
         "Fixed bug with stat monitoring.",
         "Scores no longer submit when under 4.0000 seconds. This is to prevent recording multiple games while user is tilting and angrily smashing the R key."
-    ]
-}
+    ]}
+]

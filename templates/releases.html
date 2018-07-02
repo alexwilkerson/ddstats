@@ -6,12 +6,16 @@
 {% block body %}
 <div id="download">
     <img src="{{ url_for('static', filename='img/sketch_skull3.png') }}">
-    <h1>ddstats v{{releases.version}}<br/></h1>
-      download: <a href="{{url_for('static', filename='releases/ddstats{}.zip'.format(releases.version))}}">v{{releases.version}}</a><br/>
+    <h1>ddstats v{{releases[0].version}}<br/></h1>
+      download: <a href="{{url_for('static', filename='releases/ddstats{}.zip'.format(releases[0].version))}}">v{{releases[0].version}}</a><br/>
+      {% for release in releases %}
+      v{{ release.version }} ({{ release.date }})
       <ul>
-          {% for change in releases.change_log %}
+          {% for change in release.change_log %}
           <li>{{ change }}</li>
           {% endfor %}
       </ul>
+      <br />
+      {% endfor %}
 </div>
 {% endblock %}
