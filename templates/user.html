@@ -100,14 +100,14 @@
                     + location.port + '/user_page');
 
                 var display_gems_and_homing = true;
-                var display_timeout_handle = setTimeout(function() {
+                var display_timeout_handle = window.setTimeout(function() {
                     display_gems_and_homing = false;
                 }, 60000);
 
                 $('#live-stats').on('click', function() {
                     display_gems_and_homing = true;
-                    clearTimeout(display_time_handle);
-                    display_timeout_handle = setTimeout(function() {
+                    window.clearTimeout(display_time_handle);
+                    display_timeout_handle = window.setTimeout(function() {
                         display_gems_and_homing = false;
                     }, 60000);
                 });
