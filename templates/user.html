@@ -10,8 +10,8 @@
         <div id="user-card">
             <h1 id="usertitle">{{user_data.player_name}} ({{user_id}})</h1>
             <div id="live-stats">
-              <h2 id="live-stats-title">LIVE STATS <img src="{{
-              url_for('static', filename='img/viewers_skull_icon.png')}}"><span id="live-user-count"></span></h2>
+              <h2 id="live-stats-title">LIVE STATS <img id="live-stats-user-count-img" src="{{ url_for('static', filename='img/viewers_skull_icon.png')}}">
+                <span id="live-stats-user-count"></span></h2>
               <h2 id="live-stats-status"></h2>
               <ul class="alignleft" id="live-left">
                 <li>TIME: <span id="live-game-time"></span></li>
@@ -127,7 +127,7 @@
                     socket.emit('join', '{{user_id}}');
                 });
                 socket.on('update_user_count', function(user_count) {
-                    $('#live-user-count').text(user_count);
+                    $('#live-stats-user-count').text(user_count);
                 });
                 socket.on('receive', function(game_time, gems, homing_daggers,
                       enemies_alive, enemies_killed, daggers_hit,

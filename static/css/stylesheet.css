@@ -180,6 +180,13 @@ footer {
     border-width: 2px;
     color: #DDD;
 }
+#live-stats-user-count-img {
+    max-width: 60%;
+    max-height: 60%;
+}
+#live-stats-user-count {
+  color: #9A1000;
+}
 #live-stats-title, #live-stats-status {
     margin: 0;
     padding: 0;
