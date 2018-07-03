@@ -144,7 +144,8 @@ def games_page(page_num):
     if games is None:
         return('No games found.')
 
-    return render_template('games.html', games=games, death_types=death_types)
+    live_users = get_live_users()
+    return render_template('games.html', games=games, death_types=death_types, live_users=live_users)
 
 
 @app.route('/user/<int:user_id>/', defaults={'page_num': 1})
@@ -210,8 +211,10 @@ def game_log(game_number):
     current_high_score = dd_high_score == game_time
     # game_time_list = game_time_list[:-1]
     # game_time_list.append(round(game_data["game_time"], 4))
+    live_users = get_live_users()
 
     return render_template('game_log.html',
+                           live_users=live_users,
                            player_name=user_data["player_name"],
                            current_high_score=current_high_score,
                            dd_high_score=user_data["time"],

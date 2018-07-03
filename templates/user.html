@@ -42,45 +42,46 @@
             </ul>
             <div style="clear: both;"></div>
         </div>
+        <div id="games-list">
     {% for game in games.items %}
-        </div>
         <a href="{{ url_for('game_log', game_number=game.id) }}">
-        <div id="stats-card">
-            <h2 class="alignleft">Game {{game.id}}</h1>
-            <!-- <h2 class="alignright">{{player_name}} ({{player_id}})</h1> -->
-            <div style="clear: both;"></div>
-            <ul class="alignleft" id="statsleft">
-                <li>Time: {{game.game_time|round(4)}}</li>
-                <li>Gems: {{game.gems}}</li>
-                <li>Homing Daggers: {{game.homing_daggers}}</li>
-                <li>Enemies Alive: {{game.enemies_alive}}</li>
-                <li>Enemies Killed: {{game.enemies_killed}}</li>
-            </ul>
-            <ul class="alignright" id="statsright">
-                {% if game.death_type == -1 %}
-                    <li>Death: RESTART</li>
-                {% else %}
-                    <li>Death: {{death_types[game.death_type]}}</li>
-                {% endif %}
-                {% if game.daggers_fired != 0 %}
-                    <li>Accuracy: {{((game.daggers_hit/game.daggers_fired)*100)|round(2)}}%</li>
-                {% else %}
-                    <li>Accuracy: 0.0%</li>
-                {% endif %}
-                <li>Daggers Hit: {{game.daggers_hit}}</li>
-                <li>Daggers Fired: {{game.daggers_fired}}</li>
-                <li>{{game.time_stamp|time_ago}}</li>
-            </ul>
-            <div style="clear: both;"></div>
-            <div id="statsfooter">
-            {% if game.replay_player_id > 0 %}
-                <span id="submitter" class="alignright">Replay recorded by {{game.player_id|get_username}} ({{game.player_id}})</span>
-            {% endif %}
-            <div style="clear: both;"></div>
+          <div id="stats-card">
+              <h2 class="alignleft">Game {{game.id}}</h1>
+              <!-- <h2 class="alignright">{{player_name}} ({{player_id}})</h1> -->
+              <div style="clear: both;"></div>
+              <ul class="alignleft" id="statsleft">
+                  <li>Time: {{game.game_time|round(4)}}</li>
+                  <li>Gems: {{game.gems}}</li>
+                  <li>Homing Daggers: {{game.homing_daggers}}</li>
+                  <li>Enemies Alive: {{game.enemies_alive}}</li>
+                  <li>Enemies Killed: {{game.enemies_killed}}</li>
+              </ul>
+              <ul class="alignright" id="statsright">
+                  {% if game.death_type == -1 %}
+                      <li>Death: RESTART</li>
+                  {% else %}
+                      <li>Death: {{death_types[game.death_type]}}</li>
+                  {% endif %}
+                  {% if game.daggers_fired != 0 %}
+                      <li>Accuracy: {{((game.daggers_hit/game.daggers_fired)*100)|round(2)}}%</li>
+                  {% else %}
+                      <li>Accuracy: 0.0%</li>
+                  {% endif %}
+                  <li>Daggers Hit: {{game.daggers_hit}}</li>
+                  <li>Daggers Fired: {{game.daggers_fired}}</li>
+                  <li>{{game.time_stamp|time_ago}}</li>
+              </ul>
+              <div style="clear: both;"></div>
+              <div id="statsfooter">
+              {% if game.replay_player_id > 0 %}
+                  <span id="submitter" class="alignright">Replay recorded by {{game.player_id|get_username}} ({{game.player_id}})</span>
+              {% endif %}
+              <div style="clear: both;"></div>
+              </div>
             </div>
-        </div>
-        </a>
+            </a>
     {% endfor %}
+        </div>
         <div id="pagination">
         {% if games.has_next %}
             <a href="{{ url_for('user_page', user_id=user_id, page_num=games.next_num) }}">Prev</a>    
@@ -90,6 +91,15 @@
         {% endif %}
         </div>
         <script>
+            var last_gems = 0;
+            var last_homing = 0;
+            var display_gems_and_homing = true;
+            var display_timeout_handle = setTimeout(function() {
+                $('#live-gems').text('CLICK TO SHOW');
+                $('#live-homing-daggers').text('CLICK TO SHOW');
+                display_gems_and_homing = false;
+            }, 60000);
+
             $(document).ready(function(){
                 var death_types = ["FALLEN", "SWARMED", "IMPALED", "GORED",
                                    "INFESTED", "OPENED", "PURGED", "DESECRATED",
@@ -99,17 +109,17 @@
                 var socket = io.connect('https://' + document.domain + ':'
                     + location.port + '/user_page');
 
-                var display_gems_and_homing = true;
-                var display_timeout_handle = window.setTimeout(function() {
-                    display_gems_and_homing = false;
-                }, 30000);
-
                 $('#live-stats').on('click', function() {
+                    $('#live-gems').text(last_gems);
+                    $('#live-homing-daggers').text(last_homing);
                     display_gems_and_homing = true;
-                    window.clearTimeout(display_time_handle);
-                    display_timeout_handle = window.setTimeout(function() {
+                    clearTimeout(display_timeout_handle);
+                    display_timeout_handle = null;
+                    display_timeout_handle = setTimeout(function() {
+                        $('#live-gems').text('CLICK TO SHOW');
+                        $('#live-homing-daggers').text('CLICK TO SHOW');
                         display_gems_and_homing = false;
-                    }, 30000);
+                    }, 60000);
                 });
 
                 socket.on('connect', function() {
@@ -122,6 +132,8 @@
                     $('#live-stats-title').text('LIVE STATS');
                     $('#live-stats').show(350);
                     $('#live-game-time').text(game_time.toFixed(4));
+                    last_gems = gems;
+                    last_homing = homing_daggers;
                     if (display_gems_and_homing) {
                         $('#live-gems').text(gems);
                         $('#live-homing-daggers').text(homing_daggers);
@@ -140,14 +152,21 @@
                     }
                     $('#live-accuracy').text(accuracy.toFixed(2) + '%');
 
-                    if (death_type === -1) {
+                    if (death_type === -1 && is_replay===true) {
                       $('#live-stats-status').css('color', '#1070BF');
+                      $('#live-stats').css('border-color', '#34A61C');
+                      $('#live-stats-status').text('WATCHING REPLAY');
+                    } else if (death_type === -1) {
+                      $('#live-stats-status').css('color', '#1070BF');
+                      $('#live-stats').css('border-color', '#34A61C');
                       $('#live-stats-status').text('ALIVE');
                     } else if (death_type === -2) {
                       $('#live-stats-status').css('color', '#1070BF');
+                      $('#live-stats').css('border-color', '#1070BF');
                       $('#live-stats-status').text('IN MENU');
                     } else {
                       $('#live-stats-status').css('color', '#9A1000');
+                      $('#live-stats').css('border-color', '#9A1000');
                       $('#live-stats-status').text(death_types[death_type]);
                     }
                 });

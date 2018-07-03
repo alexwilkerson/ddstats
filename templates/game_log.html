@@ -9,7 +9,11 @@
 {% block body %}
         <div id="stats">
             <h2 class="alignleft">Game {{game_number}}</h1>
-            <h2 class="alignright"><a href="{{url_for('user_page', user_id=player_id, page_num=1) }}">{{player_name}} ({{player_id}})</a></h1>
+            <h2 class="alignright">
+                {% if player_id in live_users %}
+                  <span style="color: #34A61C;">&#9673;</span> 
+                {% endif %}
+              <a href="{{url_for('user_page', user_id=player_id, page_num=1) }}">{{player_name}} ({{player_id}})</a></h1>
             <div style="clear: both;"></div>
             <ul class="alignleft" id="statsleft">
               <li>Time: {{game_time}}s

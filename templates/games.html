@@ -6,12 +6,17 @@
 {% block body %}
 
         <h1 id="usertitle">Recent Games</h1>
+        <div id="games-list">
     {% for game in games.items %}
         <a href="{{ url_for('game_log', game_number=game.id) }}">
         <div id="stats-card">
             <h2 class="alignleft">Game {{game.id}}</h1>
             {% if (game.replay_player_id == 0) or (game.player_id == game.replay_player_id) %}
-                <h2 class="alignright">{{game.username}} ({{game.player_id}})</h1>
+                <h2 class="alignright">
+                {% if game.player_id in live_users %}
+                  <span style="color: #34A61C;">&#9673;</span> 
+                {% endif %}
+                  {{game.username}} ({{game.player_id}})</h1>
             {% else %}
                 <h2 class="alignright">{{game.replay_player_id|get_username}} ({{game.replay_player_id}})</h1>
             {% endif %}
@@ -48,6 +53,7 @@
         </div>
         </a>
     {% endfor %}
+        </div>
         <div id="pagination">
         {% if games.has_next %}
             <a href="{{ url_for('games_page', page_num=games.next_num) }}">Prev</a>    
