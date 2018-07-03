@@ -419,6 +419,7 @@ def get_game_stats(game_id):
                         "level_four_time": game.level_four_time,
                         "time_stamp": game.time_stamp,
                         "replay_player_id": game.replay_player_id,
+                        "survival_hash": game.survival_hash,
                         "version": game.version})
 
 

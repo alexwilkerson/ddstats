@@ -26,6 +26,9 @@
                 <li>DAGGERS FIRED: <span id="live-daggers-fired"></span></li>
               </ul>
               <div style="clear: both;"></div>
+              <span id="live-level-two"></span>
+              <span id="live-level-three"></span>
+              <span id="live-level-four"></span>
             </div>
             <ul class="alignleft" id="userleft">
                 <li>Rank: {{user_data.rank|numberFormat}}</li>
@@ -154,6 +157,19 @@
                       accuracy = 0.0;
                     }
                     $('#live-accuracy').text(accuracy.toFixed(2) + '%');
+
+                    if (level_two > 0.0)
+                      $('#live-level-two').text('L2: ' + level_two.toFixed(4))
+                    else if (level_two === 0.0 && death_type < 0)
+                      $('#live-level-two').text('')
+                    if (level_three > 0.0)
+                      $('#live-level-three').text('L3: ' + level_three.toFixed(4))
+                    else if (level_three === 0.0 && death_type < 0)
+                      $('#live-level-three').text('')
+                    if (level_four > 0.0)
+                      $('#live-level-four').text('L4: ' + level_four.toFixed(4))
+                    else if (level_four === 0.0 && death_type < 0)
+                      $('#live-level-four').text('')
 
                     if (death_type === -1 && is_replay===true) {
                       $('#live-stats-status').css('color', '#1070BF');

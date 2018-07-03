@@ -208,6 +208,21 @@ footer {
 #live-right {
   text-align: right;
 }
+#live-level-two {
+  font-size: 14px;
+  color: #FF546B;
+  display: block;
+}
+#live-level-three {
+  font-size: 14px;
+  color: #FF54BC;
+  display: block;
+}
+#live-level-four {
+  font-size: 14px;
+  color: #E650F3;
+  display: block;
+}
 #pagination {
     max-width: 720px;
     margin: 0 auto;
