@@ -99,8 +99,10 @@
             var last_homing = 0;
             var display_gems_and_homing = true;
             var display_timeout_handle = setTimeout(function() {
-                $('#live-gems').text('CLICK TO SHOW');
-                $('#live-homing-daggers').text('CLICK TO SHOW');
+                if (death_type >= 0) {
+                    $('#live-gems').text('CLICK TO SHOW');
+                    $('#live-homing-daggers').text('CLICK TO SHOW');
+                }
                 display_gems_and_homing = false;
             }, 60000);
 
@@ -120,8 +122,10 @@
                     clearTimeout(display_timeout_handle);
                     display_timeout_handle = null;
                     display_timeout_handle = setTimeout(function() {
-                        $('#live-gems').text('CLICK TO SHOW');
-                        $('#live-homing-daggers').text('CLICK TO SHOW');
+                        if (death_type >= 0) {
+                            $('#live-gems').text('CLICK TO SHOW');
+                            $('#live-homing-daggers').text('CLICK TO SHOW');
+                        }
                         display_gems_and_homing = false;
                     }, 60000);
                 });
