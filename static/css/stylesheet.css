@@ -97,6 +97,7 @@ ul {
 #header img {
     display:block;
     margin:auto;
+    image-rendering: pixelated;
 }
 #header a:link, a:visited, a:active {
     color: #006EC2;
@@ -181,6 +182,7 @@ footer {
     color: #DDD;
 }
 #live-stats-user-count-img {
+    image-rendering: pixelated;
     max-width: 60%;
     max-height: 60%;
 }
@@ -333,6 +335,9 @@ footer {
 }
 #download ul {
     list-style-type: circle;
+}
+#logo: {
+    image-rendering: pixelated;
 }
 #logo:hover {
     -webkit-animation: action 1s infinite alternate;
