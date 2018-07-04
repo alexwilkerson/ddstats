@@ -10,7 +10,8 @@
       <div id="log"></div>
     <script>
             $(document).ready(function(){
-                var socket = io.connect('https://' + document.domain + ':' + location.port + '/test');
+                // var socket = io.connect('https://' + document.domain + ':' + location.port + '/test');
+                var socket = io.connect('https://www.ddstats.com:/test');
                 socket.on('my response', function(msg) {
                     $('#log').append('<p>Received: ' + msg.data + '</p>');
                 });
