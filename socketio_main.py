@@ -106,7 +106,7 @@ def test_connect():
 @socketio.on('disconnect', namespace='/user_page')
 def user_page_disconnect():
     global user_list
-    user = next((u for u in user_list if u['sid'] == request.sid), None) 
+    user = next((u for u in user_list if u['sid'] == request.sid), None)
     user_list = [u for u in user_list if u['sid'] != request.sid]
     if user is not None:
         player_id = user['player_id']

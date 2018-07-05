@@ -90,6 +90,23 @@ class State(db.Model):
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     username = db.Column(db.String(128), index=True, nullable=False)
+    rank = db.Column(db.Integer, nullable=False)
+    game_time = db.Column(db.Float, nullable=False)
+    death_type = db.Column(db.Integer, nullable=False)
+    gems = db.Column(db.Integer, nullable=False)
+    homing_daggers = db.Column(db.Integer, nullable=False)
+    daggers_fired = db.Column(db.Integer, nullable=False)
+    daggers_hit = db.Column(db.Integer, nullable=False)
+    enemies_alive = db.Column(db.Integer, nullable=False)
+    enemies_killed = db.Column(db.Integer, nullable=False)
+    accuracy = db.Column(db.Float, nullable=False)
+    time_total = db.Column(db.Float, nullable=False)
+    deaths_total = db.Column(db.Integer, nullable=False)
+    gems_total = db.Column(db.Integer, nullable=False)
+    enemies_killed_total = db.Column(db.Integer, nullable=False)
+    daggers_fired_total = db.Column(db.Integer, nullable=False)
+    daggers_hit_total = db.Column(db.Integer, nullable=False)
+    accuracy_total = db.Column(db.Float, nullable=False)
 
 
 class Live(db.Model):
@@ -116,7 +133,7 @@ def users_page():
             r = requests.get('http://ddstats.com/api/get_user_by_id/{}'.format(user.id))
             user_data = r.json()
             unsorted_users.append(user_data)
-        
+
     users = sorted(unsorted_users, key=lambda k: k['rank'])
     live_users = get_live_users()
     # users = db.session.query(Game.player_id).distinct().all()
