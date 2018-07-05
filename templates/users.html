@@ -9,10 +9,10 @@
     <div style="text-align: center">
     {% for user in users %}
     {% if user.id != -1 %}
-    {% if user.player_id in live_users %}
+    {% if user.id in live_users %}
     <span style="color: #34A61C;">&#9673;</span> 
     {% endif %}
-    <a style="color: #DDD;" href="{{ url_for('user_page', user_id=user.player_id, page_num=1) }}">{{ user.player_name }}</a>
+    <a style="color: #DDD;" href="{{ url_for('user_page', user_id=user.id, page_num=1) }}">{{ user.username }}</a>
     <br />
     {% endif %}
     {% endfor %}

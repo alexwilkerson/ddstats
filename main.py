@@ -94,10 +94,8 @@ class User(db.Model):
     game_time = db.Column(db.Float, nullable=False)
     death_type = db.Column(db.Integer, nullable=False)
     gems = db.Column(db.Integer, nullable=False)
-    homing_daggers = db.Column(db.Integer, nullable=False)
     daggers_fired = db.Column(db.Integer, nullable=False)
     daggers_hit = db.Column(db.Integer, nullable=False)
-    enemies_alive = db.Column(db.Integer, nullable=False)
     enemies_killed = db.Column(db.Integer, nullable=False)
     accuracy = db.Column(db.Float, nullable=False)
     time_total = db.Column(db.Float, nullable=False)
@@ -126,15 +124,7 @@ def about_page():
 
 @app.route('/users')
 def users_page():
-    list_of_users = User.query.all()
-    unsorted_users = []
-    for user in list_of_users:
-        if user.id is not -1:
-            r = requests.get('http://ddstats.com/api/get_user_by_id/{}'.format(user.id))
-            user_data = r.json()
-            unsorted_users.append(user_data)
-
-    users = sorted(unsorted_users, key=lambda k: k['rank'])
+    users = User.query.order_by(User.rank).all()
     live_users = get_live_users()
     # users = db.session.query(Game.player_id).distinct().all()
     # users_list = []
@@ -173,14 +163,34 @@ def games_page(page_num):
     return render_template('games.html', games=games, death_types=death_types, live_users=live_users)
 
 
-@app.route('/user/<int:user_id>/', defaults={'page_num': 1})
+@app.route('/user/<int:user_id>', defaults={'page_num': 1})
 @app.route('/user/<int:user_id>/<int:page_num>')
 def user_page(user_id, page_num):
     games = Game.query.filter(((Game.player_id==user_id) & (Game.replay_player_id==0)) | (Game.replay_player_id==user_id)).order_by(Game.id.desc()).paginate(per_page=10, page=page_num, error_out=True)
     if games is None:
         return('No user found with that ID')
-    r = requests.get('http://ddstats.com/api/get_user_by_id/{}'.format(user_id))
-    user_data = r.json()
+
+    existing_player = User.query.filter_by(id=user_id).first()
+    if existing_player is not None:
+        r = requests.get('http://ddstats.com/api/get_user_by_id/{}'.format(user_id))
+        user_data = r.json()
+        existing_player.username=user_data['player_name']
+        existing_player.rank=user_data['rank']
+        existing_player.game_time=user_data['time']
+        existing_player.death_type=user_data['death_type']
+        existing_player.gems=user_data['gems']
+        existing_player.daggers_fired=user_data['shots_fired']
+        existing_player.daggers_hit=user_data['shots_hit']
+        existing_player.enemies_killed=user_data['kills']
+        existing_player.accuracy=user_data['accuracy']
+        existing_player.time_total=user_data['time_total']
+        existing_player.deaths_total=user_data['deaths_total']
+        existing_player.gems_total=user_data['gems_total']
+        existing_player.enemies_killed_total=user_data['kills_total']
+        existing_player.daggers_fired_total=user_data['shots_fired_total']
+        existing_player.daggers_hit_total=user_data['shots_hit_total']
+        existing_player.accuracy_total=user_data['accuracy_total']
+        db.session.commit()
 
     return render_template('user.html', user_data=user_data, user_id=user_id, games=games, death_types=death_types)
 
@@ -593,13 +603,33 @@ def get_game_enemies_alive(game_number):
 def create_game():
     data = request.get_json()
 
-    if 'playerID' == -1:
-        return jsonify({'message': 'Some kind of error occurred.'})
+    if data['playerID'] == -1:
+        return jsonify({'message': 'Some kind of error occurred.'}), 400
+
+    r = requests.get('http://ddstats.com/api/refresh_user_by_id/{}'.format(data['playerID']))
+    user_data = r.json()
 
     if 'playerName' in data:
         existing_player = User.query.filter_by(id=data['playerID']).first()
         if existing_player is None:
-            new_player = User(id=data['playerID'], username=data['playerName'])
+            r = requests.get('http://ddstats.com/api/get_user_by_id/{}'.format(data['playerID']))
+            user_data = r.json()
+            new_player = User(id=data['playerID'], username=data['playerName'],
+                              rank=user_data['rank'],
+                              game_time=user_data['time'],
+                              death_type=user_data['death_type'],
+                              gems=user_data['gems'],
+                              daggers_fired=user_data['shots_fired'],
+                              daggers_hit=user_data['shots_hit'],
+                              enemies_killed=user_data['kills'],
+                              accuracy=user_data['accuracy'],
+                              time_total=user_data['time_total'],
+                              deaths_total=user_data['deaths_total'],
+                              gems_total=user_data['gems_total'],
+                              enemies_killed_total=user_data['kills_total'],
+                              daggers_fired_total=user_data['shots_fired_total'],
+                              daggers_hit_total=user_data['shots_hit_total'],
+                              accuracy_total=user_data['accuracy_total'])
             db.session.add(new_player)
         else:
             existing_player.username = data['playerName']
@@ -953,6 +983,7 @@ def get_user_by_id(uid):
             accuracy_total = float("{0:.2f}".format((shots_hit_total/shots_fired_total)*100))
         else:
             accuracy_total = "0.00"
+
         return jsonify({'player_name': username,
                         'rank': rank,
                         'player_id': userid,
@@ -970,6 +1001,34 @@ def get_user_by_id(uid):
                         'shots_hit_total': shots_hit_total,
                         'shots_fired_total': shots_fired_total,
                         'accuracy_total': accuracy_total})
+
+        
+@app.route('/api/refresh_user_by_id/<int:uid>')
+def refresh_user_by_id(uid):
+    existing_player = User.query.filter_by(id=uid).first()
+    if existing_player is None:
+        return jsonify({'message': 'Not a valid ddstats user.'})
+    else:
+        r = requests.get('http://ddstats.com/api/get_user_by_id/{}'.format(uid))
+        user_data = r.json()
+        existing_player.username = user_data['player_name']
+        existing_player.rank = user_data['rank']
+        existing_player.game_time = user_data['time']
+        existing_player.death_type = user_data['death_type']
+        existing_player.gems = user_data['gems']
+        existing_player.daggers_fired = user_data['shots_fired']
+        existing_player.daggers_hit = user_data['shots_hit']
+        existing_player.enemies_killed = user_data['kills']
+        existing_player.accuracy = user_data['accuracy']
+        existing_player.time_total = user_data['time_total']
+        existing_player.deaths_total = user_data['deaths_total']
+        existing_player.gems_total = user_data['gems_total']
+        existing_player.enemies_killed_total = user_data['kills_total']
+        existing_player.daggers_fired_total = user_data['shots_fired_total']
+        existing_player.daggers_hit_total = user_data['shots_hit_total']
+        existing_player.accuracy_total = user_data['accuracy_total']
+        db.session.commit()
+        return jsonify({'message': 'Success'})
 
 
 @app.route('/api/get_scores', methods=['GET'])
