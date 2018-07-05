@@ -109,7 +109,15 @@ def about_page():
 
 @app.route('/users')
 def users_page():
-    users = User.query.all()
+    list_of_users = User.query.all()
+    unsorted_users = []
+    for user in list_of_users:
+        if user.id is not -1:
+            r = requests.get('http://ddstats.com/api/get_user_by_id/{}'.format(user.id))
+            user_data = r.json()
+            unsorted_users.append(user_data)
+        
+    users = sorted(unsorted_users, key=lambda k: k['rank'])
     live_users = get_live_users()
     # users = db.session.query(Game.player_id).distinct().all()
     # users_list = []
