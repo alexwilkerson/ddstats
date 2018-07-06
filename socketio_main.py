@@ -134,7 +134,7 @@ def user_page_disconnect():
         player_id = user['player_id']
         users_in_room = [u for u in user_list if u['player_id'] == player_id]
         user_count = len(users_in_room)
-        emit('update_user_count', user_count, name_space='/stats', room=player_id)
+        emit('update_user_count', user_count, room=player_id)
 
         # player = db.session.query(Live).filter_by(player_id=player_id).first()
         # if player is not None:
@@ -155,7 +155,7 @@ def user_page_join(player_id):
     # print(player_id + ': someone joined the room.', file=sys.stdout)
     users_in_room = [u for u in user_list if u['player_id'] == player_id]
     user_count = len(users_in_room)
-    emit('update_user_count', user_count, name_space='/stats', room=player_id)
+    emit('update_user_count', user_count, room=player_id)
 
     # player = db.session.query(Live).filter_by(player_id=player_id).first()
     # if player is not None:
@@ -203,7 +203,11 @@ def game_submitted(game_id):
     print(game_id, file=sys.stdout)
     game = db.session.query(Game).filter_by(id=game_id).first()
     if game:
-        print(game["game_time"], file=sys.stdout)
+        emit('game_received', (game.id, game.game_time, game.death_type, game.gems,
+                               game.homing_daggers,
+                               game.enemies_alive, game.enemies_killed,
+                               game.daggers_hit, game.daggers_fired),
+                               namespace='/user_page', room=str(game.player_id), broadcast=True)
 
 
 @socketio.on('get_status', namespace='/stats')

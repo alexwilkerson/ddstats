@@ -95,6 +95,18 @@
         {% endif %}
         </div>
         <script>
+        // First, checks if it isn't implemented yet.
+        if (!String.prototype.format) {
+          String.prototype.format = function() {
+            var args = arguments;
+            return this.replace(/{(\d+)}/g, function(match, number) { 
+              return typeof args[number] != 'undefined'
+                ? args[number]
+                : match
+              ;
+            });
+          };
+        }
             var last_gems = 0;
             var last_homing = 0;
             var display_gems_and_homing = true;
@@ -188,6 +200,22 @@
                       $('#live-stats').css('border-color', '#9A1000');
                       $('#live-stats-status').text(death_types[death_type]);
                     }
+                });
+                socket.on('game_received', function(id, game_time, death_type,
+                      gems, homing_daggers, enemies_alive, enemies_killed,
+                      daggers_hit, daggers_fired) {
+                  var accuracy = 0.0;
+                  if (daggers_fired > 0) {
+                    accuracy = (daggers_hit/daggers_fired)*100;
+                  }
+                  var death = "RESTART";
+                  if (death_type >= 0) death = death_types[death_type];
+                  $("#games-list").prepend('<a href="/game_log/{0}"><div id="stats-card"><h2 class="alignleft">Game {0}</h1><div style="clear: both;"></div><ul class="alignleft" id="statsleft"><li>Time: {1}</li><li>Gems: {2}</li><li>Homing Daggers: {3}</li><li>Enemies Alive: {4}</li><li>Enemies Killed: {5}</li></ul><ul class="alignright" id="statsright"><li>Death: {6}</li><li>Accuracy: {7}%</li><li>Daggers Hit: {8}</li><li>Daggers Fired: {9}</li><li>now</li></ul><div style="clear: both;"></div><div id="statsfooter"><div style="clear: both;"></div></div></div></a>'.format(id,
+                        game_time.toFixed(4), gems, homing_daggers,
+                        enemies_alive, enemies_killed, death,
+                        accuracy.toFixed(2),
+                        daggers_hit, daggers_fired)).show(350);
+                   $("#games-list").children().last().remove();
                 });
             });
         </script>
