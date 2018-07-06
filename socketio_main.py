@@ -76,6 +76,21 @@ class State(db.Model):
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     username = db.Column(db.String(128), index=True, nullable=False)
+    rank = db.Column(db.Integer, nullable=False)
+    game_time = db.Column(db.Float, nullable=False)
+    death_type = db.Column(db.Integer, nullable=False)
+    gems = db.Column(db.Integer, nullable=False)
+    daggers_fired = db.Column(db.Integer, nullable=False)
+    daggers_hit = db.Column(db.Integer, nullable=False)
+    enemies_killed = db.Column(db.Integer, nullable=False)
+    accuracy = db.Column(db.Float, nullable=False)
+    time_total = db.Column(db.Float, nullable=False)
+    deaths_total = db.Column(db.Integer, nullable=False)
+    gems_total = db.Column(db.Integer, nullable=False)
+    enemies_killed_total = db.Column(db.Integer, nullable=False)
+    daggers_fired_total = db.Column(db.Integer, nullable=False)
+    daggers_hit_total = db.Column(db.Integer, nullable=False)
+    accuracy_total = db.Column(db.Float, nullable=False)
 
 
 class Live(db.Model):
@@ -186,6 +201,9 @@ def receive_stats(player_id, game_time, gems, homing_daggers,
 @socketio.on('game_submitted', namespace='/stats')
 def game_submitted(game_id):
     print(game_id, file=sys.stdout)
+    game = db.session.query(Game).filter_by(id=game_id).first()
+    if game:
+        print(game["game_time"], file=sys.stdout)
 
 
 @socketio.on('get_status', namespace='/stats')
