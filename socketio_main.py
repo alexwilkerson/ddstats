@@ -97,10 +97,17 @@ def clear_live_table():
 user_list = []
 
 
+@socketio.on('aaa')
+def received_aaa():
+    print('aaa receieved', file=sys.stdout)
+    emit('on_aaa_response')
+
+
 @socketio.on('connect', namespace='/test')
 def test_connect():
     print('This standard output', file=sys.stdout)
     emit('my response', {'data': 'Connected'}, broadcast=True)
+    emit('welcome', broadcast=True)
 
 
 @socketio.on('disconnect', namespace='/user_page')
