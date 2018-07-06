@@ -133,7 +133,7 @@ def user_page_join(player_id):
     # print(player_id + ': someone joined the room.', file=sys.stdout)
     users_in_room = [u for u in user_list if u['player_id'] == player_id]
     user_count = len(users_in_room)
-    emit('update_user_count', user_count, namespace='/stats', room=player_id)
+    emit('update_user_count', user_count, name_space='/stats', room=player_id)
 
     # player = db.session.query(Live).filter_by(player_id=player_id).first()
     # if player is not None:
