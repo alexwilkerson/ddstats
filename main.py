@@ -633,6 +633,7 @@ def create_game():
             db.session.add(new_player)
         else:
             existing_player.username = data['playerName']
+        db.session.flush()
         db.session.commit()
 
     # version and data added in same release, so this replaces the default if they
