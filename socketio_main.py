@@ -1,4 +1,5 @@
 import sys
+import time
 import os
 from datetime import datetime
 from flask import Flask, request, jsonify, Response, url_for
@@ -118,6 +119,13 @@ def received_aaa():
     emit('on_aaa_response')
 
 
+@socketio.on('connect', namespace='/ddstats-bot')
+def ddstats_bot_connect():
+    print('Bot connected.', file=sys.stdout)
+    time.sleep(2)
+    emit('test_connection', 'connected')
+
+
 @socketio.on('connect', namespace='/test')
 def test_connect():
     print('This standard output', file=sys.stdout)
@@ -168,6 +176,7 @@ def login(player_id):
     db.session.add(player)
     db.session.flush()
     db.session.commit()
+    emit('user_login', player_id, broadcast=True, namespace='/ddstats-bot')
     # users_in_room = [u for u in user_list if u['player_id'] == player_id]
     # user_count = len(users_in_room)
     # emit('update_user_count', user_count, name_space='/stats', room=request.sid)
