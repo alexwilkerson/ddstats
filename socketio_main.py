@@ -6,7 +6,7 @@ from flask import Flask, request, jsonify, Response, url_for
 from flask import render_template
 from flask_socketio import SocketIO, emit, join_room, leave_room
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import and_
+from sqlalchemy import create_engine, and_
 from flask_bower import Bower
 from flask_cors import CORS
 from time_ago import time_ago
@@ -23,6 +23,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 socketio = SocketIO(app, async_mode='gevent_uwsgi')
+
+
+engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
 
 
 class Game(db.Model):
@@ -110,20 +113,14 @@ def clear_live_table():
 ########################################################
 
 
+threshold = 1000
 user_list = []
-
-
-@socketio.on('aaa')
-def received_aaa():
-    print('aaa receieved', file=sys.stdout)
-    emit('on_aaa_response')
+player_dict = {}
 
 
 @socketio.on('connect', namespace='/ddstats-bot')
 def ddstats_bot_connect():
     print('Bot connected.', file=sys.stdout)
-    time.sleep(2)
-    emit('test_connection', 'connected')
 
 
 @socketio.on('connect', namespace='/test')
@@ -201,6 +198,21 @@ def receive_stats(player_id, game_time, gems, homing_daggers,
                   enemies_alive, enemies_killed, daggers_hit,
                   daggers_fired, level_two, level_three, level_four,
                   is_replay, death_type):
+    global player_dict
+    global threshold
+    user = db.session.query(User).filter_by(id=player_id).first()
+    if str(player_id) in player_dict:
+        if player_dict[str(player_id)] < threshold and game_time >= threshold:
+            emit('threshold_alert', (user.username, player_id, threshold), namespace='/ddstats-bot', broadcast=True)
+    # get user stats, compare to previous and current time
+    player_best = db.session.query(User.game_time).filter_by(id=player_id).first()
+    if player_best is not None:
+        player_best = player_best[0]
+        if str(player_id) in player_dict:
+            if player_dict[str(player_id)] < player_best and game_time >= player_best:
+                emit('player_best', (user.username, player_id, player_best, game_time), namespace='/ddstats-bot', broadcast=True)
+    # finally, set game time
+    player_dict[str(player_id)] = game_time
     emit('receive', (game_time, gems, homing_daggers, enemies_alive,
          enemies_killed, daggers_hit, daggers_fired, level_two, level_three,
          level_four, is_replay, death_type), room=str(player_id),
@@ -209,6 +221,7 @@ def receive_stats(player_id, game_time, gems, homing_daggers,
 
 @socketio.on('game_submitted', namespace='/stats')
 def game_submitted(game_id):
+    global threshold
     print(game_id, file=sys.stdout)
     game = db.session.query(Game).filter_by(id=game_id).first()
     if game:
@@ -217,6 +230,12 @@ def game_submitted(game_id):
                                game.enemies_alive, game.enemies_killed,
                                game.daggers_hit, game.daggers_fired),
                                namespace='/user_page', room=str(game.player_id), broadcast=True)
+        user = db.session.query(User).filter_by(id=game.player_id).first()
+        if user is not None:
+            if game.game_time >= threshold:
+                emit('threshold_submit', (user.username, game.game_time, game.death_type), namespace='/ddstats-bot', broadcast=True)
+            if game.game_time >= user.game_time:
+                emit('player_best_submit', (user.username, game.game_time, game.death_type, user.game_time, game_id), namespace='/ddstats-bot', broadcast=True)
 
 
 @socketio.on('get_status', namespace='/stats')
@@ -226,6 +245,22 @@ def get_status(player_id):
         emit('get_status', room=sid)
     else:
         emit('status', (-3)) 
+
+
+###############
+# ddstats-bot #
+###############
+
+@socketio.on('get_live_users', namespace='/ddstats-bot')
+def get_live_users():
+    with engine.connect() as conn:
+        users = conn.execute('select user.username from user inner join live on live.player_id = user.id').fetchall()
+        user_list = []
+        for user in users:
+            user_list.append(user[0])
+        if len(users) is 0:
+            user_list.append('No users are live.')
+        emit('live_users', user_list)
 
 
 ########################################################
