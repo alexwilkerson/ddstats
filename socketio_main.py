@@ -202,17 +202,20 @@ def receive_stats(player_id, game_time, gems, homing_daggers,
     global threshold
     user = db.session.query(User).filter_by(id=player_id).first()
     if str(player_id) in player_dict:
-        if player_dict[str(player_id)] < threshold and game_time >= threshold:
+        if player_dict[str(player_id)]['game_time'] < threshold and game_time >= threshold:
             emit('threshold_alert', (user.username, player_id, threshold), namespace='/ddstats-bot', broadcast=True)
     # get user stats, compare to previous and current time
     player_best = db.session.query(User.game_time).filter_by(id=player_id).first()
     if player_best is not None:
         player_best = player_best[0]
         if str(player_id) in player_dict:
-            if player_dict[str(player_id)] < player_best and game_time >= player_best:
+            if player_dict[str(player_id)]['game_time'] < player_best and game_time >= player_best:
                 emit('player_best', (user.username, player_id, player_best, game_time), namespace='/ddstats-bot', broadcast=True)
     # finally, set game time
-    player_dict[str(player_id)] = game_time
+    if str(player_id) not in player_dict:
+        player_dict[str(player_id)] = {}
+    player_dict[str(player_id)]['game_time'] = game_time
+    player_dict[str(player_id)]['death_type'] = death_type
     emit('receive', (game_time, gems, homing_daggers, enemies_alive,
          enemies_killed, daggers_hit, daggers_fired, level_two, level_three,
          level_four, is_replay, death_type), room=str(player_id),
@@ -252,7 +255,7 @@ def get_status(player_id):
 ###############
 
 @socketio.on('get_live_users', namespace='/ddstats-bot')
-def get_live_users():
+def get_live_users(channel_id):
     with engine.connect() as conn:
         users = conn.execute('select user.username from user inner join live on live.player_id = user.id').fetchall()
         user_list = []
@@ -260,7 +263,7 @@ def get_live_users():
             user_list.append(user[0])
         if len(users) is 0:
             user_list.append('No users are live.')
-        emit('live_users', user_list)
+        emit('live_users', (user_list, channel_id))
 
 
 ########################################################
