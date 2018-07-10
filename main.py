@@ -917,6 +917,58 @@ class Leaderboard(object):
                 return entry
 
 
+class UserSearch:
+    user_search_data = ""
+    entries = []
+
+    def search(self, user):
+
+        post_values = dict(search=user)
+
+        req = requests.post("http://dd.hasmodai.com/backend16/get_user_search_public.php", post_values)
+        self.user_search_data = req.content
+
+        entry_count = to_int_16(self.user_search_data, 11)
+        rank_iterator = 0
+        byte_pos = 19
+        self.entries = []
+        while(rank_iterator < entry_count):
+            entry = Entry()
+            username_length = to_int_16(self.user_search_data, byte_pos)
+            username_bytes = bytearray(username_length)
+            byte_pos += 2
+            for i in range(byte_pos, byte_pos + username_length):
+                username_bytes[i-byte_pos] = self.user_search_data[i]
+
+            byte_pos += username_length
+
+            entry.username = username_bytes.decode("utf-8")
+            entry.rank = to_int_32(self.user_search_data, byte_pos)
+            entry.userid = to_int_32(self.user_search_data, byte_pos + 4)
+            entry.time = to_int_32(self.user_search_data, byte_pos + 12) / 10000
+            entry.kills = to_int_32(self.user_search_data, byte_pos + 16)
+            entry.gems = to_int_32(self.user_search_data, byte_pos + 28)
+            entry.shots_hit = to_int_32(self.user_search_data, byte_pos + 24)
+            entry.shots_fired = to_int_32(self.user_search_data, byte_pos + 20)
+            if entry.shots_fired == 0:
+                entry.shots_fired = 1
+            entry.death_type = death_types[to_int_16(self.user_search_data, byte_pos + 32)]
+            entry.time_total = to_uint_64(self.user_search_data, byte_pos + 60) / 10000
+            entry.kills_total = to_uint_64(self.user_search_data, byte_pos + 44)
+            entry.gems_total = to_uint_64(self.user_search_data, byte_pos + 68)
+            entry.deaths_total = to_uint_64(self.user_search_data, byte_pos + 36)
+            entry.shots_hit_total = to_uint_64(self.user_search_data, byte_pos + 76)
+            entry.shots_fired_total = to_uint_64(self.user_search_data, byte_pos + 52)
+            if entry.shots_fired_total == 0:
+                entry.shots_fired_total = 1
+
+            byte_pos += 88
+
+            self.entries.append(entry)
+
+            rank_iterator += 1
+
+
 class Entry(object):
     username = ""
     userid = 0
@@ -1069,7 +1121,63 @@ def get_user_by_id(uid):
                         'shots_fired_total': shots_fired_total,
                         'accuracy_total': accuracy_total})
 
-        
+
+@app.route('/user_search/<search_string>', methods=['GET'])
+def user_search(search_string):
+    # user = " ".join(message.content.strip().split()[1:])
+    usersearch = UserSearch()
+    usersearch.search(search_string)
+    number_users_found = len(usersearch.entries)
+    if number_users_found == 0:
+        return jsonify({'message': 'Search string found no users.'})
+        # entry = usersearch.entries[0]
+        # embed = discord.Embed(title="{} ({})".format(entry.username, entry.userid),
+        #                       description="Rank {:,}".format(entry.rank), color=0x660000)
+        # embed.add_field(name="Time", value="{:.4f}s".format(entry.time), inline=True)
+        # embed.add_field(name="Kills", value="{:,}".format(entry.kills), inline=True)
+        # embed.add_field(name="Gems", value="{:,}".format(entry.gems), inline=True)
+        # embed.add_field(name="Accuracy", value="{:.2f}%".format((entry.shots_hit/entry.shots_fired)*100), inline=True)
+        # embed.add_field(name="Death Type", value=entry.death_type, inline=True)
+        # embed.add_field(name="Total Time", value="{:,.4f}s".format(entry.time_total), inline=True)
+        # embed.add_field(name="Total Time (in days)", value="{:,.2f}".format(entry.time_total / 84600), inline=True)
+        # embed.add_field(name="Kills Total", value="{:,}".format(entry.kills_total), inline=True)
+        # embed.add_field(name="Gems Total", value="{:,}".format(entry.gems_total), inline=True)
+        # embed.add_field(name="Accuracy Total",
+        #                 value="{:.2f}%".format((entry.shots_hit_total/entry.shots_fired_total)*100),
+        #                 inline=True)
+        # embed.add_field(name="Deaths Total", value="{:,}".format(entry.deaths_total), inline=True)
+        # return embed
+
+    sorted_users = sorted(usersearch.entries, key=lambda user: user.rank)[:10]
+    users_found = []
+    for entry in sorted_users:
+        e = {}
+        e["username"] = entry.username
+        e["userid"]= entry.userid
+        e["rank"] = entry.rank
+        e["time"] = entry.time
+        e["kills"] = entry.kills
+        e["gems"] = entry.gems
+        e["shots_hit"] = entry.shots_hit
+        e["shots_fired"] = entry.shots_fired
+        accuracy = 0.0
+        if entry.shots_fired != 0:
+            accuracy = ((entry.shots_hit/entry.shots_fired)*100).toFixed(2)
+        e["death_type"] = death_types[entry.death_type]
+        e["time_total"] = entry.time_total
+        e["kills_total"] = entry.kills_total
+        e["gems_total"] = entry.gems_total
+        e["deaths_total"] = entry.deaths_total
+        e["shots_hit_total"] = entry.shots_hit_total
+        e["shots_fired_total"] = entry.shots_fired_total
+        accuracy_total = 0.0
+        if entry.shots_fired_total != 0:
+            accuracy_total = ((entry.shots_hit_total/entry.shots_fired_total)*100).toFixed(2)
+        e["accuracy_total"] = accuracy_total
+        users_found.append(e)
+    return jsonify(users_found)
+
+
 @app.route('/api/refresh_user_by_id/<int:uid>')
 def refresh_user_by_id(uid):
     existing_player = User.query.filter_by(id=uid).first()
