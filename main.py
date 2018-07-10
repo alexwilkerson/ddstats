@@ -942,6 +942,70 @@ class Entry(object):
             return NotImplemented
 
 
+@app.route('/api/get_user_by_rank/<int:rank>')
+def get_user_by_rank(rank):
+        post_values = dict(rank=rank)
+
+        req = requests.post("http://dd.hasmodai.com/backend16/get_user_by_rank_public.php", post_values)
+        data = req.content
+        if (rank < 1) or (rank is None):
+            return jsonify({'message': 'Invalid user ID.'})
+
+        byte_pos = 19
+
+        username_length = to_int_16(data, byte_pos)
+        username_bytes = bytearray(username_length)
+        byte_pos += 2
+        for i in range(byte_pos, byte_pos + username_length):
+            username_bytes[i-byte_pos] = data[i]
+
+        byte_pos += username_length
+
+        userid = to_uint_64(data, byte_pos + 4)
+        if userid == 0:
+            return jsonify({'message': 'Rank out of bounds.'})
+        username = username_bytes.decode("utf-8")
+        rank = to_int_32(data, byte_pos)
+        time = to_int_32(data, byte_pos + 12) / 10000
+        kills = to_int_32(data, byte_pos + 16)
+        gems = to_int_32(data, byte_pos + 28)
+        shots_hit = to_int_32(data, byte_pos + 24)
+        shots_fired = to_int_32(data, byte_pos + 20)
+        if shots_fired > 0:
+            accuracy = float("{0:.2f}".format((shots_hit/shots_fired)*100))
+        else:
+            accuracy = "0.00"
+        death_type = death_types[to_int_16(data, byte_pos + 32)]
+        time_total = to_uint_64(data, byte_pos + 60) / 10000
+        kills_total = to_uint_64(data, byte_pos + 44)
+        gems_total = to_uint_64(data, byte_pos + 68)
+        deaths_total = to_uint_64(data, byte_pos + 36)
+        shots_hit_total = to_uint_64(data, byte_pos + 76)
+        shots_fired_total = to_uint_64(data, byte_pos + 52)
+        if shots_fired_total > 0:
+            accuracy_total = float("{0:.2f}".format((shots_hit_total/shots_fired_total)*100))
+        else:
+            accuracy_total = "0.00"
+
+        return jsonify({'player_name': username,
+                        'rank': rank,
+                        'player_id': userid,
+                        'time': time,
+                        'kills': kills,
+                        'gems': gems,
+                        'shots_hit': shots_hit,
+                        'shots_fired': shots_fired,
+                        'accuracy': accuracy,
+                        'death_type': death_type,
+                        'time_total': time_total,
+                        'kills_total': kills_total,
+                        'gems_total': gems_total,
+                        'deaths_total': deaths_total,
+                        'shots_hit_total': shots_hit_total,
+                        'shots_fired_total': shots_fired_total,
+                        'accuracy_total': accuracy_total})
+
+
 @app.route('/api/get_user_by_id/<int:uid>')
 def get_user_by_id(uid):
         post_values = dict(uid=uid)
@@ -954,6 +1018,8 @@ def get_user_by_id(uid):
         byte_pos = 19
 
         username_length = to_int_16(data, byte_pos)
+        if username_length == 0:
+            return jsonify({'message': 'Invalid user ID.'})
         username_bytes = bytearray(username_length)
         byte_pos += 2
         for i in range(byte_pos, byte_pos + username_length):

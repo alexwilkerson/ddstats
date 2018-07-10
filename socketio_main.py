@@ -169,11 +169,19 @@ def user_page_join(player_id):
 
 @socketio.on('login')
 def login(player_id):
+    global player_dict
     player = Live(player_id=int(player_id), sid=request.sid)
     db.session.add(player)
     db.session.flush()
     db.session.commit()
     emit('user_login', player_id, broadcast=True, namespace='/ddstats-bot')
+    if player_id is not -1:
+        name = db.session.query(User.username).filter_by(id=player_id).scalar()
+        player_dict[str(player_id)] = {}
+        player_dict[str(player_id)]["name"] = name
+        player_dict[str(player_id)]["game_time"] = 0.0
+        player_dict[str(player_id)]["death_type"] = -2 # in menu
+        player_dict[str(player_id)]["is_replay"] = False
     # users_in_room = [u for u in user_list if u['player_id'] == player_id]
     # user_count = len(users_in_room)
     # emit('update_user_count', user_count, name_space='/stats', room=request.sid)
@@ -182,8 +190,10 @@ def login(player_id):
 
 @socketio.on('disconnect')
 def handle_disconnect():
-    exists = db.session.query(Live.player_id).filter_by(sid=request.sid).scalar() is not None
-    if exists:
+    player_id = db.session.query(Live.player_id).filter_by(sid=request.sid).scalar()
+    if player_id is not None:
+        if str(player_id) in player_dict:
+            del player_dict[str(player_id)]
         Live.query.filter_by(sid=request.sid).delete()
         db.session.commit()
 
@@ -198,6 +208,8 @@ def receive_stats(player_id, game_time, gems, homing_daggers,
                   enemies_alive, enemies_killed, daggers_hit,
                   daggers_fired, level_two, level_three, level_four,
                   is_replay, death_type):
+    if player_id is -1:
+        return
     global player_dict
     global threshold
     user = db.session.query(User).filter_by(id=player_id).first()
@@ -216,6 +228,7 @@ def receive_stats(player_id, game_time, gems, homing_daggers,
         player_dict[str(player_id)] = {}
     player_dict[str(player_id)]['game_time'] = game_time
     player_dict[str(player_id)]['death_type'] = death_type
+    player_dict[str(player_id)]['is_replay'] = is_replay
     emit('receive', (game_time, gems, homing_daggers, enemies_alive,
          enemies_killed, daggers_hit, daggers_fired, level_two, level_three,
          level_four, is_replay, death_type), room=str(player_id),
@@ -236,7 +249,7 @@ def game_submitted(game_id):
         user = db.session.query(User).filter_by(id=game.player_id).first()
         if user is not None:
             if game.game_time >= threshold:
-                emit('threshold_submit', (user.username, game.game_time, game.death_type), namespace='/ddstats-bot', broadcast=True)
+                emit('threshold_submit', (user.username, game.game_time, game.death_type, game_id), namespace='/ddstats-bot', broadcast=True)
             if game.game_time >= user.game_time:
                 emit('player_best_submit', (user.username, game.game_time, game.death_type, user.game_time, game_id), namespace='/ddstats-bot', broadcast=True)
 
@@ -263,7 +276,8 @@ def get_live_users(channel_id):
             user_list.append(user[0])
         if len(users) is 0:
             user_list.append('No users are live.')
-        emit('live_users', (user_list, channel_id))
+        # emit('live_users', (user_list, channel_id))
+        emit('live_users', (player_dict, channel_id))
 
 
 ########################################################
