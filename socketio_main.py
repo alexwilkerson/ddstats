@@ -213,12 +213,12 @@ def receive_stats(player_id, game_time, gems, homing_daggers,
     global player_dict
     global threshold
     user = db.session.query(User).filter_by(id=player_id).first()
-    if str(player_id) in player_dict:
+    if (str(player_id) in player_dict) and (is_replay == False):
         if player_dict[str(player_id)]['game_time'] < threshold and game_time >= threshold:
             emit('threshold_alert', (user.username, player_id, threshold), namespace='/ddstats-bot', broadcast=True)
     # get user stats, compare to previous and current time
     player_best = db.session.query(User.game_time).filter_by(id=player_id).first()
-    if player_best is not None:
+    if (player_best is not None) and (is_replay == False):
         player_best = player_best[0]
         if str(player_id) in player_dict:
             if player_dict[str(player_id)]['game_time'] < player_best and game_time >= player_best:
@@ -247,7 +247,7 @@ def game_submitted(game_id):
                                game.daggers_hit, game.daggers_fired),
                                namespace='/user_page', room=str(game.player_id), broadcast=True)
         user = db.session.query(User).filter_by(id=game.player_id).first()
-        if user is not None:
+        if (user is not None) and (game.replay_player_id == 0):
             if game.game_time >= threshold:
                 emit('threshold_submit', (user.username, game.game_time, game.death_type, game_id), namespace='/ddstats-bot', broadcast=True)
             if game.game_time >= user.game_time:

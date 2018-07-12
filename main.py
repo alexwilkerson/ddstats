@@ -1122,38 +1122,20 @@ def get_user_by_id(uid):
                         'accuracy_total': accuracy_total})
 
 
-@app.route('/user_search/<search_string>', methods=['GET'])
+@app.route('/api/user_search/<search_string>', methods=['GET'])
 def user_search(search_string):
-    # user = " ".join(message.content.strip().split()[1:])
     usersearch = UserSearch()
     usersearch.search(search_string)
     number_users_found = len(usersearch.entries)
     if number_users_found == 0:
         return jsonify({'message': 'Search string found no users.'})
-        # entry = usersearch.entries[0]
-        # embed = discord.Embed(title="{} ({})".format(entry.username, entry.userid),
-        #                       description="Rank {:,}".format(entry.rank), color=0x660000)
-        # embed.add_field(name="Time", value="{:.4f}s".format(entry.time), inline=True)
-        # embed.add_field(name="Kills", value="{:,}".format(entry.kills), inline=True)
-        # embed.add_field(name="Gems", value="{:,}".format(entry.gems), inline=True)
-        # embed.add_field(name="Accuracy", value="{:.2f}%".format((entry.shots_hit/entry.shots_fired)*100), inline=True)
-        # embed.add_field(name="Death Type", value=entry.death_type, inline=True)
-        # embed.add_field(name="Total Time", value="{:,.4f}s".format(entry.time_total), inline=True)
-        # embed.add_field(name="Total Time (in days)", value="{:,.2f}".format(entry.time_total / 84600), inline=True)
-        # embed.add_field(name="Kills Total", value="{:,}".format(entry.kills_total), inline=True)
-        # embed.add_field(name="Gems Total", value="{:,}".format(entry.gems_total), inline=True)
-        # embed.add_field(name="Accuracy Total",
-        #                 value="{:.2f}%".format((entry.shots_hit_total/entry.shots_fired_total)*100),
-        #                 inline=True)
-        # embed.add_field(name="Deaths Total", value="{:,}".format(entry.deaths_total), inline=True)
-        # return embed
-
+    # sorted_users = sorted(usersearch.entries, key=lambda user: user.rank)
     sorted_users = sorted(usersearch.entries, key=lambda user: user.rank)[:10]
     users_found = []
     for entry in sorted_users:
         e = {}
-        e["username"] = entry.username
-        e["userid"]= entry.userid
+        e["player_name"] = entry.username
+        e["player_id"]= entry.userid
         e["rank"] = entry.rank
         e["time"] = entry.time
         e["kills"] = entry.kills
@@ -1162,8 +1144,9 @@ def user_search(search_string):
         e["shots_fired"] = entry.shots_fired
         accuracy = 0.0
         if entry.shots_fired != 0:
-            accuracy = ((entry.shots_hit/entry.shots_fired)*100).toFixed(2)
-        e["death_type"] = death_types[entry.death_type]
+            accuracy = float("{0:.2f}".format((entry.shots_hit/entry.shots_fired)*100))
+        e["accuracy"] = accuracy
+        e["death_type"] = entry.death_type
         e["time_total"] = entry.time_total
         e["kills_total"] = entry.kills_total
         e["gems_total"] = entry.gems_total
@@ -1172,10 +1155,10 @@ def user_search(search_string):
         e["shots_fired_total"] = entry.shots_fired_total
         accuracy_total = 0.0
         if entry.shots_fired_total != 0:
-            accuracy_total = ((entry.shots_hit_total/entry.shots_fired_total)*100).toFixed(2)
+            accuracy_total = float("{0:.2f}".format((entry.shots_hit_total/entry.shots_fired_total)*100))
         e["accuracy_total"] = accuracy_total
         users_found.append(e)
-    return jsonify(users_found)
+    return jsonify({'users_found': users_found, 'number_users_found': number_users_found})
 
 
 @app.route('/api/refresh_user_by_id/<int:uid>')
