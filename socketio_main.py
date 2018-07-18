@@ -247,11 +247,12 @@ def game_submitted(game_id):
                                game.daggers_hit, game.daggers_fired),
                                namespace='/user_page', room=str(game.player_id), broadcast=True)
         user = db.session.query(User).filter_by(id=game.player_id).first()
-        if (user is not None) and (game.replay_player_id == 0):
-            if game.game_time >= threshold:
-                emit('threshold_submit', (user.username, game.game_time, game.death_type, game_id), namespace='/ddstats-bot', broadcast=True)
-            if game.game_time >= user.game_time:
-                emit('player_best_submit', (user.username, game.game_time, game.death_type, user.game_time, game_id), namespace='/ddstats-bot', broadcast=True)
+        if str(game.player_id) in player_dict and player_dict[str(game.player_id)]["is_replay"] == False:
+            if (user is not None):
+                if game.game_time >= threshold:
+                    emit('threshold_submit', (user.username, game.game_time, game.death_type, game_id), namespace='/ddstats-bot', broadcast=True)
+                if game.game_time >= user.game_time:
+                    emit('player_best_submit', (user.username, game.game_time, game.death_type, user.game_time, game_id), namespace='/ddstats-bot', broadcast=True)
 
 
 @socketio.on('get_status', namespace='/stats')
