@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+    <head>
+        <title>PACIFIST LEADERBOARD</title>
+    <style>
+        body {
+            text-align: center;
+            background: radial-gradient(red, green, blue);
+        }
+        .rainbow-gradient {
+            background: red;
+            background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet);
+            background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet);
+            background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet);
+            background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        header {
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            text-align: center;
+            font-size: 40px;
+        }
+        header img {
+            margin: 0;
+            padding: 0;
+        }
+        header h1 {
+            margin-top: 0;
+            padding-top: 0;
+        }
+        #everything {
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+    </head>
+
+    <header>
+        <img style="max-height: 180px;" src="{{ url_for('static', filename='img/skull_jump_rope.gif') }}">
+        <h1 class="rainbow-gradient">PACIFIST LEADERBOARD</h1> 
+    </header>
+
+    <body>
+
+        <div id="everything">
+            {% for game in games %}
+                {% if game[0].replay_player_id == 0 or game[0].replay_player_id == game[0].player_id %}
+                    {% if game[0].survival_hash == '5ff43e37d0f85e068caab5457305754e' %}
+                    <a href="{{ url_for('game_log', game_number=game[0].id) }}"> {{ game[0].id }}.</a> {{ game.username }} -> {{ game[0].game_time | numberFormat(4)}}s<br/>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <img style="max-height: 180px;" src="{{ url_for('static', filename='img/flappy_skull.gif') }}">
+    </body>
+
+</html>

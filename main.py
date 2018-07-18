@@ -40,7 +40,7 @@ db = SQLAlchemy(app)
 
 class Game(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
-    player_id = db.Column(db.Integer, nullable=False)
+    player_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     granularity = db.Column(db.Integer, nullable=False)
     game_time = db.Column(db.Float, nullable=False)
     death_type = db.Column(db.Integer, nullable=False)
@@ -115,6 +115,12 @@ class Live(db.Model):
 class Spawnset(db.Model):
     survival_hash = db.Column(db.String(32), primary_key=True, nullable=False)
     spawnset_name = db.Column(db.String(), nullable=False)
+
+
+@app.route('/pacifist')
+def pacifist_page():
+    games = db.session.query(Game, User.username).outerjoin(User).filter(Game.player_id==User.id).filter(Game.enemies_killed==0).filter(Game.id>4500).order_by(Game.game_time.desc()).all()
+    return render_template('pacifist.html', games=games)
 
 
 @app.route('/about')
