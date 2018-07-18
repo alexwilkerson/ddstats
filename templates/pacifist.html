@@ -46,7 +46,7 @@
 
         <div id="everything">
             {% for game in games %}
-                <a href="{{ url_for('game_log', game_number=game[0].id) }}"> {{ game[0].id }}.</a> {{ game.username }} -> {{ game[0].game_time | numberFormat(4)}}s<br/>
+                <a href="{{ url_for('game_log', game_number=game[0].id) }}"> {{ loop.index }}.</a> {{ game.username }} -> {{ game[0].game_time | numberFormat(4)}}s<br/>
             {% endfor %}
         </div>
 
