@@ -7,7 +7,7 @@ from datetime import datetime
 from flask import Flask, request, jsonify, Response, url_for
 from flask import render_template
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import and_, or_
+from sqlalchemy import and_, or_, func
 from flask_bower import Bower
 from flask_cors import CORS
 from byte_converters import to_int_16, to_int_32, to_uint_64
@@ -119,7 +119,9 @@ class Spawnset(db.Model):
 
 @app.route('/pacifist')
 def pacifist_page():
-    games = db.session.query(Game, User.username).outerjoin(User).filter(Game.player_id==User.id).filter(Game.enemies_killed==0).filter(Game.id>4500).order_by(Game.game_time.desc()).all()
+    # games = db.session.query(Game, User.username).outerjoin(User).filter(Game.player_id==User.id).filter(Game.enemies_killed==0).filter(Game.id>4500).order_by(Game.game_time.desc()).all()
+    games = db.session.query(Game,
+            User.username).outerjoin(User).filter(Game.player_id==User.id).filter(Game.survival_hash=='5ff43e37d0f85e068caab5457305754e').group_by(Game.player_id).filter(Game.enemies_killed==0).order_by(func.max(Game.game_time).desc())
     return render_template('pacifist.html', games=games)
 
 
