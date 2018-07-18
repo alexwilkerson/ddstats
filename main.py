@@ -16,7 +16,7 @@ from time_ago import time_ago
 # latest release
 current_version = "0.3.1"
 # lowest release number that is valid
-valid_version = "0.1.9"
+valid_version = "0.3.1"
 
 death_types = ["FALLEN", "SWARMED", "IMPALED", "GORED", "INFESTED", "OPENED", "PURGED",
                "DESECRATED", "SACRIFICED", "EVISCERATED", "ANNIHILATED", "INTOXICATED",
@@ -120,8 +120,7 @@ class Spawnset(db.Model):
 @app.route('/pacifist')
 def pacifist_page():
     # games = db.session.query(Game, User.username).outerjoin(User).filter(Game.player_id==User.id).filter(Game.enemies_killed==0).filter(Game.id>4500).order_by(Game.game_time.desc()).all()
-    games = db.session.query(Game,
-            User.username).outerjoin(User).filter(Game.player_id==User.id).filter(Game.survival_hash=='5ff43e37d0f85e068caab5457305754e').filter(Game.id>4500).group_by(Game.player_id).filter(Game.enemies_killed==0).order_by(func.max(Game.game_time).desc())
+    games = db.session.query(Game, User.username).outerjoin(User).filter(Game.player_id==User.id).filter(Game.survival_hash=='5ff43e37d0f85e068caab5457305754e').filter(Game.id>4500).group_by(Game.player_id).filter(Game.enemies_killed==0).order_by(func.max(Game.game_time).desc())
     return render_template('pacifist.html', games=games)
 
 
