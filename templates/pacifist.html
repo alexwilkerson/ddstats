@@ -17,7 +17,7 @@
             -webkit-text-fill-color: transparent;
         }
         header {
-            font-family: "Comic Sans MS", cursive, sans-serif;
+            font-family: "Comic Sans MS", "Comic Sans", sans-serif;
             text-align: center;
             font-size: 40px;
         }
@@ -30,7 +30,7 @@
             padding-top: 0;
         }
         #everything {
-            font-family: "Comic Sans MS", cursive, sans-serif;
+            font-family: "Comic Sans MS", "Comic Sans", sans-serif;
             font-weight: bold;
             text-align: center;
         }
@@ -46,11 +46,7 @@
 
         <div id="everything">
             {% for game in games %}
-                {% if game[0].replay_player_id == 0 or game[0].replay_player_id == game[0].player_id %}
-                    {% if game[0].survival_hash == '5ff43e37d0f85e068caab5457305754e' %}
-                    <a href="{{ url_for('game_log', game_number=game[0].id) }}"> {{ game[0].id }}.</a> {{ game.username }} -> {{ game[0].game_time | numberFormat(4)}}s<br/>
-                    {% endif %}
-                {% endif %}
+                <a href="{{ url_for('game_log', game_number=game[0].id) }}"> {{ game[0].id }}.</a> {{ game.username }} -> {{ game[0].game_time | numberFormat(4)}}s<br/>
             {% endfor %}
         </div>
 
