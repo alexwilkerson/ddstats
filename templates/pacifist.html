@@ -2,49 +2,50 @@
 <html>
     <head>
         <title>PACIFIST LEADERBOARD</title>
-    <style>
-        @font-face {
-          font-family: 'Comic Neue';
-          src: url('{{ url_for('static', filename='font/ComicNeue-Bold.eot') }}');
-          src: url('{{ url_for('static', filename='font/ComicNeue-Bold.eot') }}?#iefix') format('embedded-opentype'),
-               url('{{ url_for('static', filename='font/ComicNeue-Bold.woff2') }}') format('woff2'),
-               url('{{ url_for('static', filename='font/ComicNeue-Bold.woff') }}') format('woff'),
-               url('{{ url_for('static', filename='font/ComicNeue-Bold.ttf') }}')  format('truetype');
-          font-weight: 700;
-        }
-        body {
-            text-align: center;
-            background: radial-gradient(red, green, blue);
-        }
-        .rainbow-gradient {
-            background: red;
-            background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet);
-            background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet);
-            background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet);
-            background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        header {
-            font-family: "Comic Sans MS", "Comic Sans", "Comic Neue", sans-serif;
-            font-weight: bold;
-            text-align: center;
-            font-size: 40px;
-        }
-        header img {
-            margin: 0;
-            padding: 0;
-        }
-        header h1 {
-            margin-top: 0;
-            padding-top: 0;
-        }
-        #everything {
-            font-family: "Comic Sans MS", "Comic Sans", "Comic Neue", sans-serif;
-            font-weight: bold;
-            text-align: center;
-        }
-    </style>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            @font-face {
+              font-family: 'Comic Neue';
+              src: url('{{ url_for('static', filename='font/ComicNeue-Bold.eot') }}');
+              src: url('{{ url_for('static', filename='font/ComicNeue-Bold.eot') }}?#iefix') format('embedded-opentype'),
+                   url('{{ url_for('static', filename='font/ComicNeue-Bold.woff2') }}') format('woff2'),
+                   url('{{ url_for('static', filename='font/ComicNeue-Bold.woff') }}') format('woff'),
+                   url('{{ url_for('static', filename='font/ComicNeue-Bold.ttf') }}')  format('truetype');
+              font-weight: 700;
+            }
+            body {
+                text-align: center;
+                background: radial-gradient(red, green, blue);
+            }
+            .rainbow-gradient {
+                background: red;
+                background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet);
+                background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet);
+                background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet);
+                background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            header {
+                font-family: "Comic Sans MS", "Comic Sans", "Comic Neue", sans-serif;
+                font-weight: bold;
+                text-align: center;
+                font-size: 40px;
+            }
+            header img {
+                margin: 0;
+                padding: 0;
+            }
+            header h1 {
+                margin-top: 0;
+                padding-top: 0;
+            }
+            #everything {
+                font-family: "Comic Sans MS", "Comic Sans", "Comic Neue", sans-serif;
+                font-weight: bold;
+                text-align: center;
+            }
+        </style>
     </head>
 
     <header>
