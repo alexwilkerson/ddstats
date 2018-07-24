@@ -16,7 +16,7 @@ from time_ago import time_ago
 # latest release
 current_version = "0.3.1"
 # lowest release number that is valid
-valid_version = "0.3.1"
+valid_version = "0.3.0"
 
 death_types = ["FALLEN", "SWARMED", "IMPALED", "GORED", "INFESTED", "OPENED", "PURGED",
                "DESECRATED", "SACRIFICED", "EVISCERATED", "ANNIHILATED", "INTOXICATED",
