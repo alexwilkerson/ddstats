@@ -11,7 +11,7 @@
         <div class="column left">
             <div id="live-users" class="card">
                 <h1>Live Users</h1>
-                {% if live_users is defined %}
+                {% if live_users|length > 0 %}
                     {% for user in live_users %}
                     <ul>
                         <li><a href="{{ url_for('user_page', user_id=user.player_id) }}">{{ user.username }}</a></li>
@@ -58,7 +58,7 @@
             var socket = io.connect('https://' + document.domain + ':' + location.port + '/index');
 
             socket.on('connect', function() {
-                $('#server-stats').text('online');
+                $('#online-status').text('online');
             });
 
         });
