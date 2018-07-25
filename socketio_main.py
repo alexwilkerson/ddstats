@@ -118,6 +118,11 @@ user_list = []
 player_dict = {}
 
 
+@socketio.on('connect', namespace="/index")
+def index_connect():
+    pass
+
+
 @socketio.on('connect', namespace='/ddstats-bot')
 def ddstats_bot_connect():
     print('Bot connected.', file=sys.stdout)

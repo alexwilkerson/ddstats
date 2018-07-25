@@ -11,7 +11,9 @@
                 <h1>Live Users</h1>
                 {% if live_users is defined %}
                     {% for user in live_users %}
-                        {{ user.username }}<br/>
+                    <ul>
+                        <li><a href="{{ url_for('user_page', user_id=user.player_id) }}">{{ user.username }}</a></li>
+                    </ul>
                     {% endfor %}
                 {% else %}
                 No users are live.
@@ -19,7 +21,7 @@
             </div>
             <div id="server-stats" class="card">
                 <h1>Server Stats</h1>
-                server-stats
+                <span id="online-status">connecting...</span>
             </div>
             <div id="latest-release" class="card">
                 <h1>Latest Release</h1>
@@ -48,4 +50,15 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function(){
+
+            var socket = io.connect('https://' + document.domain + ':' + location.port + '/index');
+
+            socket.on('connect', function() {
+                $('#server-stats').text('online');
+            });
+
+        });
+    </script>
 {% endblock %}
