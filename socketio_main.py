@@ -187,6 +187,7 @@ def login(player_id):
         player_dict[str(player_id)]["game_time"] = 0.0
         player_dict[str(player_id)]["death_type"] = -2 # in menu
         player_dict[str(player_id)]["is_replay"] = False
+    emit('live_users_update', player_dict, include_self=False, broadcast=True, namespace='/index')
     # users_in_room = [u for u in user_list if u['player_id'] == player_id]
     # user_count = len(users_in_room)
     # emit('update_user_count', user_count, name_space='/stats', room=request.sid)
@@ -201,6 +202,7 @@ def handle_disconnect():
             del player_dict[str(player_id)]
         Live.query.filter_by(sid=request.sid).delete()
         db.session.commit()
+    emit('live_users_update', player_dict, include_self=False, broadcast=True, namespace='/index')
 
 
 @socketio.on('message')

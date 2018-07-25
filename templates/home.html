@@ -57,8 +57,14 @@
 
             var socket = io.connect('https://' + document.domain + ':' + location.port + '/index');
 
-            socket.on('connect', function() {
+            socket.on('connect', () => {
                 $('#online-status').text('online');
+            });
+
+            socket.on('live_users_update', (player_list) => {
+                for (player in player_list) {
+                    
+                }
             });
 
         });
