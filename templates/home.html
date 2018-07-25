@@ -8,7 +8,7 @@
 {% endblock %}
 {% block body %}
     <div class="container">
-        <div class="column left">
+        <div class="left">
             <div id="live-users" class="card">
                 <h1>Live Users</h1>
                 {% if live_users|length > 0 %}
@@ -30,10 +30,10 @@
                 <a href="{{ url_for('releases') }}">{{ current_version }}</a>
             </div>
         </div>
-        <div class="column center">
+        <div class="center">
             center-column
         </div>
-        <div class="column right">
+        <div class="right">
             <div id="top-games" class="card">
                 <h1>Top Games v3</h1>
                 <ul>

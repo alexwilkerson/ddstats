@@ -1,30 +1,29 @@
 .container {
+    display: flex;
     max-width: 720px;
-    padding: 0;
     margin: 0 auto;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
 }
 
-.column {
-    float: left;
-    margin: 0;
-    padding: 0 10px;
+.left {
+    flex: 1 0 0;
+    order: 1;
 }
 
-.left, .right {
-    width: 25%;
-}
-
-.container:after {
-    content: "";
-    display: table;
-    clear: both;
+.right {
+    flex: 1 0 0;
+    order: 3;
 }
 
 .center {
-    width: 40%;
+    flex: 2 0 0;
+    order: 2;
     background-color: #DDD;
     border-radius: 6px;
-    margin: 0 auto;
+    margin: 0 10px;
     padding: 0;
     box-shadow: 3px 3px #9A1000;
     color: #121212;
