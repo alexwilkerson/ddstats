@@ -66,7 +66,7 @@
                     $('#live-users-list').html('<li>No users are live.</li>');
                 }
                 for (var id in player_list) {
-                    $('#live-users-list').html("<li><a href=\"{{ url_for('user_page') }}" + player.id + "\">" + player_list[id].name +"</a></li>");
+                    $('#live-users-list').html("<li><a href=\"https://ddstats.com/user/" + player.id + "\">" + player_list[id].name +"</a></li>");
                 }
             });
 
