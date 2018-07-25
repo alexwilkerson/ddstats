@@ -11,15 +11,15 @@
         <div class="left">
             <div id="live-users" class="card">
                 <h1>Live Users</h1>
-                {% if live_users|length > 0 %}
-                    {% for user in live_users %}
-                    <ul>
+                    <ul id="live-users-list">
+                    {% if live_users|length > 0 %}
+                        {% for user in live_users %}
                         <li><a href="{{ url_for('user_page', user_id=user.player_id) }}">{{ user.username }}</a></li>
+                        {% endfor %}
+                    {% else %}
+                        <li>No users are live.</li>
+                    {% endif %}
                     </ul>
-                    {% endfor %}
-                {% else %}
-                No users are live.
-                {% endif %}
             </div>
             <div id="server-stats" class="card">
                 <h1>Server Stats</h1>
@@ -62,8 +62,11 @@
             });
 
             socket.on('live_users_update', (player_list) => {
-                for (player in player_list) {
-                    
+                if (player_list.length < 1 || player_list == undefined) {
+                    $('#live-users-list').html('<li>No users are live.</li>');
+                }
+                for (var id in player_list) {
+                    $('#live-users-list').html("<li><a href=\"{{ url_for('user_page') }}" + player.id + "\">" + player_list[id].name +"</a></li>");
                 }
             });
 
