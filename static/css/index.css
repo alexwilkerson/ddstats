@@ -1,0 +1,59 @@
+.container {
+    max-width: 720px;
+    padding: 0;
+    margin: 0 auto;
+}
+
+.column {
+    float: left;
+    margin: 0;
+    padding: 0 10px;
+}
+
+.left, .right {
+    width: 25%;
+}
+
+.container:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.center {
+    width: 40%;
+    background-color: #DDD;
+    border-radius: 6px;
+    margin: 0 auto;
+    padding: 0;
+    box-shadow: 3px 3px #9A1000;
+    color: #121212;
+}
+
+.card {
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+    background-color: #333;
+    border-radius: 6px;
+    margin: 0 auto 10px auto;
+    padding: 5px;
+    box-shadow: 3px 3px #9A1000;
+    color: #DDD;
+    transition:0.3s;
+}
+
+.card:hover {
+    background-color: #3A3A3A;
+    transform: scale(1.02);
+}
+
+.card h1 {
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}

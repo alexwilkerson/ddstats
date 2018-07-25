@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}ddstats{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="column left">
+            <div id="live-users" class="card">
+                <h1>Live Users</h1>
+                {% if live_users is defined %}
+                    {% for user in live_users %}
+                        {{ user.username }}<br/>
+                    {% endfor %}
+                {% else %}
+                No users are live.
+                {% endif %}
+            </div>
+            <div id="server-stats" class="card">
+                <h1>Server Stats</h1>
+                server-stats
+            </div>
+            <div id="latest-release" class="card">
+                <h1>Latest Release</h1>
+                <a href="{{ url_for('releases') }}">{{ current_version }}</a>
+            </div>
+        </div>
+        <div class="column center">
+            center-column
+        </div>
+        <div class="column right">
+            <div id="top-games" class="card">
+                <h1>Top Games v3</h1>
+                <ul>
+                    {% for game in top_games %}
+                    <li><a href="{{ url_for('game_log', game_number=game.id) }}">{{ game.username }} - {{ game.game_time | numberFormat(4) }}s</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div id="recent-games" class="card">
+                <h1>Recent Games</h1>
+                <ul>
+                    {% for game in recent_games %}
+                    <li><a href="{{ url_for('game_log', game_number=game.id) }}">{{ game.username }} - {{ game.game_time | numberFormat(4) }}s</a></li>
+                    {% endfor %} 
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

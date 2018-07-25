@@ -16,7 +16,7 @@ from time_ago import time_ago
 # latest release
 current_version = "0.3.1"
 # lowest release number that is valid
-valid_version = "0.3.0"
+valid_version = "0.3.1"
 
 death_types = ["FALLEN", "SWARMED", "IMPALED", "GORED", "INFESTED", "OPENED", "PURGED",
                "DESECRATED", "SACRIFICED", "EVISCERATED", "ANNIHILATED", "INTOXICATED",
@@ -117,6 +117,31 @@ class Spawnset(db.Model):
     spawnset_name = db.Column(db.String(), nullable=False)
 
 
+@app.route('/home')
+def home_page():
+    live_users = db.session.query(Live.player_id, User.username)\
+        .outerjoin(User)\
+        .all()
+    top_games = db.session.query(Game.id, Game.game_time, User.username)\
+        .outerjoin(User)\
+        .distinct(Game.game_time)\
+        .filter(Game.survival_hash=='5ff43e37d0f85e068caab5457305754e')\
+        .filter((Game.replay_player_id==0) | (Game.replay_player_id==Game.player_id))\
+        .order_by(Game.game_time.desc())\
+        .limit(10)\
+        .all()
+    recent_games = db.session.query(Game.id, Game.game_time, User.username)\
+        .outerjoin(User)\
+        .order_by(Game.id.desc())\
+        .limit(10)\
+        .all()
+    return render_template('home.html',
+                           live_users=live_users,
+                           current_version=current_version,
+                           top_games=top_games,
+                           recent_games=recent_games)
+
+
 @app.route('/pacifist')
 def pacifist_page():
     # games = db.session.query(Game, User.username).outerjoin(User).filter(Game.player_id==User.id).filter(Game.enemies_killed==0).filter(Game.id>4500).order_by(Game.game_time.desc()).all()
@@ -144,7 +169,7 @@ def users_page():
     return render_template('users.html', users=users, live_users=live_users)
 
 
-@app.route('/games/', defaults={'page_num': 1})
+@app.route('/games', defaults={'page_num': 1})
 @app.route('/games/<int:page_num>')
 def games_page(page_num):
     games = Game.query.join(User, Game.player_id == User.id).\
