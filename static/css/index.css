@@ -49,10 +49,38 @@
     font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
     font-weight: bold;
     font-size: 16px;
+    margin-bottom: 10px;
 }
 
 .card ul {
     list-style: none;
     padding: 0;
     margin: 0;
+}
+
+#top-games li, #recent-games li {
+    font-size: 10px;
+    background: #DDD;
+    margin: 3px;
+    border-radius: 3px;
+    padding: 3px;
+}
+
+#top-games li:nth-child(even), #recent-games li:nth-child(even) {
+    background: #AAA;
+}
+
+#top-games li hr, #recent-games li hr {
+    border-style: none;
+    border-top: 1px solid;
+    color: #121212;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+#top-games a:link, #recent-games a:link {
+    display: block;
+    text-decoration: none;
+    color: #1070BF;
 }

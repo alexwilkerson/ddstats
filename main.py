@@ -146,7 +146,6 @@ def home_page():
 
 @app.route('/pacifist')
 def pacifist_page():
-    # games = db.session.query(Game, User.username).outerjoin(User).filter(Game.player_id==User.id).filter(Game.enemies_killed==0).filter(Game.id>4500).order_by(Game.game_time.desc()).all()
     games = db.session.query(Game, User.username).outerjoin(User).filter(Game.player_id==User.id).filter(Game.survival_hash==v3_survival_hash).filter(Game.id>4500).group_by(Game.player_id).filter(Game.enemies_killed==0).order_by(func.max(Game.game_time).desc())
     return render_template('pacifist.html', games=games)
 
