@@ -9,17 +9,17 @@
 }
 
 .left {
-    flex: 2 0 0;
+    flex: 1 0 0;
     order: 1;
 }
 
 .right {
-    flex: 2 0 0;
+    flex: 1 0 0;
     order: 3;
 }
 
 .center {
-    flex: 3 0 0;
+    flex: 2 0 0;
     order: 2;
     background-color: #DDD;
     border-radius: 6px;
