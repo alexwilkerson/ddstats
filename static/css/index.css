@@ -21,6 +21,15 @@
 .center {
     flex: 2 0 0;
     order: 2;
+}
+
+.center-header {
+    font-family: "Goethe";
+    text-align: center;
+    color: #9A1000;
+}
+
+.center-content {
     background-color: #DDD;
     border-radius: 6px;
     margin: 0 10px;
@@ -84,4 +93,12 @@
 #top-games a:hover, #recent-games a:hover {
     color: #F049FF;
     transition: 0.2s;
+}
+
+footer p {
+    margin-top: 0;
+}
+
+footer {
+    max-width: 750px;
 }

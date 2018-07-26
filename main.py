@@ -121,6 +121,10 @@ class Spawnset(db.Model):
 
 @app.route('/home')
 def home_page():
+    motd = ""
+    with open('motd.json') as f:
+        data = json.load(f)
+        motd = data["motd"]
     live_users = db.session.query(Live.player_id, User.username)\
         .outerjoin(User)\
         .all()
@@ -138,6 +142,7 @@ def home_page():
         .limit(10)\
         .all()
     return render_template('home.html',
+                           motd=motd,
                            live_users=live_users,
                            current_version=current_version,
                            top_games=top_games,
@@ -739,7 +744,7 @@ def create_game():
     return jsonify({'message': 'Game submitted.', 'game_id': new_game.id})
 
 
-@app.route('/api/get_motd', methods=['POST'])
+@app.route('/api/get_motd', methods=['GET, POST'])
 def get_motd():
 
     motd = ""
