@@ -5,7 +5,7 @@
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
-    align-items: stretch;
+    align-items: flex-start;
 }
 
 .left {
@@ -37,18 +37,13 @@
     padding: 5px;
     box-shadow: 2px 2px #9A1000;
     color: #DDD;
-    transition:0.3s;
-}
-
-.card:hover {
-    background-color: #3A3A3A;
-    transform: scale(1.02);
 }
 
 .card h1 {
     font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
     font-weight: bold;
     font-size: 16px;
+    color: #D39C00;
     margin-bottom: 10px;
 }
 
@@ -67,7 +62,7 @@
 }
 
 #top-games li:nth-child(even), #recent-games li:nth-child(even) {
-    background: #AAA;
+    background: #BBB;
 }
 
 #top-games li hr, #recent-games li hr {
@@ -83,4 +78,10 @@
     display: block;
     text-decoration: none;
     color: #1070BF;
+    transition: 0.2s;
+}
+
+#top-games a:hover, #recent-games a:hover {
+    color: #F049FF;
+    transition: 0.2s;
 }

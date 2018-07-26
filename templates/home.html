@@ -46,7 +46,7 @@
                 <h1>Recent Games</h1>
                 <ul>
                     {% for game in recent_games %}
-                    <li><a href="{{ url_for('game_log', game_number=game.id) }}">{{ game.username }}<hr>{{ game.game_time | numberFormat(4) }}s</a></li>
+                    <li><a href="{{ url_for('game_log', game_number=game.id) }}">{{ game.username }}<hr>{{ game.game_time | numberFormat(4) }}s - {{ game.time_stamp|time_ago }}</a></li>
                     {% endfor %} 
                 </ul>
             </div>

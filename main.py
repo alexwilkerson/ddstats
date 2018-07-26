@@ -132,7 +132,7 @@ def home_page():
         .order_by(Game.game_time.desc())\
         .limit(10)\
         .all()
-    recent_games = db.session.query(Game.id, Game.game_time, User.username)\
+    recent_games = db.session.query(Game.id, Game.game_time, Game.time_stamp, User.username)\
         .outerjoin(User)\
         .order_by(Game.id.desc())\
         .limit(10)\
