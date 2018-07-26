@@ -64,9 +64,10 @@
             socket.on('live_users_update', (player_list) => {
                 if (player_list.length < 1 || player_list == undefined) {
                     $('#live-users-list').html('<li>No users are live.</li>');
-                }
-                for (var id in player_list) {
-                    $('#live-users-list').html("<li><a href=\"https://ddstats.com/user/" + id + "\">" + player_list[id].name +"</a></li>");
+                } else {
+                    for (var id in player_list) {
+                        $('#live-users-list').html("<li><a href=\"https://ddstats.com/user/" + id + "\">" + player_list[id].name +"</a></li>");
+                    }
                 }
             });
 
