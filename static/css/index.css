@@ -1,6 +1,6 @@
 .container {
     display: flex;
-    max-width: 720px;
+    max-width: 750px;
     margin: 0 auto;
     flex-wrap: wrap;
     flex-direction: row;
