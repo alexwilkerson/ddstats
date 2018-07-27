@@ -744,7 +744,7 @@ def create_game():
     return jsonify({'message': 'Game submitted.', 'game_id': new_game.id})
 
 
-@app.route('/api/get_motd', methods=['GET, POST'])
+@app.route('/api/get_motd', methods=['POST'])
 def get_motd():
 
     motd = ""
