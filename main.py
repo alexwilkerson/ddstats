@@ -642,6 +642,7 @@ def create_game():
     data = request.get_json()
 
     if data['playerID'] == -1:
+        print("Error: Game submitted with playerID -1.", file=sys.stdout)
         return jsonify({'message': 'Some kind of error occurred.'}), 400
 
     r = requests.get('http://ddstats.com/api/refresh_user_by_id/{}'.format(data['playerID']))
