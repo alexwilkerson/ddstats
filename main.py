@@ -235,7 +235,7 @@ def user_page(user_id, page_num):
 
     pb_game = None
     with engine.connect() as conn:
-        pb_game_query = conn.execute('select id, player_id, replay_player_id from game where round(game_time, 4) = ' + str(user_data["time"])).fetchall()
+        pb_game_query = conn.execute('select id, player_id, replay_player_id from game where round(game_time, 4) = ' + str(user_data["time"]) + ' and player_id = ' + str(player_id)).fetchall()
         if len(pb_game_query) is 1:
             pb_game = pb_game_query[0]
         elif len(pb_game_query) > 0:
