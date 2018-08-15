@@ -32,7 +32,11 @@
             </div>
             <ul class="alignleft" id="userleft">
                 <li>Rank: {{user_data.rank|numberFormat}}</li>
+                {% if pb_game is not none %}
+                <li id="pb">Time: <a href="{{ url_for('game_log', game_number=pb_game['id']) }}">{{user_data.time|numberFormat(4)}}s</a></li>
+                {% else %}
                 <li>Time: {{user_data.time|numberFormat(4)}}s</li>
+                {% endif %}
                 <li>Gems: {{user_data.gems|numberFormat}}</li>
                 <li>Kills: {{user_data.kills|numberFormat}}</li>
                 <li>Accuracy: {{user_data.accuracy}}%</li>

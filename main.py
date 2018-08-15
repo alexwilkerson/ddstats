@@ -7,7 +7,7 @@ from datetime import datetime
 from flask import Flask, request, jsonify, Response, url_for
 from flask import render_template
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import and_, or_, func
+from sqlalchemy import and_, or_, func, create_engine
 from flask_bower import Bower
 from flask_cors import CORS
 from byte_converters import to_int_16, to_int_32, to_uint_64
@@ -38,6 +38,8 @@ app.config['JSON_SORT_KEYS'] = False
 app.jinja_env.filters['time_ago'] = time_ago
 
 db = SQLAlchemy(app)
+
+engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
 
 
 class Game(db.Model):
@@ -230,7 +232,25 @@ def user_page(user_id, page_num):
         existing_player.accuracy_total=user_data['accuracy_total']
         db.session.commit()
 
-    return render_template('user.html', user_data=user_data, user_id=user_id, games=games, death_types=death_types)
+
+    pb_game = None
+    with engine.connect() as conn:
+        pb_game_query = conn.execute('select id, player_id, replay_player_id from game where round(game_time, 4) = ' + str(user_data["time"])).fetchall()
+        if len(pb_game_query) is 1:
+            pb_game = pb_game_query[0]
+        elif len(pb_game_query) > 0:
+            pb_game_query_sorted = sorted(pb_game_query, key=lambda k: k['replay_player_id'])
+            if pb_game_query_sorted[0]['replay_player_id'] == 0:
+                pb_game = pb_game_query_sorted[0]
+            else:
+                for pb in pb_game_query_sorted:
+                    if pb[1] == pb[2]:
+                        pb_game = pb
+            if pb_game is None:
+                pb_game = pb_game_query[0]
+
+
+    return render_template('user.html', user_data=user_data, user_id=user_id, games=games, death_types=death_types, pb_game=pb_game)
 
 
 @app.route('/game_log/<game_number>')

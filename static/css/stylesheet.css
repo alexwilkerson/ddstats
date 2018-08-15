@@ -352,3 +352,10 @@ footer {
     0% { transform: translateY(0); }
     100% { transform: translateY(-3px); }
 }
+#pb a:link, a:visited, a:active {
+    color: #006EC2;
+    text-decoration: none;
+}
+#pb a:hover {
+    color: #F049FF;
+}
