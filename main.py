@@ -121,8 +121,8 @@ class Spawnset(db.Model):
     spawnset_name = db.Column(db.String(), nullable=False)
 
 
-@app.route('/home')
-def home_page():
+@app.route('/')
+def index():
     motd = ""
     with open('motd.json') as f:
         data = json.load(f)
@@ -799,13 +799,6 @@ def get_motd():
     return jsonify({'motd': motd,
                     'valid_version': valid,
                     'update_available': update_available})
-
-
-@app.route('/')
-def index():
-    return render_template('index.html')
-    # content = get_file('dagger.txt')
-    # return Response(content, mimetype="text/plain")
 
 
 def root_dir():  # pragma: no cover

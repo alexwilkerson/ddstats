@@ -29,13 +29,28 @@
     color: #9A1000;
 }
 
+.center-content img {
+    display: block;
+    margin: 0 auto;
+    width: 65%;
+    object-fit: cover;
+    overflow: hidden;
+}
+
 .center-content {
+    font-family: "CMU Typewriter Text";
+    font-size: 14px;
     background-color: #DDD;
     border-radius: 6px;
     margin: 0 10px;
-    padding: 0;
+    padding: 10px;
     box-shadow: 2px 2px #580900;
     color: #121212;
+}
+
+.center-content h1 {
+    font-family: "CMU Typewriter Text";
+    font-size: 14px;
 }
 
 .card {
@@ -44,6 +59,7 @@
     border-radius: 6px;
     margin: 0 auto 10px auto;
     padding: 5px;
+    padding-bottom: 10px;
     box-shadow: 2px 2px #580900;
     color: #DDD;
 }
@@ -83,6 +99,10 @@
     margin: 0;
 }
 
+a:link {
+    text-decoration: none;
+}
+
 #top-games a:link, #recent-games a:link {
     display: block;
     text-decoration: none;
@@ -101,4 +121,16 @@ footer p {
 
 footer {
     max-width: 750px;
+}
+
+#live-users {
+    text-align: center;
+}
+
+#server-stats {
+    text-align: center;
+}
+
+#latest-release {
+    text-align: center;
 }

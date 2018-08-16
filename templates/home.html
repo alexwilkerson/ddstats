@@ -27,7 +27,7 @@
             </div>
             <div id="latest-release" class="card">
                 <h1>Latest Release</h1>
-                <a href="{{ url_for('releases') }}">{{ current_version }}</a>
+                <a href="{{ url_for('releases') }}">v{{ current_version }}</a>
             </div>
         </div>
         <div class="center">
@@ -35,7 +35,14 @@
                 <marquee>MOTD: {{ motd }}</marquee>
             </div>
             <div class="center-content">
-                center-content
+                <h1>NEWS</h1>
+                <span id="date">8.16.18</span>
+                <p>
+                    There is now a home page for ddstats! That's exciting. There's not much news to discuss. I am currently working on a complete rewrite of the ddstats.exe program. The code base for the program was becoming somewhat of a nuissance, so in order to keep adding new fun things, I decided to scrap the old code and build it nice and neat from the ground up. I will be posting any information I have about updates and that sort of thing here on the main page. You should also get notifications of any sort of update within the program it self. Aside from that, enjoy the website, enjoy the program, enjoy ddstats, and enjoy Devil Daggers!
+                </p>
+                <span id="signature">*vhs</span>
+                <img src="{{ url_for('static', filename='img/sketch_skull4.png') }}">
+                <span style="display: block; text-align: center;">***</span>
             </div>
         </div>
         <div class="right">

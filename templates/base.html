@@ -21,8 +21,8 @@
     <body>
         {% block header %}
         <div id="header">
-            <img id="logo" src="{{ url_for('static', filename='img/logo_smaller_transparent_white.png') }}" onmouseover="this.src='{{url_for('static', filename='img/logo_smaller_animated.gif')}}'" onmouseout="this.src='{{ url_for('static', filename='img/logo_smaller_transparent_white.png') }}'"/>
-            <h1>ddstats</h1>
+            <a href="{{ url_for('index') }}"><img id="logo" src="{{ url_for('static', filename='img/logo_smaller_transparent_white.png') }}" onmouseover="this.src='{{url_for('static', filename='img/logo_smaller_animated.gif')}}'" onmouseout="this.src='{{ url_for('static', filename='img/logo_smaller_transparent_white.png') }}'"/></a>
+                <h1>ddstats</h1>
             <a href="{{url_for('games_page')}}">games</a> |
             <a href="{{url_for('users_page')}}" title="You found me!">users</a> |
             <a href="{{url_for('releases')}}">download</a> |
