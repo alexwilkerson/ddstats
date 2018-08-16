@@ -103,14 +103,14 @@ a:link {
     text-decoration: none;
 }
 
-#top-games a:link, #recent-games a:link {
+#top-games a:link, #recent-games a:link, .card a:link {
     display: block;
     text-decoration: none;
     color: #1070BF;
     transition: 0.2s;
 }
 
-#top-games a:hover, #recent-games a:hover {
+#top-games a:hover, #recent-games a:hover, .card a:hover {
     color: #F049FF;
     transition: 0.2s;
 }
