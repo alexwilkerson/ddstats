@@ -16,6 +16,7 @@
     <meta name="msapplication-TileImage" content="{{ url_for('static', filename='icons/mstile-144x144.png') }}">
     <meta name="msapplication-config" content="{{ url_for('static', filename='icons/browserconfig.xml') }}">
     <meta name="theme-color" content="#000000">
+    <script src="https://donorbox.org/install-popup-button.js" type="text/javascript" defer></script>
     {% endblock %}
 </head>
     <body>
@@ -27,6 +28,7 @@
             <a href="{{url_for('users_page')}}" title="You found me!">users</a> |
             <a href="{{url_for('releases')}}">download</a> |
             <a href="{{url_for('about_page')}}">about</a>
+            <a href="https://donorbox.org/ddstats-com" class="custom-dbox-popup">donate</a>
         </div>
         {% endblock %}
         {% block body %}
