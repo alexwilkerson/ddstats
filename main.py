@@ -14,11 +14,12 @@ from byte_converters import to_int_16, to_int_32, to_uint_64
 from time_ago import time_ago
 
 # latest release
-current_version = "0.3.1"
+current_version = "0.4.5"
 # lowest release number that is valid
 valid_version = "0.3.1"
 # v3 survival hash
 v3_survival_hash = '5ff43e37d0f85e068caab5457305754e'
+v3_survival_hash_also = '569fead87abf4d30fdee4231a6398051'
 
 death_types = ["FALLEN", "SWARMED", "IMPALED", "GORED", "INFESTED", "OPENED", "PURGED",
                "DESECRATED", "SACRIFICED", "EVISCERATED", "ANNIHILATED", "INTOXICATED",
@@ -133,7 +134,7 @@ def index():
     top_games = db.session.query(Game.id, Game.game_time, User.username)\
         .outerjoin(User)\
         .distinct(Game.game_time)\
-        .filter(Game.survival_hash==v3_survival_hash)\
+        .filter(or_(Game.survival_hash==v3_survival_hash, Game.survival_hash==v3_survival_hash_also))\
         .filter((Game.replay_player_id==0) | (Game.replay_player_id==Game.player_id))\
         .order_by(Game.game_time.desc())\
         .limit(10)\
@@ -153,7 +154,9 @@ def index():
 
 @app.route('/pacifist')
 def pacifist_page():
-    games = db.session.query(Game, User.username).outerjoin(User).filter(Game.player_id==User.id).filter(Game.survival_hash==v3_survival_hash).filter(Game.id>4500).group_by(Game.player_id).filter(Game.enemies_killed==0).order_by(func.max(Game.game_time).desc())
+    games = db.session.query(Game,
+        User.username).outerjoin(User).filter(Game.player_id==User.id).filter(or_(Game.survival_hash==v3_survival_hash, Game.survival_hash==v3_survival_hash_also))\
+            .filter(Game.id>4500).group_by(Game.player_id).filter(Game.enemies_killed==0).order_by(func.max(Game.game_time).desc())
     return render_template('pacifist.html', games=games)
 
 
@@ -668,7 +671,93 @@ def create_game():
     r = requests.get('http://ddstats.com/api/refresh_user_by_id/{}'.format(data['playerID']))
     user_data = r.json()
 
+    if 'version' not in data:
+        print('Error: version not in JSON sent to server.', file=sys.stdout)
+        return jsonify({'message': 'version not in JSON data.'}), 400
+    if 'playerID' not in data:
+        print('Error: playerID not in JSON sent to server.', file=sys.stdout)
+        return jsonify({'message': 'playerID not in JSON data.'}), 400
+    if  data['playerID'] == 0:
+        print('Error: playerID is 0.', file=sys.stdout)
+        return jsonify({'message': 'playerID is 0.'}), 400
+    if 'playerName' not in data:
+        print('Error: playerName not in JSON sent to server.', file=sys.stdout)
+        return jsonify({'message': 'playerName not in JSON data.'}), 400
+    if 'granularity' not in data:
+        print('Error: granularity not in JSON sent to server.', file=sys.stdout)
+        return jsonify({'message': 'granularity not in JSON data.'}), 400
+    if 'inGameTimer' not in data:
+        print('Error: inGameTimer not in JSON sent to server.', file=sys.stdout)
+        return jsonify({'message': 'inGameTimer not in JSON data.'}), 400
+    if 'inGameTimerVector' not in data:
+        print('Error: inGameTimerVector not in JSON sent to server.', file=sys.stdout)
+        return jsonify({'message': 'inGameTimerVector not in JSON data.'}), 400
+    if 'gems' not in data:
+        print('Error: gems not in JSON sent to server.', file=sys.stdout)
+        return jsonify({'message': 'gems not in JSON data.'}), 400
+    if 'gemsVector' not in data:
+        print('Error: gemsVector not in JSON sent to server.', file=sys.stdout)
+        return jsonify({'message': 'gemsVector not in JSON data.'}), 400
+    if 'levelTwoTime' not in data:
+        print('Error: levelTwoTime not in JSON sent to server.', file=sys.stdout)
+        return jsonify({'message': 'levelTwoTime not in JSON data.'}), 400
+    if 'levelThreeTime' not in data:
+        print('Error: levelThreetime not in JSON sent to server.', file=sys.stdout)
+        return jsonify({'message': 'levelThreetime not in JSON data.'}), 400
+    if 'levelFourTime' not in data:
+        print('Error: levelFourTime not in JSON sent to server.', file=sys.stdout)
+        return jsonify({'message': 'levelFourTime not in JSON data.'}), 400
+    if 'homingDaggers' not in data:
+        print('Error: homingDaggers not in JSON sent to server.', file=sys.stdout)
+        return jsonify({'message': 'homingDaggers not in JSON data.'}), 400
+    if 'homingDaggersVector' not in data:
+        print('Error: homingDaggersVector not in JSON sent to server.', file=sys.stdout)
+        return jsonify({'message': 'homingDaggersVector not in JSON data.'}), 400
+    if 'homingDaggersMax' not in data:
+        print('Error: homingDaggersMax not in JSON sent to server.', file=sys.stdout)
+        return jsonify({'message': 'homingDaggersMax not in JSON data.'}), 400
+    if 'homingDaggersMaxTime' not in data:
+        print('Error: homingDaggersMaxTime not in JSON sent to server.', file=sys.stdout)
+        return jsonify({'message': 'homingDaggersMaxTime not in JSON data.'}), 400
+    if 'daggersFired' not in data:
+        print('Error: daggersFired not in JSON sent to server.', file=sys.stdout)
+        return jsonify({'message': 'daggersFired not in JSON data.'}), 400
+    if 'daggersFiredVector' not in data:
+        print('Error: daggersFiredVector not in JSON sent to server.', file=sys.stdout)
+        return jsonify({'message': 'daggersFiredVector not in JSON data.'}), 400
+    if 'daggersHit' not in data:
+        print('Error: daggersHit not in JSON sent to server.', file=sys.stdout)
+        return jsonify({'message': 'daggersHit not in JSON data.'}), 400
+    if 'daggersHitVector' not in data:
+        print('Error: daggersHitVector not in JSON sent to server.', file=sys.stdout)
+        return jsonify({'message': 'daggersHitVector not in JSON data.'}), 400
+    if 'enemiesAlive' not in data:
+        print('Error: enemiesAlive not in JSON sent to server.', file=sys.stdout)
+        return jsonify({'message': 'enemiesAlive not in JSON data.'}), 400
+    if 'enemiesAliveVector' not in data:
+        print('Error: enemiesAliveVector not in JSON sent to server.', file=sys.stdout)
+        return jsonify({'message': 'enemiesAliveVector not in JSON data.'}), 400
+    if 'enemiesAliveMax' not in data:
+        print('Error: enemiesAliveMax not in JSON sent to server.', file=sys.stdout)
+        return jsonify({'message': 'enemiesAliveMax not in JSON data.'}), 400
+    if 'enemiesAliveMaxTime' not in data:
+        print('Error: enemiesAliveMaxTime not in JSON sent to server.', file=sys.stdout)
+        return jsonify({'message': 'enemiesAliveMaxTime not in JSON data.'}), 400
+    if 'enemiesKilled' not in data:
+        print('Error: enemiesKilled not in JSON sent to server.', file=sys.stdout)
+        return jsonify({'message': 'enemiesKilled not in JSON data.'}), 400
+    if 'enemiesKilledVector' not in data:
+        print('Error: enemiesKilledVector not in JSON sent to server.', file=sys.stdout)
+        return jsonify({'message': 'enemiesKilledVector not in JSON data.'}), 400
+    if 'deathType' not in data:
+        print('Error: deathType not in JSON sent to server.', file=sys.stdout)
+        return jsonify({'message': 'deathType not in JSON data.'}), 400
+    if 'replayPlayerID' not in data:
+        print('Error: replayPlayerID not in JSON sent to server.', file=sys.stdout)
+        return jsonify({'message': 'replayPlayerID not in JSON data.'}), 400
+
     if 'playerName' in data:
+        print('playerID is' + str(data['playerID']) + '.', file=sys.stdout)
         existing_player = User.query.filter_by(id=data['playerID']).first()
         if existing_player is None:
             r = requests.get('http://ddstats.com/api/get_user_by_id/{}'.format(data['playerID']))
