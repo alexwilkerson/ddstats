@@ -203,11 +203,77 @@ def handle_disconnect():
         Live.query.filter_by(sid=request.sid).delete()
         db.session.commit()
     emit('live_users_update', player_dict, include_self=False, broadcast=True, namespace='/index')
+    emit('offline', room=str(player_id), include_self=False, broadcast=True, namespace='/user_page')
 
 
 @socketio.on('message')
 def handle_message(message):
     print('received message: ' + message, file=sys.stdout)
+
+#######################################################################################################################
+# post 0.4.0
+#######################################################################################################################
+
+@socketio.on('status_update')
+def on_status_update(player_id, status):
+    if player_id is -1:
+        return
+    emit('status_update', (status), room=str(player_id), namespace='/user_page',
+            include_self=False, broadcast=True)
+
+@socketio.on('submit')
+def receive_stats(player_id, game_time, gems, homing_daggers,
+                  enemies_alive, enemies_killed, daggers_hit,
+                  daggers_fired, level_two, level_three, level_four,
+                  is_replay, death_type, notify_player_best, notify_above_1000):
+    if player_id is -1:
+        return
+    global player_dict
+    global threshold
+    user = db.session.query(User).filter_by(id=player_id).first()
+    if (str(player_id) in player_dict) and (is_replay == False) and notify_above_1000:
+        if player_dict[str(player_id)]['game_time'] < threshold and game_time >= threshold:
+            emit('threshold_alert', (user.username, player_id, threshold), namespace='/ddstats-bot', broadcast=True)
+    # get user stats, compare to previous and current time
+    player_best = db.session.query(User.game_time).filter_by(id=player_id).first()
+    if (player_best is not None) and (is_replay == False) and notify_player_best:
+        player_best = player_best[0]
+        if str(player_id) in player_dict:
+            if player_dict[str(player_id)]['game_time'] < player_best and game_time >= player_best:
+                emit('player_best', (user.username, player_id, player_best, game_time), namespace='/ddstats-bot', broadcast=True)
+    # finally, set game time
+    if str(player_id) not in player_dict:
+        player_dict[str(player_id)] = {}
+    player_dict[str(player_id)]['game_time'] = game_time
+    player_dict[str(player_id)]['death_type'] = death_type
+    player_dict[str(player_id)]['is_replay'] = is_replay
+    emit('receive', (game_time, gems, homing_daggers, enemies_alive,
+         enemies_killed, daggers_hit, daggers_fired, level_two, level_three,
+         level_four, is_replay, death_type), room=str(player_id),
+         namespace='/user_page', include_self=False, broadcast=True)
+
+@socketio.on('game_submitted')
+def game_submitted(game_id, notify_player_best, notify_above_1000):
+    global threshold
+    # print(game_id, file=sys.stdout)
+    game = db.session.query(Game).filter_by(id=game_id).first()
+    if game:
+        emit('game_received', (game.id, game.game_time, game.death_type, game.gems,
+                               game.homing_daggers,
+                               game.enemies_alive, game.enemies_killed,
+                               game.daggers_hit, game.daggers_fired),
+                               namespace='/user_page', room=str(game.player_id), broadcast=True)
+        user = db.session.query(User).filter_by(id=game.player_id).first()
+        if str(game.player_id) in player_dict and player_dict[str(game.player_id)]["is_replay"] == False:
+            if (user is not None):
+                if game.game_time >= threshold and notify_above_1000:
+                    emit('threshold_submit', (user.username, game.game_time, game.death_type, game_id), namespace='/ddstats-bot', broadcast=True)
+                if game.game_time >= user.game_time and notify_player_best:
+                    emit('player_best_submit', (user.username, game.game_time, game.death_type, user.game_time, game_id), namespace='/ddstats-bot', broadcast=True)
+
+#######################################################################################################################
+# end post 0.4.0
+#######################################################################################################################
 
 
 @socketio.on('submit', namespace='/stats')
