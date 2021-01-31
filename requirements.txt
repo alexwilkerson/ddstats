@@ -19,7 +19,7 @@ python-engineio==2.1.1
 python-socketio==1.9.0
 pytz==2018.4
 regex==2018.6.9
-requests==2.18.4
+requests==2.20.0
 six==1.11.0
 SQLAlchemy==1.2.7
 tzlocal==1.5.1
